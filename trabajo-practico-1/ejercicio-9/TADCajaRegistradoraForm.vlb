@@ -1,0 +1,13 @@
+﻿[GroupBox1]
+Coordinates=64,10,79,58
+
+[UpDown1]
+Coordinates=310,40,71,36
+
+[]
+Coordinates=79,77,91,36
+
+[eMonedasDe1]
+Coordinates=240,30,44,58
+Visible=True
+
