@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -76,7 +77,8 @@ object Form1: TForm1
       Left = 123
       Top = 32
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 0
       Text = '0'
@@ -94,7 +96,8 @@ object Form1: TForm1
       Left = 123
       Top = 80
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 2
       Text = '0'
@@ -112,7 +115,8 @@ object Form1: TForm1
       Left = 123
       Top = 128
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 4
       Text = '0'
@@ -130,7 +134,8 @@ object Form1: TForm1
       Left = 123
       Top = 173
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 6
       Text = '0'
@@ -247,7 +252,8 @@ object Form1: TForm1
       Left = 123
       Top = 28
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 0
       Text = '0'
@@ -256,7 +262,8 @@ object Form1: TForm1
       Left = 123
       Top = 153
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 1
       Text = '0'
@@ -265,7 +272,8 @@ object Form1: TForm1
       Left = 123
       Top = 279
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 2
       Text = '0'
@@ -274,7 +282,8 @@ object Form1: TForm1
       Left = 123
       Top = 72
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 3
       Text = '0'
@@ -283,7 +292,8 @@ object Form1: TForm1
       Left = 123
       Top = 193
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 4
       Text = '0'
@@ -292,7 +302,8 @@ object Form1: TForm1
       Left = 123
       Top = 113
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 5
       Text = '0'
@@ -301,7 +312,8 @@ object Form1: TForm1
       Left = 123
       Top = 235
       Width = 33
-      Height = 20
+      Height = 21
+      Alignment = taCenter
       NumbersOnly = True
       TabOrder = 6
       Text = '0'
@@ -369,5 +381,46 @@ object Form1: TForm1
       Max = 10000
       TabOrder = 13
     end
+  end
+  object sgCaja: TStringGrid
+    Left = 724
+    Top = 27
+    Width = 305
+    Height = 325
+    ColCount = 2
+    DefaultColWidth = 150
+    DefaultColAlignment = taCenter
+    FixedColor = clMedGray
+    RowCount = 12
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    GridLineWidth = 3
+    ParentFont = False
+    TabOrder = 2
+    RowHeights = (
+      24
+      24
+      24
+      24
+      24
+      24
+      24
+      24
+      24
+      24
+      24
+      24)
+  end
+  object btCargar: TButton
+    Left = 272
+    Top = 432
+    Width = 153
+    Height = 57
+    Caption = 'Cargar'
+    TabOrder = 3
+    OnClick = btCargarClick
   end
 end

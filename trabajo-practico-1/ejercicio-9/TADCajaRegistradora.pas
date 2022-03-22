@@ -24,7 +24,6 @@ type
       Contenedores: RegContenedores;
     public
       procedure InicializarContenedores();
-      procedure setContenedores(C:RegContenedores);
       function getContenedores():RegContenedores;
       procedure cargarMonedasDe1(cantidad:integer);
       procedure cargarMonedasDe2(cantidad:integer);
@@ -46,11 +45,6 @@ implementation
 function CajaRegistradora.getContenedores: RegContenedores;
 begin
   result:= Contenedores;
-end;
-
-procedure CajaRegistradora.setContenedores(C: RegContenedores);
-begin
-  Contenedores := C;
 end;
 
 procedure CajaRegistradora.InicializarContenedores;
