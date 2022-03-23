@@ -2,7 +2,8 @@ program ejercicio5;
 
 uses
   Vcl.Forms,
-  formEj5 in 'formEj5.pas' {Form1};
+  formEj5 in 'formEj5.pas' {Form1},
+  TADFecha in 'TADFecha.pas';
 
 {$R *.res}
 
