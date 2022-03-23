@@ -16,7 +16,7 @@ object Form1: TForm1
   TextHeight = 13
   object Label12: TLabel
     Left = 882
-    Top = 27
+    Top = 8
     Width = 75
     Height = 33
     Caption = 'Vuelto'
@@ -28,8 +28,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label13: TLabel
-    Left = 456
-    Top = 27
+    Left = 464
+    Top = 8
     Width = 211
     Height = 33
     Caption = 'Caja Registradora'
@@ -39,6 +39,34 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+  end
+  object Label15: TLabel
+    Left = 230
+    Top = 16
+    Width = 123
+    Height = 13
+    Caption = '1'#186' Cargar dinero a la caja'
+  end
+  object Label16: TLabel
+    Left = 230
+    Top = 35
+    Width = 155
+    Height = 13
+    Caption = '2'#186' Ingresar billetes o monedas a'
+  end
+  object Label17: TLabel
+    Left = 230
+    Top = 54
+    Width = 138
+    Height = 13
+    Caption = 'utilizar para efectuar el pago'
+  end
+  object Label18: TLabel
+    Left = 230
+    Top = 73
+    Width = 142
+    Height = 13
+    Caption = '3'#186' Ingresar el monto a cobrar'
   end
   object GroupBox1: TGroupBox
     Left = 16
@@ -135,7 +163,7 @@ object Form1: TForm1
       Height = 21
       Associate = eMonedasDe2
       Max = 10000
-      TabOrder = 3
+      TabOrder = 5
     end
     object eMonedasDe5: TEdit
       Left = 123
@@ -144,7 +172,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 4
+      TabOrder = 3
       Text = '0'
     end
     object UpDown3: TUpDown
@@ -154,7 +182,7 @@ object Form1: TForm1
       Height = 21
       Associate = eMonedasDe5
       Max = 10000
-      TabOrder = 5
+      TabOrder = 6
     end
     object eMonedasDe10: TEdit
       Left = 123
@@ -163,7 +191,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 6
+      TabOrder = 4
       Text = '0'
     end
     object UpDown4: TUpDown
@@ -291,7 +319,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 1
+      TabOrder = 6
       Text = '0'
     end
     object eBilletesDe1000: TEdit
@@ -301,7 +329,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 2
+      TabOrder = 11
       Text = '0'
     end
     object eBilletesde20: TEdit
@@ -311,7 +339,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 3
+      TabOrder = 2
       Text = '0'
     end
     object eBilletesDe200: TEdit
@@ -321,7 +349,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 4
+      TabOrder = 8
       Text = '0'
     end
     object eBilletesDe50: TEdit
@@ -331,7 +359,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 5
+      TabOrder = 4
       Text = '0'
     end
     object eBilletesDe500: TEdit
@@ -341,7 +369,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
-      TabOrder = 6
+      TabOrder = 10
       Text = '0'
     end
     object UpDown5: TUpDown
@@ -351,7 +379,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe10
       Max = 10000
-      TabOrder = 7
+      TabOrder = 1
     end
     object UpDown6: TUpDown
       Left = 156
@@ -360,7 +388,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesde20
       Max = 10000
-      TabOrder = 8
+      TabOrder = 3
     end
     object UpDown7: TUpDown
       Left = 156
@@ -369,7 +397,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe200
       Max = 10000
-      TabOrder = 9
+      TabOrder = 5
     end
     object UpDown8: TUpDown
       Left = 156
@@ -378,7 +406,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe1000
       Max = 10000
-      TabOrder = 10
+      TabOrder = 7
     end
     object UpDown9: TUpDown
       Left = 156
@@ -387,7 +415,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe500
       Max = 10000
-      TabOrder = 11
+      TabOrder = 9
     end
     object UpDown10: TUpDown
       Left = 156
@@ -410,7 +438,7 @@ object Form1: TForm1
   end
   object sgCaja: TStringGrid
     Left = 420
-    Top = 66
+    Top = 58
     Width = 305
     Height = 325
     ColCount = 2
@@ -441,17 +469,23 @@ object Form1: TForm1
       24)
   end
   object btCargar: TButton
-    Left = 240
-    Top = 91
+    Left = 248
+    Top = 124
     Width = 141
-    Height = 37
+    Height = 61
     Caption = 'Cargar a la caja'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
     OnClick = btCargarClick
   end
   object sgVuelto: TStringGrid
     Left = 772
-    Top = 66
+    Top = 58
     Width = 305
     Height = 325
     ColCount = 2
@@ -482,10 +516,10 @@ object Form1: TForm1
       24)
   end
   object GroupBox3: TGroupBox
-    Left = 240
-    Top = 163
+    Left = 248
+    Top = 249
     Width = 141
-    Height = 87
+    Height = 88
     TabOrder = 5
     object Label14: TLabel
       Left = 24
@@ -514,9 +548,9 @@ object Form1: TForm1
     end
   end
   object Memo1: TMemo
-    Left = 264
+    Left = 240
     Top = 429
-    Width = 829
+    Width = 853
     Height = 111
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -539,11 +573,11 @@ object Form1: TForm1
     OnClick = btSaldoClick
   end
   object btCerrarCaja: TButton
-    Left = 172
+    Left = 164
     Top = 553
-    Width = 773
+    Width = 793
     Height = 25
-    Caption = 'CerrarCaja'
+    Caption = 'Cerrar Caja'
     TabOrder = 8
     OnClick = btCerrarCajaClick
   end

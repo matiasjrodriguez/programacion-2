@@ -56,6 +56,10 @@ type
     Memo1: TMemo;
     btSaldo: TButton;
     btCerrarCaja: TButton;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btCargarClick(Sender: TObject);
     procedure btCobrarClick(Sender: TObject);
@@ -114,7 +118,6 @@ begin
   btCobrar.Enabled := False;
   eCantidadACobrar.Enabled := False;
 end;
-
 
 procedure MostrarCaja();
 begin
