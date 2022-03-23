@@ -133,7 +133,9 @@ object Form1: TForm1
       Width = 33
       Height = 21
       Alignment = taCenter
+      AutoSelect = False
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 0
       Text = '0'
     end
@@ -153,6 +155,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 2
       Text = '0'
     end
@@ -172,6 +175,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 3
       Text = '0'
     end
@@ -191,6 +195,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 4
       Text = '0'
     end
@@ -309,6 +314,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 0
       Text = '0'
     end
@@ -319,6 +325,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 6
       Text = '0'
     end
@@ -329,6 +336,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 11
       Text = '0'
     end
@@ -339,6 +347,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 2
       Text = '0'
     end
@@ -349,6 +358,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 8
       Text = '0'
     end
@@ -359,6 +369,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 4
       Text = '0'
     end
@@ -369,6 +380,7 @@ object Form1: TForm1
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 10
       Text = '0'
     end
@@ -470,7 +482,7 @@ object Form1: TForm1
   end
   object btCargar: TButton
     Left = 248
-    Top = 124
+    Top = 161
     Width = 141
     Height = 61
     Caption = 'Cargar a la caja'
@@ -517,7 +529,7 @@ object Form1: TForm1
   end
   object GroupBox3: TGroupBox
     Left = 248
-    Top = 249
+    Top = 246
     Width = 141
     Height = 88
     TabOrder = 5
@@ -545,6 +557,7 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       TabOrder = 1
+      OnChange = eCantidadACobrarChange
     end
   end
   object Memo1: TMemo

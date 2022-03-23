@@ -65,6 +65,7 @@ type
     procedure btCobrarClick(Sender: TObject);
     procedure btSaldoClick(Sender: TObject);
     procedure btCerrarCajaClick(Sender: TObject);
+    procedure eCantidadACobrarChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -173,8 +174,8 @@ begin
   CargarValores(CR);
   MostrarCaja();
   LimpiarEdits();
-  btCobrar.Enabled := True;
   eCantidadACobrar.Enabled := True;
+  memo1.Clear;
 end;
 
 procedure CargarValores(var C:CajaRegistradora);
@@ -215,8 +216,10 @@ begin
   else begin
 
     if not CRCopia.GenerarVuelto(ContenedoresCliente.getContenedores,aCobrar,nVuelto) then begin //se verifica con la copia del objeto si se puede efectuar el vuelto
+
       messagedlg('La caja no posee el dinero necesario para efectuar el vuelto exacto de $' + nVuelto.ToString ,mtError,[mbOK],0);
       Exit;
+
     end
     else begin
       valor := CR.GenerarVuelto(ContenedoresCliente.getContenedores,aCobrar,nVuelto);
@@ -225,6 +228,8 @@ begin
       MostrarCaja();
       LimpiarEdits();
       memo1.Clear;
+      eCantidadACobrar.Clear;
+      memo1.Lines.Add('A cobrar: $' + aCobrar.ToString);
       memo1.Lines.Add('Se deben entregar $' + nVuelto.ToString + ' de vuelto. En la tabla se muestran la cantidad de cada moneda o billete que se devolverá y se han actualizado los datos de la Caja Registradora.');
     end;
   end;
@@ -263,12 +268,21 @@ begin
     memo1.Lines.Add('-----------------------------------------------------------------');
     memo1.Lines.Add('TOTAL ACUMULADO: $' + saldofinal.ToString);
   end;
+  eCantidadACobrar.Clear;
   CR.InicializarContenedores;
   CR.InicializarVuelto;
   MostrarCaja();
   MostrarVuelto();
   btCobrar.Enabled := False;
   eCantidadACobrar.Enabled := False
+end;
+
+procedure TForm1.eCantidadACobrarChange(Sender: TObject);
+begin
+  if eCantidadACobrar.Text = '' then
+    btCobrar.Enabled := False
+  else
+    btCobrar.Enabled := True;
 end;
 
 end.
