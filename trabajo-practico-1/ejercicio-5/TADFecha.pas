@@ -6,6 +6,9 @@ uses
   sysutils;
 
 type
+
+  OPCION = (Mayor, Menor, Igual);
+
   Fecha = object
   private
     dia: byte;
@@ -21,8 +24,9 @@ type
     function cargarFecha(nuevoDia, nuevoMes:byte; nuevoAño:integer):boolean;
     function stringFecha():string;
     function verificarFecha():boolean;
-    function comparar(otraFecha:Fecha):string;
-
+    function comparar(otraFecha:Fecha):OPCION;
+    function esBisiesto():boolean;
+    function diferencia(otraFecha:Fecha):Fecha;
   end;
 
 implementation
@@ -91,25 +95,37 @@ begin
 
 end;
 
-function Fecha.comparar(otraFecha: Fecha): string;
-var comparacion:string;
+function Fecha.comparar(otraFecha: Fecha): OPCION;
+var comparacion:OPCION;
 begin
   if getAño() > otraFecha.getAño() then
-    comparacion := 'Mayor'
+    comparacion := Mayor
   else if getAño() < otraFecha.getAño() then
-    comparacion := 'Menor'
+    comparacion := Menor
   else if getMes() > otraFecha.getMes() then
-    comparacion := 'Mayor'
+    comparacion := Mayor
   else if getMes() < otraFecha.getMes() then
-    comparacion := 'Menor'
+    comparacion := Menor
   else if getDia() > otraFecha.getDia() then
-    comparacion := 'Mayor'
+    comparacion := Mayor
   else if getDia() < otraFecha.getDia() then
-    comparacion := 'Menor'
+    comparacion := Menor
   else
-    comparacion := 'Igual';
+    comparacion := Igual;
 
   result := comparacion
+
+end;
+
+function Fecha.esBisiesto():boolean;
+begin
+  result := ((getAño() mod 4) = 0) and
+    (not((getAño() mod 100) = 0) or ((getAño() mod 400) = 0))
+end;
+
+function Fecha.diferencia(otraFecha: Fecha): Fecha;
+  var resultado: Fecha;
+begin
 
 end;
 

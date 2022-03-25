@@ -24,9 +24,16 @@ type
     btnRestarFecha: TButton;
     btnCalcularDiferencia: TButton;
     btnCompararFechas: TButton;
+    btnBisiesto: TButton;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    btn2Bisiesto: TButton;
     procedure btnCargarFechaClick(Sender: TObject);
     procedure btnCompararFechasClick(Sender: TObject);
     procedure cargarFecha(sDia1, sMes1, sAño1, sDia2, sMes2, sAño2:string);
+    procedure mostrarBisiesto(año:Fecha);
+    procedure btnBisiestoClick(Sender: TObject);
+    procedure btn2BisiestoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,17 +67,41 @@ begin
     Memo1.Lines.Add('Error');
 end;
 
+procedure TForm1.mostrarBisiesto(año: Fecha);
+var bisiesto: string;
+begin
+  if año.esBisiesto() then
+    bisiesto := 'Es bisiesto'
+  else
+    bisiesto := 'No es bisiesto';
+  Memo1.Lines.Add(bisiesto);
+end;
+
+procedure TForm1.btn2BisiestoClick(Sender: TObject);
+begin
+  mostrarBisiesto(fecha2);
+end;
+
+procedure TForm1.btnBisiestoClick(Sender: TObject);
+begin
+  mostrarBisiesto(fecha1);
+end;
+
 procedure TForm1.btnCargarFechaClick(Sender: TObject);
 begin
   cargarFecha(editDia.Text, editMes.Text, editAño.Text, edit2Dia.Text, edit2Mes.Text, edit2Año.Text);
 end;
 
 procedure TForm1.btnCompararFechasClick(Sender: TObject);
-var comparacion: string;
+var comparacion: OPCION;
 begin
   cargarFecha(editDia.Text, editMes.Text, editAño.Text, edit2Dia.Text, edit2Mes.Text, edit2Año.Text);
   comparacion := fecha1.comparar(fecha2);
-  Memo1.Lines.Add(comparacion);
+  case comparacion of
+    Mayor: Memo1.Lines.Add('Es mayor');
+    Menor: Memo1.Lines.Add('Es menor');
+    Igual: Memo1.Lines.Add('Es igual');
+  end;
 end;
 
 end.
