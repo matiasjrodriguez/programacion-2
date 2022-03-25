@@ -2,8 +2,8 @@
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 508
-  ClientWidth = 647
+  ClientHeight = 283
+  ClientWidth = 668
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,42 +16,27 @@
   object Memo1: TMemo
     Left = 390
     Top = 16
-    Width = 251
-    Height = 225
+    Width = 270
+    Height = 245
     ReadOnly = True
     TabOrder = 0
   end
-  object btnSumarFecha: TButton
-    Left = 148
-    Top = 440
-    Width = 75
-    Height = 25
-    Caption = 'btnSumarFecha'
-    TabOrder = 1
-  end
-  object btnRestarFecha: TButton
-    Left = 240
-    Top = 440
-    Width = 75
-    Height = 25
-    Caption = 'btnRestarFecha'
-    TabOrder = 2
-  end
   object btnCalcularDiferencia: TButton
-    Left = 336
-    Top = 440
-    Width = 75
-    Height = 25
-    Caption = 'btnCalcularDiferencia'
-    TabOrder = 3
+    Left = 140
+    Top = 231
+    Width = 107
+    Height = 30
+    Caption = 'Calcular diferencia'
+    TabOrder = 1
+    OnClick = btnCalcularDiferenciaClick
   end
   object btnCompararFechas: TButton
-    Left = 137
-    Top = 143
+    Left = 255
+    Top = 231
     Width = 107
     Height = 30
     Caption = 'Comparar fechas'
-    TabOrder = 4
+    TabOrder = 2
     WordWrap = True
     OnClick = btnCompararFechasClick
   end
@@ -59,9 +44,9 @@
     Left = 8
     Top = 8
     Width = 185
-    Height = 121
+    Height = 209
     Caption = 'Fecha 1'
-    TabOrder = 5
+    TabOrder = 3
     object labelDiagonal1: TLabel
       Left = 47
       Top = 25
@@ -112,21 +97,52 @@
     end
     object btnBisiesto: TButton
       Left = 16
-      Top = 59
+      Top = 163
       Width = 149
       Height = 30
       Caption = #191'Es a'#241'o bisiesto?'
       TabOrder = 3
       OnClick = btnBisiestoClick
     end
+    object GroupBox3: TGroupBox
+      Left = 16
+      Top = 60
+      Width = 149
+      Height = 97
+      Caption = 'Modificar cantidad de d'#237'as'
+      TabOrder = 4
+      object editModDias: TEdit
+        Left = 38
+        Top = 21
+        Width = 71
+        Height = 21
+        TabOrder = 0
+      end
+      object btnRestarFecha: TButton
+        Left = 78
+        Top = 53
+        Width = 63
+        Height = 30
+        Caption = 'Restar d'#237'as'
+        TabOrder = 1
+      end
+      object btnSumarFecha: TButton
+        Left = 8
+        Top = 53
+        Width = 63
+        Height = 30
+        Caption = 'Sumar d'#237'as'
+        TabOrder = 2
+      end
+    end
   end
   object GroupBox2: TGroupBox
     Left = 199
     Top = 8
     Width = 185
-    Height = 121
+    Height = 209
     Caption = 'Fecha 2'
-    TabOrder = 6
+    TabOrder = 4
     object label2Diagonal1: TLabel
       Left = 47
       Top = 25
@@ -177,21 +193,52 @@
     end
     object btn2Bisiesto: TButton
       Left = 14
-      Top = 59
-      Width = 149
+      Top = 163
+      Width = 152
       Height = 30
       Caption = #191'Es a'#241'o bisiesto?'
       TabOrder = 3
       OnClick = btn2BisiestoClick
     end
+    object GroupBox4: TGroupBox
+      Left = 16
+      Top = 60
+      Width = 149
+      Height = 97
+      Caption = 'Modificar cantidad de d'#237'as'
+      TabOrder = 4
+      object edit2ModDias: TEdit
+        Left = 38
+        Top = 21
+        Width = 71
+        Height = 21
+        TabOrder = 0
+      end
+      object btn2RestarFecha: TButton
+        Left = 78
+        Top = 53
+        Width = 63
+        Height = 30
+        Caption = 'Restar d'#237'as'
+        TabOrder = 1
+      end
+      object btn2SumarFecha: TButton
+        Left = 8
+        Top = 53
+        Width = 63
+        Height = 30
+        Caption = 'Sumar d'#237'as'
+        TabOrder = 2
+      end
+    end
   end
   object btnCargarFecha: TButton
     Left = 24
-    Top = 143
+    Top = 231
     Width = 107
     Height = 30
     Caption = 'Cargar fechas'
-    TabOrder = 7
+    TabOrder = 5
     WordWrap = True
     OnClick = btnCargarFechaClick
   end

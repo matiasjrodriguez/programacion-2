@@ -125,8 +125,27 @@ end;
 
 function Fecha.diferencia(otraFecha: Fecha): Fecha;
   var resultado: Fecha;
+  var I: integer;
 begin
 
+  //////// HAY QUE CORREGIR ESTA FUNCIÓN ////////
+
+  if getDia() > otraFecha.getDia() then
+    resultado.setDia(getDia() - otraFecha.getDia())
+  else
+    resultado.setDia(otraFecha.getDia() - getDia());
+
+  if getMes() > otraFecha.getMes() then
+    resultado.setMes(getMes() - otraFecha.getMes())
+  else
+    resultado.setMes(otraFecha.getMes() - getMes());
+
+  if getAño() > otraFecha.getAño() then
+    resultado.setAño(getAño() - otraFecha.getAño())
+  else
+    resultado.setAño(otraFecha.getAño() - getAño());
+
+  result := resultado;
 end;
 
 end.

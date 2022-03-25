@@ -28,12 +28,19 @@ type
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     btn2Bisiesto: TButton;
+    editModDias: TEdit;
+    GroupBox3: TGroupBox;
+    GroupBox4: TGroupBox;
+    edit2ModDias: TEdit;
+    btn2RestarFecha: TButton;
+    btn2SumarFecha: TButton;
     procedure btnCargarFechaClick(Sender: TObject);
     procedure btnCompararFechasClick(Sender: TObject);
     procedure cargarFecha(sDia1, sMes1, sAño1, sDia2, sMes2, sAño2:string);
     procedure mostrarBisiesto(año:Fecha);
     procedure btnBisiestoClick(Sender: TObject);
     procedure btn2BisiestoClick(Sender: TObject);
+    procedure btnCalcularDiferenciaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,15 +94,27 @@ begin
   mostrarBisiesto(fecha1);
 end;
 
+procedure TForm1.btnCalcularDiferenciaClick(Sender: TObject);
+var
+  fecha3: Fecha;
+begin
+  fecha3 := fecha1.diferencia(fecha2);
+  Memo1.Lines.Add('La diferencia es de ' + fecha3.getDia().ToString() + ' día(s) ' +
+    fecha3.getMes().ToString + ' mes(es) y ' + fecha3.getAño().ToString() + ' año(s)');
+end;
+
 procedure TForm1.btnCargarFechaClick(Sender: TObject);
 begin
-  cargarFecha(editDia.Text, editMes.Text, editAño.Text, edit2Dia.Text, edit2Mes.Text, edit2Año.Text);
+  cargarFecha(editDia.Text, editMes.Text, editAño.Text, edit2Dia.Text,
+    edit2Mes.Text, edit2Año.Text);
 end;
 
 procedure TForm1.btnCompararFechasClick(Sender: TObject);
 var comparacion: OPCION;
 begin
-  cargarFecha(editDia.Text, editMes.Text, editAño.Text, edit2Dia.Text, edit2Mes.Text, edit2Año.Text);
+  cargarFecha(editDia.Text, editMes.Text, editAño.Text, edit2Dia.Text,
+    edit2Mes.Text, edit2Año.Text);
+
   comparacion := fecha1.comparar(fecha2);
   case comparacion of
     Mayor: Memo1.Lines.Add('Es mayor');
