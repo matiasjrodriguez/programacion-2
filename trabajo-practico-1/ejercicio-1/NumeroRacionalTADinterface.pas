@@ -58,8 +58,7 @@ begin
   n2.SetDenominador(entradaDenominador2);
   memo1.Lines.Add(n2.Fraccion());
 
-  //memo1.Lines.Add(n1.Compara(n2));
-//  memo1.Lines.Add(n1.Fraccion());
+  memo1.Lines.Add(n1.Compara(n2));
 
 end;
 

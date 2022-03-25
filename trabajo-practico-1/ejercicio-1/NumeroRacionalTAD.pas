@@ -20,7 +20,7 @@ type
     function Multiplica(x:NumeroRacional):NumeroRacional;
     function Divide(x:NumeroRacional):NumeroRacional;
     function Potencias(x:NumeroRacional):NumeroRacional;
-    function Compara(x:NumeroRacional):NumeroRacional;
+    function Compara(x:NumeroRacional):String;
   End;
 
 implementation
@@ -57,12 +57,12 @@ begin
     y.SetNumerador(GetNumerador() + x.GetNumerador());
     y.SetDenominador(GetDenominador());
   end else begin
-     y.SetNumerador(1);
-     y.SetDenominador(1);
-
+     y.SetNumerador((GetNumerador()*x.GetDenominador())+(GetDenominador()*x.GetNumerador()));
+     y.SetDenominador(GetDenominador()*x.GetDenominador());
   end;
 result := y;
 end;
+
 
 function NumeroRacional.Resta(x:NumeroRacional):NumeroRacional;
 var y: NumeroRacional;
@@ -71,12 +71,13 @@ begin
     y.SetNumerador(GetNumerador() - x.GetNumerador());
     y.SetDenominador(GetDenominador());
   end else begin
-    y.SetNumerador(1);
-    y.SetDenominador(1);
-
+    y.SetDenominador(GetDenominador() * x.GetDenominador());
+    y.SetNumerador((GetNumerador()*x.GetDenominador())-(GetDenominador()*x.GetNumerador()));
   end;
 result := y;
 end;
+
+
 function NumeroRacional.Multiplica(x:NumeroRacional):NumeroRacional;
 var y:NumeroRacional;
 begin
@@ -91,6 +92,8 @@ begin
   y.SetDenominador(GetDenominador()* x.GetNumerador());
   result := y
 end;
+
+
 function NumeroRacional.Potencias(x:NumeroRacional):NumeroRacional;
 var y : NumeroRacional; potencia : single;
 
@@ -102,38 +105,51 @@ y.SetDenominador(1);
 result := y
 end;
 
-function NumeroRacional.Compara(x:NumeroRacional):NumeroRacional;
+
+function NumeroRacional.Compara(x:NumeroRacional):String;
 var resultadoComparacion : string;
   numero1, numero2, denominadorModificado, denominadorXModificado, i, l : integer;
+  Esdivisible, EsdivisibleX : boolean;
 begin
-i := 2
-l := 2
-  if GetDenominador() = x.GetDenominador() then begin
-    numero1 := GetNumerador();
-    numero2 := x.GetNumerador();
-  end else begin
-      while GetDenominador() <> x.GetDenominador do
-        if GetDenominador() > x.GetDenominador() then
-          denominadorXModificado :=  x.GetDenominador * i
-          i := i+1
-        else denominadorXModificado > GetDenominador()
-          denominadorModificado := GetDenominador() * l
-          l := l+1
+i := 1;
+l := 1;
+      Esdivisible := false;
+      EsdivisibleX := false;
+      numero1 := GetNumerador();
+      numero2 := x.GetNumerador();
+      denominadorModificado := GetDenominador();
+      denominadorXModificado :=  x.GetDenominador();
+      while denominadorModificado <> denominadorXModificado do begin
+        if ((denominadorModificado MOD x.GetDenominador()) = 0) and (denominadorModificado >= denominadorXModificado) then begin
+          Esdivisible := true
+        end;
+        if ((denominadorXModificado MOD GetDenominador()) = 0) and (denominadorXModificado >= denominadorModificado) then begin
+          EsdivisibleX := true
+        end;
+        if (denominadorModificado > denominadorXModificado) and (EsdivisibleX = false) then begin
+          i := i+1;
+          denominadorXModificado :=  x.GetDenominador() * i;
+        end else if (denominadorXModificado > denominadorModificado) and (Esdivisible = false) then begin
+          l := l+1;
+          denominadorModificado := GetDenominador() * l;
+        end;
+      end;
       SetNumerador(numero1*l);
       x.SetNumerador(numero2*i);
       SetDenominador(denominadorModificado);
       x.SetDenominador(denominadorXModificado);
       numero1 := GetNumerador();
       numero2 := x.GetNumerador();
-  end;
 
-  if numero1 > numero2 then
-    resultadoComparacion := 'Mayor :'
-  else
-    resultadoComparacion := 'Menor'
-  else
+  if numero1 = numero2 then begin
     resultadoComparacion:= 'Igual';
+  end else begin
+    if numero1 > numero2 then begin
+      resultadoComparacion:= 'Mayor';
+    end else begin
+    resultadoComparacion := 'Menor';
+    end;
   end;
-result := resultadoComparacion
+  result := resultadoComparacion
 end;
 end.
