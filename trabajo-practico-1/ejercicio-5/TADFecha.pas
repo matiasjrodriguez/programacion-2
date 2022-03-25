@@ -27,6 +27,7 @@ type
     function comparar(otraFecha:Fecha):OPCION;
     function esBisiesto():boolean;
     function diferencia(otraFecha:Fecha):Fecha;
+    function convertirADias():integer;
   end;
 
 implementation
@@ -146,6 +147,45 @@ begin
     resultado.setAño(otraFecha.getAño() - getAño());
 
   result := resultado;
+end;
+
+function Fecha.convertirADias(): Integer;
+var totalDias, totalMeses, totalAños: integer;
+begin
+  totalDias := getDia();
+  totalMeses := getMes() - 1;
+  totalAños := getAño();
+
+  while totalMeses > 0 do begin
+
+    if (getMes() in [1, 3, 5, 7, 8, 10, 12]) then 
+      Inc(totalDias, 31)
+    else if (getMes() in [4, 6, 9, 11]) then
+      Inc(totalDias, 30)
+    else if esBisiesto() then
+      Inc(totalDias, 29)
+    else
+      Inc(totalDias, 28);
+             
+    Dec(totalMeses);
+    
+  end;
+
+  Dec(totalAños);
+  
+  while totalAños > 0 do begin
+  
+    if esBisiesto() then
+      Inc(totalDias, 366)
+    else
+      Inc(totalDias, 365);
+
+    Dec(totalAños);
+
+  end;
+
+  result := totalDias;
+  
 end;
 
 end.
