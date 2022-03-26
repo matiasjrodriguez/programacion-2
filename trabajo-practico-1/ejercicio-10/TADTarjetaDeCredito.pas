@@ -45,7 +45,7 @@ end;
 
 function TarjetaDeCredito.getFecha: TDateTime;
 begin
-
+  result := fechaVencimiento;
 end;
 
 function TarjetaDeCredito.getLimite: regLimite;
@@ -65,7 +65,7 @@ end;
 
 procedure TarjetaDeCredito.setFecha(fecha: TDateTime);
 begin
-
+  fechaVencimiento := fecha;
 end;
 
 procedure TarjetaDeCredito.setLimite(lim: regLimite);
