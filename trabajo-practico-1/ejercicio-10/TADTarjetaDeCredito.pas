@@ -31,4 +31,56 @@ type
 
 implementation
 
+{ TarjetaDeCredito }
+
+function TarjetaDeCredito.comprar(monto: integer): boolean;
+begin
+
+end;
+
+function TarjetaDeCredito.entidadEmisora: EMISORAS;
+begin
+
+end;
+
+function TarjetaDeCredito.getFecha: TDateTime;
+begin
+
+end;
+
+function TarjetaDeCredito.getLimite: regLimite;
+begin
+
+end;
+
+function TarjetaDeCredito.getNumero: string;
+begin
+
+end;
+
+function TarjetaDeCredito.mostrarLimites: regLimite;
+begin
+
+end;
+
+procedure TarjetaDeCredito.setFecha(fecha: TDateTime);
+begin
+
+end;
+
+procedure TarjetaDeCredito.setLimite(lim: regLimite);
+begin
+
+end;
+
+procedure TarjetaDeCredito.setNumero(num: string);
+begin
+
+end;
+
+function TarjetaDeCredito.validarNro: boolean;
+begin
+
+end;
+
 end.
