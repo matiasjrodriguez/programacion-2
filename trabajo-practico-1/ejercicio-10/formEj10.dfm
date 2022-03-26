@@ -69,13 +69,13 @@
   end
   object Memo1: TMemo
     Left = 440
-    Top = 56
+    Top = 61
     Width = 432
-    Height = 304
-    Font.Charset = DEFAULT_CHARSET
+    Height = 285
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -21
-    Font.Name = 'Tahoma'
+    Font.Name = 'Trebuchet MS'
     Font.Style = []
     Lines.Strings = (
       '')
@@ -99,7 +99,7 @@
     Width = 401
     Height = 163
     Caption = 'L'#237'mite de Cr'#233'dito'
-    TabOrder = 2
+    TabOrder = 5
     object Label3: TLabel
       Left = 16
       Top = 34
@@ -130,7 +130,7 @@
     end
     object eUnaCuota: TEdit
       Left = 208
-      Top = 31
+      Top = 29
       Width = 126
       Height = 21
       NumbersOnly = True
@@ -162,7 +162,7 @@
     Width = 117
     Height = 49
     Caption = 'Validar Tarjeta'
-    TabOrder = 3
+    TabOrder = 4
     OnClick = btValidarClick
   end
   object eMes: TEdit
@@ -173,7 +173,7 @@
     Alignment = taCenter
     MaxLength = 2
     NumbersOnly = True
-    TabOrder = 4
+    TabOrder = 2
     OnChange = eNumeroChange
   end
   object eAño: TEdit
@@ -184,7 +184,7 @@
     Alignment = taCenter
     MaxLength = 2
     NumbersOnly = True
-    TabOrder = 5
+    TabOrder = 3
     OnChange = eNumeroChange
   end
   object GroupBox2: TGroupBox

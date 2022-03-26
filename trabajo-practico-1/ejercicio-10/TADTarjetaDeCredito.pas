@@ -9,7 +9,7 @@ type
 
   regLimite = record
     unaCuota: single;
-    variasCuotas: single;
+    variasCuotas: double;
   end;
 
   TarjetaDeCredito = object
@@ -111,7 +111,7 @@ end;
 
 function TarjetaDeCredito.mostrarLimites: string;
 begin
-  result := ('Limite en una cuota: ' + limite.unaCuota.ToString + #10 + #13 + ' Limite de varias cuotas: ' + limite.variasCuotas.ToString);
+  result := ('-Limite actual en una cuota: ' + limite.unaCuota.ToString + #13#10 + '-Limite actual en varias cuotas: ' + limite.variasCuotas.ToString);
 end;
 
 procedure TarjetaDeCredito.setFecha(fecha: TDateTime);

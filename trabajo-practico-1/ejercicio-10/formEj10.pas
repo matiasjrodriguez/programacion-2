@@ -70,9 +70,11 @@ begin
   memo1.Clear;
   monto := strtoint(eMonto.Text);
   cuotas := strtoint(eCuotas.Text);
-  lim.unaCuota := strtoint(eUnaCuota.Text);
-  lim.variasCuotas := strtoint(eVariasCuotas.Text);
-  tdc.setLimite(lim);
+  if eUnaCuota.Enabled and eVariasCuotas.Enabled then begin
+    lim.unaCuota := strtoint(eUnaCuota.Text);
+    lim.variasCuotas := strtoint(eVariasCuotas.Text);
+    tdc.setLimite(lim);
+  end;
   if cuotas = 1 then begin
     if tdc.comprarUnaCuota(monto) then
       memo1.Lines.Add('Compra efectuada con exito')
@@ -90,6 +92,8 @@ begin
   btLimites.Enabled := True;
   eUnaCuota.Enabled := False;
   eVariasCuotas.Enabled := False;
+  eMonto.Clear;
+  eCuotas.Text := '0';
 end;
 
 procedure TForm1.btValidarClick(Sender: TObject);
@@ -117,7 +121,9 @@ begin
           AmericanExpress: Memo1.Lines.Add('Emisora: AmericanExpress');
           Maestro: Memo1.Lines.Add('Emisora: Maestro');
         end;
-        btPagar.Enabled := True;
+        eUnaCuota.Clear;
+        eVariasCuotas.Clear;
+
       end else begin
         memo1.Clear;
         memo1.Lines.Add('ERROR:');
@@ -128,6 +134,11 @@ begin
         if fecha > fechaVencimiento then
           memo1.Lines.Add('La tarjeta se encuentra vencida.');
         btPagar.Enabled := False;
+        eUnaCuota.Clear;
+        eVariasCuotas.Clear;
+        eUnaCuota.Enabled := True;
+        eVariasCuotas.Enabled := True;
+        btLimites.Enabled := False;
       end;
 
     end else
