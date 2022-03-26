@@ -8,8 +8,8 @@ type
   EMISORAS = (Null, Visa, Mastercard, AmericanExpress, Maestro);
 
   regLimite = record
-    unaCuota: integer;
-    variasCuotas: integer;
+    unaCuota: single;
+    variasCuotas: single;
   end;
 
   TarjetaDeCredito = object
@@ -26,17 +26,42 @@ type
     function getLimite():regLimite;
     function validarNro():boolean;
     function entidadEmisora():EMISORAS;
-    function comprar(monto:integer):boolean;
-    function mostrarLimites():regLimite;
+    function comprarUnaCuota(monto:integer):boolean;
+    function comprarMuchasCuotas(monto,cuotas:integer):boolean;
+    function mostrarLimites():string;
   end;
 
 implementation
 
 { TarjetaDeCredito }
 
-function TarjetaDeCredito.comprar(monto: integer): boolean;
+function TarjetaDeCredito.comprarMuchasCuotas(monto,cuotas: integer): boolean;
 begin
+  if Limite.variasCuotas >= monto then begin
+    if cuotas <= 6 then begin
+      Limite.variasCuotas := Limite.variasCuotas - (monto * 0.90);
+      Limite.unaCuota := Limite.unaCuota - (monto / cuotas);
+    end else begin
+      Limite.variasCuotas := Limite.variasCuotas - (monto * 0.70);
+      Limite.unaCuota := Limite.unaCuota - (monto / cuotas);
+    end;
+    result := true;
+  end else
+    result := false;
+end;
 
+function TarjetaDeCredito.comprarUnaCuota(monto: integer): boolean;
+begin
+  if Limite.unaCuota >= monto then begin
+    case entidadEmisora() of
+      Visa: Limite.unaCuota := Limite.unaCuota - (monto * 0.80);
+      AmericanExpress: Limite.unaCuota := Limite.unaCuota - (monto * 0.80);
+    else
+      Limite.unaCuota := Limite.unaCuota - monto;
+    end;
+    result := true
+  end else
+    result := false;
 end;
 
 function TarjetaDeCredito.entidadEmisora: EMISORAS;
@@ -84,9 +109,9 @@ begin
   result := numero
 end;
 
-function TarjetaDeCredito.mostrarLimites: regLimite;
+function TarjetaDeCredito.mostrarLimites: string;
 begin
-
+  result := ('Limite en una cuota: ' + limite.unaCuota.ToString + #10 + #13 + ' Limite de varias cuotas: ' + limite.variasCuotas.ToString);
 end;
 
 procedure TarjetaDeCredito.setFecha(fecha: TDateTime);
@@ -126,5 +151,6 @@ begin
 
   result := (acumulador mod 10) = 0;
 end;
+
 
 end.
