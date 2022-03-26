@@ -50,12 +50,12 @@ end;
 
 function TarjetaDeCredito.getLimite: regLimite;
 begin
-
+  result := limite;
 end;
 
 function TarjetaDeCredito.getNumero: string;
 begin
-
+  result := numero
 end;
 
 function TarjetaDeCredito.mostrarLimites: regLimite;
@@ -70,12 +70,12 @@ end;
 
 procedure TarjetaDeCredito.setLimite(lim: regLimite);
 begin
-
+  limite := lim
 end;
 
 procedure TarjetaDeCredito.setNumero(num: string);
 begin
-
+  numero := num
 end;
 
 function TarjetaDeCredito.validarNro: boolean;
