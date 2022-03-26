@@ -1,10 +1,11 @@
 unit TADTarjetaDeCredito;
 
 interface
-
+uses
+  SysUtils;
 type
 
-  EMISORAS = (Visa, Mastercard, AmericanExpress, Maestro);
+  EMISORAS = (Null, Visa, Mastercard, AmericanExpress, Maestro);
 
   regLimite = record
     unaCuota: integer;
@@ -39,7 +40,32 @@ begin
 end;
 
 function TarjetaDeCredito.entidadEmisora: EMISORAS;
+var
+  num:string;
+  INN:integer;
+  empresa: EMISORAS;
 begin
+  num := getNumero();
+
+  if num[1] = '4' then
+    empresa := Visa
+  else begin
+    INN := StrToInt(num[1] + num[2]);
+
+    if (INN >= 34) and (INN <= 37) then
+      empresa := AmericanExpress
+    else if (INN = 50) or ((INN >= 56) and (INN <= 58)) then
+      empresa := Maestro
+    else if (INN >= 51) and (INN <= 55) then
+      empresa := Mastercard
+    else begin
+      INN := StrToInt(num[1] + num[2] + num[3] + num[4]);
+      if (INN >= 2021) and (INN <= 2720) then
+        empresa := Mastercard;
+    end;
+  end;
+
+  result := empresa;
 
 end;
 
@@ -79,8 +105,26 @@ begin
 end;
 
 function TarjetaDeCredito.validarNro: boolean;
-begin
+var
+  num, numDuplicado:string;
+  I, acumulador:byte;
 
+begin
+  num := getNumero();
+  numDuplicado := '';
+  acumulador := 0;
+
+  for I := 1 to length(num) do begin
+    if (I mod 2) <> 0 then
+      numDuplicado := numDuplicado + (StrToInt(num[I])*2).ToString
+    else
+      numDuplicado := numDuplicado + num[I];
+  end;
+
+  for I := 1 to length(numDuplicado) do
+    acumulador := acumulador + StrToint(numDuplicado[I]);
+
+  result := (acumulador mod 10) = 0;
 end;
 
 end.
