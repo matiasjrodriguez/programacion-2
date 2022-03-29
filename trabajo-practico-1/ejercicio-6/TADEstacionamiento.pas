@@ -124,6 +124,8 @@ begin
 
   if horaDif < 3 then begin
     totalMinutos := minDif + (horaDif * 60);
+    if totalMinutos mod 10 <> 0 then
+      totalMinutos := totalMinutos - (totalMinutos mod 10) + 10;
     auto.abona := (totalMinutos * getTarifaHora()) / 60;
     auto.tipotarifa := porHora;
   end else if horaDif < 6 then begin
