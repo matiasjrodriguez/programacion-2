@@ -3,7 +3,8 @@ unit NumeroRacionalTADinterface;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, NumeroRacionalTAD;
 
 type
@@ -19,6 +20,11 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit5: TEdit;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure SumarClick(Sender: TObject);
     procedure RestarClick(Sender: TObject);
     procedure MultiplicarClick(Sender: TObject);
@@ -36,141 +42,150 @@ var
 
 implementation
 
-
 {$R *.dfm}
 
-
 procedure TOperaciones.CompararClick(Sender: TObject);
-var n1, n2 : NumeroRacional;
-  entradaNumerador1, entradaNumerador2, entradaDenominador1, entradaDenominador2 : integer;
+var
+  n1, n2: NumeroRacional;
+  entradaNumerador1, entradaNumerador2, entradaDenominador1,
+    entradaDenominador2: integer;
 begin
-  TryStrToInt(edit1.Text,entradaNumerador1);
+  memo1.Clear;
+  TryStrToInt(Edit1.Text, entradaNumerador1);
   n1.SetNumerador(entradaNumerador1);
 
-  TryStrToInt(edit2.Text, entradaDenominador1);
+  TryStrToInt(Edit2.Text, entradaDenominador1);
   n1.SetDenominador(entradaDenominador1);
-  memo1.Lines.Add(n1.Fraccion);
 
-  TryStrToInt(edit3.Text, entradaNumerador2);
+  TryStrToInt(Edit3.Text, entradaNumerador2);
   n2.SetNumerador(entradaNumerador2);
 
-  TryStrToInt(edit4.Text, entradaDenominador2);
+  TryStrToInt(Edit4.Text, entradaDenominador2);
   n2.SetDenominador(entradaDenominador2);
-  memo1.Lines.Add(n2.Fraccion());
 
-  memo1.Lines.Add(n1.Compara(n2));
-
+  Memo1.Lines.Add(n1.Fraccion + ' es ' + n1.Compara(n2) + ' que ' + n2.Fraccion);
 end;
 
 procedure TOperaciones.DividirClick(Sender: TObject);
-var n1, n2, n3 : NumeroRacional ;
-  entradaNumerador1, entradaNumerador2, entradaDenominador1, entradaDenominador2 : integer;
+var
+  n1, n2, n3: NumeroRacional;
+  entradaNumerador1, entradaNumerador2, entradaDenominador1,
+    entradaDenominador2: integer;
 begin
-  trystrtoint(edit1.Text, entradaNumerador1);
+  Memo1.Clear;
+  TryStrToInt(Edit1.Text, entradaNumerador1);
   n1.SetNumerador(entradaNumerador1);
 
-  TryStrToInt(edit2.Text, entradaDenominador1);
+  TryStrToInt(Edit2.Text, entradaDenominador1);
   n1.SetDenominador(entradaDenominador1);
-  memo1.Lines.Add(n1.Fraccion());
 
-  TryStrToInt(edit3.Text, entradaNumerador2);
+  TryStrToInt(Edit3.Text, entradaNumerador2);
   n2.SetNumerador(entradaNumerador2);
 
-  TryStrToInt(edit4.Text, entradaDenominador2);
+  TryStrToInt(Edit4.Text, entradaDenominador2);
   n2.SetDenominador(entradaDenominador2);
-  memo1.Lines.Add(n2.Fraccion());
+  Memo1.Lines.Add(n1.Fraccion + ' / ' + n2.Fraccion());
+  Memo1.Lines.Add('-----------------------');
 
   n3 := n1.Divide(n2);
-  memo1.Lines.Add(n3.Fraccion());
+  Memo1.Lines.Add(n3.Fraccion());
+
 end;
 
 procedure TOperaciones.MultiplicarClick(Sender: TObject);
-var n1,n2,n3 : NumeroRacional;
- entradaNumerador1, entradaNumerador2, entradaDenominador1, entradaDenominador2 : integer;
- begin
-  trystrtoint(edit1.Text,entradaNumerador1);
+var
+  n1, n2, n3: NumeroRacional;
+  entradaNumerador1, entradaNumerador2, entradaDenominador1,
+    entradaDenominador2: integer;
+begin
+  Memo1.Clear;
+  TryStrToInt(Edit1.Text, entradaNumerador1);
   n1.SetNumerador(entradaNumerador1);
 
-  TryStrToInt(edit2.Text, entradaDenominador1);
+  TryStrToInt(Edit2.Text, entradaDenominador1);
   n1.SetDenominador(entradaDenominador1);
-  memo1.Lines.Add(n1.Fraccion());
 
-  TrySTrToInt(edit3.Text,entradaNumerador2);
+  TryStrToInt(Edit3.Text, entradaNumerador2);
   n2.SetNumerador(entradaNumerador2);
 
-  TryStrToInt(edit4.Text,entradaDenominador2);
+  TryStrToInt(Edit4.Text, entradaDenominador2);
   n2.SetDenominador(entradaDenominador2);
-  memo1.Lines.Add(n2.Fraccion());
+  Memo1.Lines.Add(n1.Fraccion() + ' * ' + n2.Fraccion());
+  Memo1.Lines.Add('-----------------------');
 
   n3 := n1.Multiplica(n2);
-  memo1.Lines.Add(n3.Fraccion());
-
+  Memo1.Lines.Add(n3.Fraccion());
 
 end;
 
 procedure TOperaciones.PotenciaClick(Sender: TObject);
-var n1, n2e, n3 : NumeroRacional;
-  entradaNumerador, entradaExponente : integer;
+var
+  n1, n3: NumeroRacional;
+  entradaNumerador, entradaDenominador, entradaExponente: integer;
 begin
-  TryStrToInt(edit1.Text,entradaNumerador);
+  TryStrToInt(Edit1.Text, entradaNumerador);
   n1.SetNumerador(entradaNumerador);
 
-  TryStrToInt(edit3.Text, entradaExponente);
-  n2e.SetNumerador(entradaExponente);
+  TryStrToInt(Edit2.Text, entradaDenominador);
+  n1.SetDenominador(entradaDenominador);
 
-  n3 :=  n1.Potencias(n2e);
-  memo1.Lines.Add(n3.Fraccion());
+  TryStrToInt(Edit5.Text, entradaExponente);
 
+  n3 := n1.Potencias(entradaExponente);
+
+  Memo1.Clear;
+  Memo1.Lines.Add('Resultado: ' + n3.Fraccion());
 end;
 
 procedure TOperaciones.RestarClick(Sender: TObject);
-var n1, n2, n3 : NumeroRacional;
-  entradaNumerador1, entradaNumerador2, entradaDenominador1, entradaDenominador2 : integer;
+var
+  n1, n2, n3: NumeroRacional;
+  entradaNumerador1, entradaNumerador2, entradaDenominador1,
+    entradaDenominador2: integer;
 begin
-   TryStrToInt(edit1.Text,entradaNumerador1);
-   n1.SetNumerador(entradaNumerador1);
+  Memo1.Clear;
+  TryStrToInt(Edit1.Text, entradaNumerador1);
+  n1.SetNumerador(entradaNumerador1);
 
+  TryStrToInt(Edit2.Text, entradaDenominador1);
+  n1.SetDenominador(entradaDenominador1);
 
-   TryStrToInt(edit2.Text, entradaDenominador1);
-   n1.SetDenominador(entradaDenominador1);
-   memo1.lines.Add(n1.Fraccion());
+  TryStrToInt(Edit3.Text, entradaNumerador2);
+  n2.SetNumerador(entradaNumerador2);
 
-   TryStrToInt(edit3.Text,entradaNumerador2);
-   n2.SetNumerador(entradaNumerador2);
+  TryStrToInt(Edit4.Text, entradaDenominador2);
+  n2.SetDenominador(entradaDenominador2);
+  Memo1.Lines.Add(n1.Fraccion + ' - ' + n2.Fraccion());
 
-   TryStrToInt(edit4.Text, entradaDenominador2);
-   n2.SetDenominador(entradaDenominador2);
-   memo1.lines.add(n2.Fraccion());
-
-   n3 := n1.Resta(n2);
-   memo1.Lines.Add(n3.Fraccion());
-
-
-
-
+  n3 := n1.Resta(n2);
+  Memo1.Lines.Add('-------------------');
+  Memo1.Lines.Add(n3.Fraccion());
 
 end;
 
 procedure TOperaciones.SumarClick(Sender: TObject);
-var n1, n2, n3 : NumeroRacional;
-  entradaNumerador1, entradaDenominador1, entradaNumerador2, entradaDenominador2  : integer;
+var
+  n1, n2, n3: NumeroRacional;
+  entradaNumerador1, entradaDenominador1, entradaNumerador2,
+    entradaDenominador2: integer;
 begin
-  TryStrtoInt(edit1.text,entradaNumerador1);
+  Memo1.Clear;
+  TryStrToInt(Edit1.Text, entradaNumerador1);
   n1.SetNumerador(entradaNumerador1);
 
-  TryStrtoInt(edit2.text,entradaDenominador1);
+  TryStrToInt(Edit2.Text, entradaDenominador1);
   n1.SetDenominador(entradaDenominador1);
-  memo1.lines.add(n1.Fraccion());
 
-  trystrtoint(edit3.text, entradaNumerador2);
+  TryStrToInt(Edit3.Text, entradaNumerador2);
   n2.SetNumerador(entradaNumerador2);
 
-  TryStrToInt(edit4.text, entradaDenominador2);
+  TryStrToInt(Edit4.Text, entradaDenominador2);
   n2.SetDenominador(entradaDenominador2);
-  memo1.lines.add(n2.Fraccion());
+  Memo1.Lines.Add(n1.Fraccion + ' + ' + n2.Fraccion());
 
   n3 := n1.Suma(n2);
-  memo1.lines.add(n3.Fraccion());
+  Memo1.Lines.Add('--------------------');
+  Memo1.Lines.Add(n3.Fraccion());
 
 end;
 

@@ -1,8 +1,10 @@
 unit TADTarjetaDeCredito;
 
 interface
+
 uses
   SysUtils;
+
 type
 
   EMISORAS = (Null, Visa, Mastercard, AmericanExpress, Maestro);
