@@ -26,8 +26,9 @@ type
     function verificarFecha():boolean;
     function comparar(otraFecha:Fecha):OPCION;
     function esBisiesto():boolean;
-    function diferencia(otraFecha:Fecha):Fecha;
+    function diferencia(otraFecha:Fecha):Integer;
     function convertirADias():integer;
+    function convertirAFecha(dias:integer):fecha;
   end;
 
 implementation
@@ -124,27 +125,11 @@ begin
     (not((getAño() mod 100) = 0) or ((getAño() mod 400) = 0))
 end;
 
-function Fecha.diferencia(otraFecha: Fecha): Fecha;
+function Fecha.diferencia(otraFecha: Fecha): Integer;
   var resultado: Fecha;
   var I: integer;
 begin
 
-  //////// HAY QUE CORREGIR ESTA FUNCIÓN ////////
-
-  if getDia() > otraFecha.getDia() then
-    resultado.setDia(getDia() - otraFecha.getDia())
-  else
-    resultado.setDia(otraFecha.getDia() - getDia());
-
-  if getMes() > otraFecha.getMes() then
-    resultado.setMes(getMes() - otraFecha.getMes())
-  else
-    resultado.setMes(otraFecha.getMes() - getMes());
-
-  if getAño() > otraFecha.getAño() then
-    resultado.setAño(getAño() - otraFecha.getAño())
-  else
-    resultado.setAño(otraFecha.getAño() - getAño());
 
   result := resultado;
 end;
@@ -186,6 +171,27 @@ begin
 
   result := totalDias;
   
+end;
+
+function Fecha.convertirAFecha(dias: Integer): Fecha;
+var
+  nuevaFecha:Fecha;
+  totalDias, totalMeses, totalAños: integer;
+begin
+  nuevaFecha.setDia(1);
+  nuevaFecha.setMes(1);
+  nuevaFecha.setAño(1);
+  Dec(dias, 365);
+
+  while dias >= 365 do begin
+    nuevaFecha.setAño(nuevaFecha.getAño()+1);
+    if (nuevaFecha.esBisiesto) and (dias > 365) then
+      Dec(dias, 366)
+    else
+      Dec(dias, 365);
+  end
+
+
 end;
 
 end.
