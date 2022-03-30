@@ -66,6 +66,13 @@
     Font.Style = []
     ParentFont = False
   end
+  object Label5: TLabel
+    Left = 768
+    Top = 21
+    Width = 48
+    Height = 13
+    Caption = 'Resultado'
+  end
   object SGMatriz1: TStringGrid
     AlignWithMargins = True
     Left = 128
@@ -188,7 +195,7 @@
     Height = 21
     Associate = eTamaño
     Min = 2
-    Max = 20
+    Max = 10
     Position = 5
     TabOrder = 6
   end
@@ -264,5 +271,6 @@
     Height = 25
     Caption = 'Diagonal Principal y Opuesta'
     TabOrder = 15
+    OnClick = btDiagonalesClick
   end
 end

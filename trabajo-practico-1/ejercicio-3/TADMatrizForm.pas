@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TADMatriz, Vcl.Grids, Vcl.StdCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, VectorTADelements;
 
 type
   TForm1 = class(TForm)
@@ -29,12 +29,14 @@ type
     btBuscar: TButton;
     eBuscar: TEdit;
     btDiagonales: TButton;
+    Label5: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure eTamañoChange(Sender: TObject);
     procedure btResultadoClick(Sender: TObject);
     procedure btMaxFilaClick(Sender: TObject);
     procedure btEscalarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
+    procedure btDiagonalesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -136,6 +138,35 @@ begin
     Memo1.Lines.Add('ERROR: Entrada invalida en una Matriz');
     Exit;
    end;
+end;
+
+procedure TForm1.btDiagonalesClick(Sender: TObject);
+var
+  DPrincipal, DOpuesta: Vector;
+  i: integer;
+  s: string;
+begin
+  if ValidarGrids() then begin
+    CargarMatrices();
+    DPrincipal := M1.DiagonalPrincipal();
+    DOpuesta := M1.DiagonalOpuesta;
+    memo1.Clear;
+    s := '';
+    for i := 1 to M1.getDimension do
+      s := s + DPrincipal.GetPosicionElegida(i).ToString + '; ';
+    memo1.Lines.Add('Diagonal principal: ' + s);
+    s := '';
+
+    for i := 1 to M1.getDimension do
+      s := s + DOpuesta.GetPosicionElegida(i).ToString + '; ';
+    memo1.Lines.Add('');
+    memo1.Lines.Add('Diagonal Opuesta: ' + s);
+  end
+  else begin
+    Memo1.Clear;
+    Memo1.Lines.Add('ERROR: Entrada invalida en una Matriz');
+    Exit;
+  end;
 end;
 
 procedure TForm1.btEscalarClick(Sender: TObject);

@@ -2,10 +2,10 @@ unit TADMatriz;
 
 interface
 
-uses sysutils, System.Math;
+uses sysutils, System.Math, VectorTADelements;
 
 const
-  MAX = 20;
+  MAX = 10;
 
 type
   tipoVector = array[1..MAX] of integer;
@@ -29,6 +29,8 @@ type
       function Escalar(n:integer):Matriz;
       procedure InicializarMatriz();
       function Buscar(item:integer;var nFila, nColumna: integer):boolean;
+      function DiagonalPrincipal():Vector;
+      function DiagonalOpuesta(): Vector;
   End;
 
 implementation
@@ -158,6 +160,38 @@ begin
 
   suma := mayor;
   result := iMayor;
+end;
+
+function Matriz.DiagonalPrincipal: Vector;
+var
+  i,j,k,n: Integer;
+  VR: Vector;
+begin
+  k := 1;
+  for i := 1 to nDimension do
+    for j := 1 to nDimension do
+      if i = j then begin
+        n := Items[i,j];
+        VR.SetPosicionElegida(k,n);
+        inc(k);
+      end;
+  result := VR;
+end;
+
+function Matriz.DiagonalOpuesta: Vector;
+var
+  i,j,k,n: Integer;
+  VR: Vector;
+begin
+  k := 1;
+  for i := 1 to nDimension do
+    for j := 1 to nDimension do
+      if (i + j = nDimension + 1) then begin
+        n := Items[i,j];
+        VR.SetPosicionElegida(k,n);
+        inc(k);
+      end;
+  result := VR;
 end;
 
 function Matriz.Escalar(n: integer): Matriz;
