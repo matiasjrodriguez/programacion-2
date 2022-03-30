@@ -570,7 +570,6 @@ object Form1: TForm1
       Width = 65
       Height = 21
       Alignment = taCenter
-      NumbersOnly = True
       TabOrder = 1
       OnChange = eCantidadACobrarChange
     end

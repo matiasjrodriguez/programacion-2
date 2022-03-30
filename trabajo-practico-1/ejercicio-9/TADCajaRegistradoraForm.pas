@@ -120,9 +120,8 @@ end;
 procedure MostrarCaja();
 var i:integer;
 begin
-  for i := 1 to CR.getLongitud do begin
+  for i := 1 to CR.getLongitud do
     form1.sgCaja.Cells[1,i] := CR.getContenedores[i].Cantidad.ToString;
-  end;
 end;
 
 procedure MostrarVuelto();
@@ -191,7 +190,12 @@ begin
   MostrarVuelto();
   ContenedoresCliente.InicializarContenedores;
   CargarValores(ContenedoresCliente);
-  aCobrar := strtoint(trim(eCantidadaCobrar.Text));
+  if not trystrtofloat(trim(eCantidadaCobrar.Text),aCobrar) then begin
+    messagedlg('Ingrese un valor a cobrar válido',mtError,[mbOK],0);
+    exit;
+  end;
+  aCobrar := strtofloat(trim(eCantidadaCobrar.Text));
+
 
   if not ContenedoresCliente.ValidarCobro(ContenedoresCliente.getContenedores,aCobrar) then
     messagedlg('La cantidad ingresada no es suficiente para cobrar',mtError,[mbOK],0)
