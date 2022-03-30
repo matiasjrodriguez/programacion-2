@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 706
-  ClientWidth = 635
+  ClientHeight = 614
+  ClientWidth = 597
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,92 +13,202 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 72
-    Top = 96
-    Width = 61
-    Height = 13
-    Caption = 'CHOCOLATE'
-  end
-  object Label2: TLabel
-    Left = 184
-    Top = 93
-    Width = 98
-    Height = 25
-    Caption = 'CREMA AMERICANA'
-  end
-  object Label3: TLabel
-    Left = 344
-    Top = 93
-    Width = 47
-    Height = 13
-    Caption = 'FRUTILLA'
-  end
-  object Label4: TLabel
-    Left = 472
-    Top = 96
-    Width = 32
-    Height = 13
-    Caption = 'LIMON'
-  end
-  object Memo1: TMemo
-    Left = 72
-    Top = 112
-    Width = 65
-    Height = 129
-    Lines.Strings = (
-      'Memo1')
-    TabOrder = 0
-  end
-  object Memo2: TMemo
-    Left = 201
-    Top = 112
-    Width = 65
-    Height = 129
-    Lines.Strings = (
-      'Memo2')
-    TabOrder = 1
-  end
-  object Memo3: TMemo
-    Left = 344
-    Top = 112
-    Width = 65
-    Height = 129
-    Lines.Strings = (
-      'Memo3')
-    TabOrder = 2
-  end
-  object Button1: TButton
+  object GroupBox1: TGroupBox
     Left = 8
-    Top = 336
-    Width = 153
-    Height = 33
-    Caption = 'Aumentar cantidad de helado'
-    TabOrder = 3
+    Top = 96
+    Width = 588
+    Height = 521
+    TabOrder = 0
+    object Label4: TLabel
+      Left = 440
+      Top = 238
+      Width = 27
+      Height = 13
+      Caption = 'Limon'
+    end
+    object Label3: TLabel
+      Left = 355
+      Top = 238
+      Width = 32
+      Height = 13
+      Caption = 'Frutilla'
+    end
+    object Label2: TLabel
+      Left = 244
+      Top = 238
+      Width = 84
+      Height = 13
+      Caption = 'Crema Americana'
+    end
+    object Label1: TLabel
+      Left = 166
+      Top = 238
+      Width = 48
+      Height = 13
+      Caption = 'Chocolate'
+      Color = clHighlight
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 3
+      Top = 258
+      Width = 160
+      Height = 13
+      Caption = 'Seleccione los sabores deseados:'
+    end
+    object Label9: TLabel
+      Left = 3
+      Top = 439
+      Width = 612
+      Height = 13
+      Caption = 
+        '________________________________________________________________' +
+        '______________________________________'
+    end
+    object CheckBox1: TCheckBox
+      Left = 188
+      Top = 257
+      Width = 97
+      Height = 17
+      TabOrder = 0
+    end
+    object CheckBox2: TCheckBox
+      Left = 274
+      Top = 257
+      Width = 97
+      Height = 17
+      TabOrder = 1
+    end
+    object CheckBox3: TCheckBox
+      Left = 361
+      Top = 257
+      Width = 97
+      Height = 17
+      TabOrder = 2
+    end
+    object CheckBox4: TCheckBox
+      Left = 449
+      Top = 257
+      Width = 97
+      Height = 17
+      TabOrder = 3
+    end
+    object GroupBox2: TGroupBox
+      Left = 154
+      Top = 32
+      Width = 337
+      Height = 200
+      TabOrder = 4
+      object Label5: TLabel
+        Left = 144
+        Top = 19
+        Width = 55
+        Height = 13
+        Caption = 'Congelador'
+      end
+      object Memo1: TMemo
+        Left = 12
+        Top = 60
+        Width = 53
+        Height = 137
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 0
+      end
+      object Memo2: TMemo
+        Left = 103
+        Top = 60
+        Width = 53
+        Height = 137
+        Lines.Strings = (
+          'Memo2')
+        TabOrder = 1
+      end
+      object Memo3: TMemo
+        Left = 190
+        Top = 59
+        Width = 53
+        Height = 137
+        Lines.Strings = (
+          'Memo3')
+        TabOrder = 2
+      end
+      object Memo4: TMemo
+        Left = 273
+        Top = 60
+        Width = 53
+        Height = 137
+        Lines.Strings = (
+          'Memo4')
+        TabOrder = 3
+      end
+    end
+    object Panel1: TPanel
+      Left = 177
+      Top = 280
+      Width = 303
+      Height = 153
+      TabOrder = 5
+      object Button1: TButton
+        Left = 14
+        Top = 87
+        Width = 275
+        Height = 41
+        Caption = 'Aumentar cantidad de helado seleccionado'
+        TabOrder = 0
+      end
+      object Button3: TButton
+        Left = 14
+        Top = 25
+        Width = 275
+        Height = 41
+        Caption = 'Consultar disponibilidad de sabores de helado deseados'
+        TabOrder = 1
+      end
+    end
+    object Button2: TButton
+      Left = 3
+      Top = 472
+      Width = 275
+      Height = 41
+      Caption = 'Consultar si alcanza para 2 o 3 sabores disponibles'
+      TabOrder = 6
+    end
+    object Button4: TButton
+      Left = 313
+      Top = 472
+      Width = 275
+      Height = 41
+      Caption = 'Consultar combinaciones disponibles'
+      TabOrder = 7
+    end
   end
-  object Button2: TButton
-    Left = 184
-    Top = 336
-    Width = 207
-    Height = 29
-    Caption = 'Consultar helado para 2 o mas sabores'
-    TabOrder = 4
-  end
-  object Button3: TButton
-    Left = 446
-    Top = 338
-    Width = 75
-    Height = 25
-    Caption = 'Button3'
-    TabOrder = 5
-  end
-  object Memo4: TMemo
-    Left = 456
-    Top = 112
-    Width = 65
-    Height = 129
-    Lines.Strings = (
-      'Memo4')
-    TabOrder = 6
+  object GroupBox3: TGroupBox
+    Left = 8
+    Top = 1
+    Width = 585
+    Height = 89
+    TabOrder = 1
+    object Label7: TLabel
+      Left = 3
+      Top = 35
+      Width = 205
+      Height = 13
+      Caption = 'Ingrese cuantas bochas de helado desea:'
+    end
+    object Label8: TLabel
+      Left = 62
+      Top = 59
+      Width = 86
+      Height = 13
+      Caption = '(Opciones: 2 o 3) '
+    end
+    object Edit1: TEdit
+      Left = 214
+      Top = 35
+      Width = 358
+      Height = 21
+      TabOrder = 0
+    end
   end
 end
