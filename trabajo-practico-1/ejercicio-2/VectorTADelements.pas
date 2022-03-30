@@ -3,7 +3,7 @@ unit VectorTADelements;
 interface
 
 uses
-  System.SysUtils, Math;
+  System.SysUtils, Math, System.Character;
 
 const
   min = 1;
@@ -20,17 +20,17 @@ type
   public
     procedure CargaAleatoria(min, max: integer; letra: string);
     function SumatoriaElementosVector(): integer;
-    function PromedioVector(): integer;
+    function PromedioVector(): double;
     function MaximoDelVector(var posicion: integer): integer;
     function MinimoDelVector(var posicion: integer): integer;
     function DevolucionIntercalada(separador: string): string;
-    function MultiplicacionEscalar(): Vector;
-    // function SumaVectores(VectorParametro : Vector): Vector;
+    function MultiplicacionEscalar(escalar: integer): Vector;
+    function SumaVectores(VectorParametro : Vector): Vector;
     procedure SetVector1(Parametros: integer);
     function GetVector1(): TipoVector;
     procedure SetPosicionElegida(posicion, Parametros: integer);
     function GetPosicionElegida(posicion: integer): integer;
-    // procedure SplitParametros(cadena,separador: string; var VectorArmado:TipoVectorS);
+    procedure StringAVector(cadena: string);
   end;
 
 implementation
@@ -111,6 +111,7 @@ function Vector.SumatoriaElementosVector(): integer;
 var
   i, SumaTotalVector: integer;
 begin
+  SumaTotalVector := 0;
   for i := min to max do
   begin
     SumaTotalVector := items[i] + SumaTotalVector;
@@ -118,17 +119,27 @@ begin
   result := SumaTotalVector;
 end;
 
-function Vector.PromedioVector(): integer;
+function Vector.SumaVectores(VectorParametro: Vector): Vector;
 var
-  i, l, promedio, SumaTotal: integer;
+  I: Integer;  VR: Vector;
+begin
+  for I := 1 to max do begin
+    VR.SetPosicionElegida(i,items[i] + VectorParametro.GetPosicionElegida(i));
+  end;
+  result := VR;
+end;
+
+function Vector.PromedioVector(): double;
+var
+  i, l, SumaTotal: integer;
+  promedio: double;
 begin
   SumaTotal := 0;
   for i := min to max do
   begin
     SumaTotal := items[i] + SumaTotal;
   end;
-  l := i - 1;
-  promedio := SumaTotal div l;
+  promedio := SumaTotal / max;
   result := promedio;
 end;
 
@@ -171,19 +182,20 @@ var
   i: integer;
   ListaIntercalada: string;
 begin
+  ListaIntercalada := '';
   for i := min to max do
   begin
-    ListaIntercalada := ListaIntercalada + separador + items[i].ToString;
+    ListaIntercalada := ListaIntercalada + items[i].ToString + separador;
   end;
   result := ListaIntercalada;
 end;
 
-function Vector.MultiplicacionEscalar(): Vector;
+function Vector.MultiplicacionEscalar(escalar: integer): Vector;
 var
   nEscalar, i: integer;
   NuevosItems: Vector;
 begin
-  nEscalar := 2;
+  nEscalar := escalar;
   for i := min to max do
   begin
     items[i] := items[i] * nEscalar;
@@ -191,8 +203,6 @@ begin
   end;
   result := NuevosItems;
 end;
-
-// SET Y GET
 
 procedure Vector.SetVector1(Parametros: integer);
 var
@@ -204,44 +214,39 @@ begin
   end;
 end;
 
-function Vector.GetVector1(): TipoVector;
+procedure Vector.StringAVector(cadena: string);
+var
+  i,p: integer;
 begin
-  result := items;
-end;
+  for i := min to max do
+    Items[i] := 0;
 
-// SET Y GET Posiciones
-function Vector.GetPosicionElegida(posicion: integer): integer;
-begin
-  result := items[posicion];
-end;
-
-procedure Vector.SetPosicionElegida(posicion, Parametros: integer);
-begin
-  items[posicion] := Parametros;
-end;
-
-// _____-----____
-// procedure Vector.SplitParametros(cadena,separador: string; var VectorArmado:TipoVectorS);
-{ var i, cadenaAseparar : integer;
-  begin
   i := 0;
-  cadenaAseparar := Pos(separador, cadena);
-  while cadenaAseparar >0 do begin
-  i := i+1;
-  itemsString[i] := Copy(cadena,1, cadenaAseparar-1);
-  cadena := Copy(cadena, cadenaAseparar+1, Length(cadena));
-  cadenaAseparar := Pos(separador, cadena);
-  end;
-  end; }
+  cadena := cadena + ' ';
+  p := pos(' ', cadena);
 
-{ function Vector.SumaVectores(VectorParametro : Vector): Vector;
-  ar i, Resultado : integer;
-  NuevosItems : Vector;
-  begin
-  for i := min to max do begin
-  Resultado := VectorParametro.GetPosicionElegida(i) + items[i];
-  NuevosItems.SetPosicionElegida(i,Resultado);
+  while P > 0 do begin
+    Inc(i);
+    Items[i] := strtoint(Copy(cadena, 1, p - 1));
+    cadena := copy(cadena, P + 1, length(cadena));
+    p := pos(' ', cadena);
   end;
-  result := NuevosItems;
-  end; }
+end;
+
+  function Vector.GetVector1(): TipoVector;
+  begin
+    result := items;
+  end;
+
+  // SET Y GET Posiciones
+  function Vector.GetPosicionElegida(posicion: integer): integer;
+  begin
+    result := items[posicion];
+  end;
+
+  procedure Vector.SetPosicionElegida(posicion, Parametros: integer);
+  begin
+    items[posicion] := Parametros;
+  end;
+
 end.

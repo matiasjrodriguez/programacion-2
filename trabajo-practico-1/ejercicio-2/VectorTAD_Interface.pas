@@ -23,6 +23,8 @@ type
     Inserte_un_vector_separado_por_espacios: TLabel;
     Edit3: TEdit;
     Label2: TLabel;
+    Button1: TButton;
+    Edit4: TEdit;
     procedure Genere_VectorClick(Sender: TObject);
     procedure Devolucion_intercaladaClick(Sender: TObject);
     procedure Sumatoria_del_VectorClick(Sender: TObject);
@@ -31,6 +33,7 @@ type
     procedure Minimo_del_VectorClick(Sender: TObject);
     procedure Maximo_del_VectorClick(Sender: TObject);
     procedure Sumar_un_vectorClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -48,19 +51,27 @@ implementation
 
 
 
-procedure TForm1.Devolucion_intercaladaClick(Sender: TObject);
-var separadorParametro : string;
-  i : integer;
+procedure TForm1.Button1Click(Sender: TObject);
+var i:integer;
 begin
-  separadorParametro := edit2.Text;
-  memo1.Lines.Add(VectorGenerado.DevolucionIntercalada( separadorParametro));
+  memo1.Clear;
+  for i := 1 to max do begin
+    memo1.Lines.Add(VectorGenerado.GetPosicionElegida(i).ToString);
+  end;
+  memo1.Lines.Add('------------------------');
 end;
 
-
+procedure TForm1.Devolucion_intercaladaClick(Sender: TObject);
+var separadorParametro : string;
+begin
+  separadorParametro := edit2.Text;
+  memo1.Lines.Add(VectorGenerado.DevolucionIntercalada(separadorParametro));
+end;
 
 procedure TForm1.Genere_VectorClick(Sender: TObject);
 var letra : string;
 begin
+  memo1.Clear;
   letra := edit3.Text;
   VectorGenerado.CargaAleatoria(min,max,letra);
 end;
@@ -84,57 +95,39 @@ procedure TForm1.Multiplicar_escalarClick(Sender: TObject);
 var NuevoVector : Vector;
   i: Integer;
   s : string;
+  escalar: integer;
 begin
-  NuevoVector := (VectorGenerado.MultiplicacionEscalar());
+  trystrtoint(edit4.Text,escalar);
+  NuevoVector := (VectorGenerado.MultiplicacionEscalar(escalar));
+  s:= '[';
   for i := min to max do begin
-     s := (s+NuevoVector.GetVector1[i].ToString+ ' ');
+     s := (s+NuevoVector.GetVector1[i].ToString+ ',');
   end;
+  s := s + ']';
   memo1.Lines.Add(s);
 end;
 
 
 procedure TForm1.Promedio_del_VectorClick(Sender: TObject);
 begin
-  memo1.Lines.Add(VectorGenerado.PromedioVector().ToString) //revisar
+  memo1.Lines.Add('Promedio: ' + VectorGenerado.PromedioVector().ToString)
 end;
 
 
 procedure TForm1.Sumar_un_vectorClick(Sender: TObject);
-begin
-  memo1.Lines.Add(VectorGenerado.PromedioVector().ToString) //revisar
-end;
-{var i, cadenaAseparar : integer;
-  imprimeVector, cadena : string;
-begin
-  cadena := edit1.Text;
-  cadenaAseparar := Pos(' ', cadena);
-  cadenaAseparar := Copy(cadena,1, cadenaAseparar-1);
-  memo1.Lines.Add(cadenaAseparar.ToString)
-
-end; }
-
-{var VectorParametroListo : Vector;
+var V2,VR : Vector;
   i: Integer;
-  vectorEntrada : integer;
-  s, s2 : string;
 begin
-  trystrtoint(edit1.Text,vectorEntrada);
-   VectorParametro := VectorParametro.SplitParametros(vectorEntrada.ToString, ' ');
-  for i := min to max do begin
-     s := (s+ ' '+ VectorParametro.GetVector1[i].ToString);
-     memo1.Lines.Add(s);
-  end;
-  VectorParametroListo := VectorGenerado.SumaVectores(VectorParametro);
-  for i := min to max do begin
-    s2 := (s2+ ' '+ VectorParametroListo.GetVector1[i].ToString);
-    memo1.Lines.Add(s2);
-  end;
-end;  }
+  V2.StringAVector(trim(edit1.Text));
+  VR := VectorGenerado.SumaVectores(V2);
+  for i := 1 to max do
+    memo1.Lines.Add(VR.GetPosicionElegida(i).ToString)
+end;
 
 
 procedure TForm1.Sumatoria_del_VectorClick(Sender: TObject);
 begin
-  memo1.Lines.Add(VectorGenerado.SumatoriaElementosVector().ToString);
+  memo1.Lines.Add('Sumatoria: ' + VectorGenerado.SumatoriaElementosVector().ToString);
 end;
 
 end.

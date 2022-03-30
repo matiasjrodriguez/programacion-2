@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 366
-  ClientWidth = 484
+  ClientWidth = 490
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,12 +16,12 @@ object Form1: TForm1
   object Inserte_un_vector_separado_por_espacios: TLabel
     Left = 248
     Top = 249
-    Width = 210
+    Width = 227
     Height = 13
-    Caption = 'Inserte_un_vector_separado_por_espacios'
+    Caption = 'Ingrese un vector de 10 separado por espacios'
   end
   object Label1: TLabel
-    Left = 8
+    Left = 48
     Top = 249
     Width = 143
     Height = 13
@@ -30,7 +30,7 @@ object Form1: TForm1
   object Label2: TLabel
     Left = 48
     Top = 16
-    Width = 220
+    Width = 209
     Height = 13
     Caption = 'Ingrese_NR_para_no_permitir_repeticiones'
   end
@@ -71,7 +71,7 @@ object Form1: TForm1
     OnClick = Minimo_del_VectorClick
   end
   object Devolucion_intercalada: TButton
-    Left = 79
+    Left = 59
     Top = 295
     Width = 137
     Height = 25
@@ -80,16 +80,16 @@ object Form1: TForm1
     OnClick = Devolucion_intercaladaClick
   end
   object Multiplicar_escalar: TButton
-    Left = 337
+    Left = 370
     Top = 94
-    Width = 137
+    Width = 104
     Height = 25
     Caption = 'Multiplicar_escalar'
     TabOrder = 5
     OnClick = Multiplicar_escalarClick
   end
   object Sumar_un_vector: TButton
-    Left = 324
+    Left = 304
     Top = 295
     Width = 137
     Height = 25
@@ -107,16 +107,17 @@ object Form1: TForm1
     OnClick = Genere_VectorClick
   end
   object Edit2: TEdit
-    Left = 59
+    Left = 75
     Top = 268
-    Width = 121
+    Width = 102
     Height = 21
+    MaxLength = 1
     TabOrder = 8
   end
   object Edit1: TEdit
     Left = 304
     Top = 268
-    Width = 121
+    Width = 137
     Height = 21
     TabOrder = 9
   end
@@ -124,7 +125,9 @@ object Form1: TForm1
     Left = 8
     Top = 96
     Width = 321
-    Height = 89
+    Height = 105
+    ReadOnly = True
+    ScrollBars = ssVertical
     TabOrder = 10
   end
   object Edit3: TEdit
@@ -133,5 +136,23 @@ object Form1: TForm1
     Width = 121
     Height = 21
     TabOrder = 11
+  end
+  object Button1: TButton
+    Left = 128
+    Top = 207
+    Width = 88
+    Height = 25
+    Caption = 'Mostrar Vector'
+    TabOrder = 12
+    OnClick = Button1Click
+  end
+  object Edit4: TEdit
+    Left = 335
+    Top = 96
+    Width = 29
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 13
+    Text = '1'
   end
 end
