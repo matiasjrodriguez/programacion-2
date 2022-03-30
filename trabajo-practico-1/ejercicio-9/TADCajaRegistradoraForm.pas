@@ -60,6 +60,12 @@ type
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    eMonedasDe050: TEdit;
+    UpDown12: TUpDown;
+    eMonedasDe025: TEdit;
+    UpDown13: TUpDown;
     procedure FormCreate(Sender: TObject);
     procedure btCargarClick(Sender: TObject);
     procedure btCobrarClick(Sender: TObject);
@@ -78,39 +84,30 @@ type
 
 var
   Form1: TForm1;
-  CR: CajaRegistradora; // Los contenedores de la caja registradora
+  CR: CajaRegistradora;
 implementation
 
 {$R *.dfm}
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+  I: Integer;
 begin
   sgCaja.Cells[0,0] := 'CONTENEDOR';
   sgCaja.Cells[1,0] := 'CANTIDAD';
-  sgCaja.Cells[0,1] := 'Monedas de $ 1';
-  sgCaja.Cells[0,2] := 'Monedas de $ 2';
-  sgCaja.Cells[0,3] := 'Monedas de $ 5';
-  sgCaja.Cells[0,4] := 'Monedas de $ 10';
-  sgCaja.Cells[0,5] := 'Billetes de $ 10';
-  sgCaja.Cells[0,6] := 'Billetes de $ 20';
-  sgCaja.Cells[0,7] := 'Billetes de $ 50';
-  sgCaja.Cells[0,8] := 'Billetes de $ 100';
-  sgCaja.Cells[0,9] := 'Billetes de $ 200';
-  sgCaja.Cells[0,10] := 'Billetes de $ 500';
-  sgCaja.Cells[0,11] := 'Billetes de $ 1000';
   sgVuelto.Cells[0,0] := 'TIPO';
   sgVuelto.Cells[1,0] := 'CANTIDAD';
-  sgVuelto.Cells[0,1] := 'Monedas de $ 1';
-  sgVuelto.Cells[0,2] := 'Monedas de $ 2';
-  sgVuelto.Cells[0,3] := 'Monedas de $ 5';
-  sgVuelto.Cells[0,4] := 'Monedas de $ 10';
-  sgVuelto.Cells[0,5] := 'Billetes de $ 10';
-  sgVuelto.Cells[0,6] := 'Billetes de $ 20';
-  sgVuelto.Cells[0,7] := 'Billetes de $ 50';
-  sgVuelto.Cells[0,8] := 'Billetes de $ 100';
-  sgVuelto.Cells[0,9] := 'Billetes de $ 200';
-  sgVuelto.Cells[0,10] := 'Billetes de $ 500';
-  sgVuelto.Cells[0,11] := 'Billetes de $ 1000';
+
+  for I := 1 to 6 do begin
+    sgCaja.Cells[0,i] := 'Monedas de $ ' + Valores[i].ToString;
+    sgVuelto.Cells[0,i] := 'Monedas de $ ' + Valores[i].ToString;
+  end;
+
+  for I := 7 to CR.getLongitud do begin
+    sgCaja.Cells[0,i] := 'Billetes de $ ' + Valores[i].ToString;
+    sgVuelto.Cells[0,i] := 'Billetes de $ ' + Valores[i].ToString;
+  end;
+
   CR.InicializarContenedores;
   CR.InicializarVuelto;
   MostrarCaja();
@@ -121,41 +118,24 @@ begin
 end;
 
 procedure MostrarCaja();
+var i:integer;
 begin
-  with CR.getContenedores do begin
-    form1.sgCaja.Cells[1,1] := MonedasDe1.ToString;
-    form1.sgCaja.Cells[1,2] := MonedasDe2.ToString;
-    form1.sgCaja.Cells[1,3] := MonedasDe5.ToString;
-    form1.sgCaja.Cells[1,4] := MonedasDe10.ToString;
-    form1.sgCaja.Cells[1,5] := BilletesDe10.ToString;
-    form1.sgCaja.Cells[1,6] := BilletesDe20.ToString;
-    form1.sgCaja.Cells[1,7] := BilletesDe50.ToString;
-    form1.sgCaja.Cells[1,8] := BilletesDe100.ToString;
-    form1.sgCaja.Cells[1,9] := BilletesDe200.ToString;
-    form1.sgCaja.Cells[1,10] := BilletesDe500.ToString;
-    form1.sgCaja.Cells[1,11] := BilletesDe1000.ToString;
+  for i := 1 to CR.getLongitud do begin
+    form1.sgCaja.Cells[1,i] := CR.getContenedores[i].Cantidad.ToString;
   end;
 end;
 
 procedure MostrarVuelto();
+var i:integer;
 begin
-  with CR.getVuelto do begin
-    form1.sgVuelto.Cells[1,1] := MonedasDe1.ToString;
-    form1.sgVuelto.Cells[1,2] := MonedasDe2.ToString;
-    form1.sgVuelto.Cells[1,3] := MonedasDe5.ToString;
-    form1.sgVuelto.Cells[1,4] := MonedasDe10.ToString;
-    form1.sgVuelto.Cells[1,5] := BilletesDe10.ToString;
-    form1.sgVuelto.Cells[1,6] := BilletesDe20.ToString;
-    form1.sgVuelto.Cells[1,7] := BilletesDe50.ToString;
-    form1.sgVuelto.Cells[1,8] := BilletesDe100.ToString;
-    form1.sgVuelto.Cells[1,9] := BilletesDe200.ToString;
-    form1.sgVuelto.Cells[1,10] := BilletesDe500.ToString;
-    form1.sgVuelto.Cells[1,11] := BilletesDe1000.ToString;
-  end;
+  for i := 1 to CR.getLongitud do
+    form1.sgVuelto.Cells[1,i] := CR.getVuelto[i].Cantidad.ToString;
 end;
 
 procedure LimpiarEdits();
 begin
+  form1.eMonedasDe025.Text := '0';
+  form1.eMonedasDe050.Text := '0';
   form1.eMonedasDe1.text := '0';
   form1.eMonedasDe2.text := '0';
   form1.eMonedasDe5.text := '0';
@@ -179,27 +159,30 @@ begin
 end;
 
 procedure CargarValores(var C:CajaRegistradora);
+var
+  ContenedoresAux: ArrayContenedores;
 begin
-  with C do begin
-    cargarMonedasDe1(strtoint(trim(form1.eMonedasDe1.Text)));
-    cargarMonedasDe2(strtoint(trim(form1.eMonedasDe2.Text)));
-    cargarMonedasDe5(strtoint(trim(form1.eMonedasDe5.Text)));
-    cargarMonedasDe10(strtoint(trim(form1.eMonedasDe10.Text)));
-    cargarBilletesDe10(strtoint(trim(form1.eBilletesDe10.Text)));
-    cargarBilletesDe20(strtoint(trim(form1.eBilletesDe20.Text)));
-    cargarBilletesDe50(strtoint(trim(form1.eBilletesDe50.Text)));
-    cargarBilletesDe100(strtoint(trim(form1.eBilletesDe100.Text)));
-    cargarBilletesDe200(strtoint(trim(form1.eBilletesDe200.Text)));
-    cargarBilletesDe500(strtoint(trim(form1.eBilletesDe500.Text)));
-    cargarBilletesDe1000(strtoint(trim(form1.eBilletesDe1000.Text)));
-  end;
+  ContenedoresAux[1].Cantidad := (strtoint(trim(form1.eMonedasDe025.Text)));
+  ContenedoresAux[2].Cantidad := (strtoint(trim(form1.eMonedasDe050.Text)));
+  ContenedoresAux[3].Cantidad := (strtoint(trim(form1.eMonedasDe1.Text)));
+  ContenedoresAux[4].Cantidad := (strtoint(trim(form1.eMonedasDe2.Text)));
+  ContenedoresAux[5].Cantidad := (strtoint(trim(form1.eMonedasDe5.Text)));
+  ContenedoresAux[6].Cantidad := (strtoint(trim(form1.eMonedasDe10.Text)));
+  ContenedoresAux[7].Cantidad := (strtoint(trim(form1.eBilletesDe10.Text)));
+  ContenedoresAux[8].Cantidad := (strtoint(trim(form1.eBilletesDe20.Text)));
+  ContenedoresAux[9].Cantidad := (strtoint(trim(form1.eBilletesDe50.Text)));
+  ContenedoresAux[10].Cantidad := (strtoint(trim(form1.eBilletesDe100.Text)));
+  ContenedoresAux[11].Cantidad := (strtoint(trim(form1.eBilletesDe200.Text)));
+  ContenedoresAux[12].Cantidad := (strtoint(trim(form1.eBilletesDe500.Text)));
+  ContenedoresAux[13].Cantidad := (strtoint(trim(form1.eBilletesDe1000.Text)));
+  C.AgregarACaja(ContenedoresAux);
 end;
 
 procedure TForm1.btCobrarClick(Sender: TObject);
 var
-  aCobrar: integer;
+  aCobrar: double;
   ContenedoresCliente: CajaRegistradora; //Se crea otro objeto para los contenedores del cliente para calcular si se puede efectuar el cobro
-  nVuelto: integer;
+  nVuelto: double;
   CRCopia: CajaRegistradora; // se crea una copia para verificar si se puede efectuar el vuelto con los contenedores de la caja y asi no perder valores en el proceso
   valor:boolean;
 begin
@@ -238,7 +221,7 @@ end;
 
 procedure TForm1.btSaldoClick(Sender: TObject);
 var
-  s: LongInt;
+  s: double;
 begin
   s:= CR.Saldo(CR.getContenedores());
   memo1.Clear;
@@ -247,34 +230,24 @@ end;
 
 procedure TForm1.btCerrarCajaClick(Sender: TObject);
 var
-  ContRestantes: RegContenedores;
-  saldofinal: integer;
+  ContRestantes: ArrayContenedores;
+  saldofinal: double;
+  i: Integer;
 begin
   ContRestantes := CR.CerrarCaja(saldofinal);
-  with ContRestantes do begin
-    memo1.Clear;
-    memo1.Lines.Add('Cerrando el turno...');
-    memo1.Lines.Add('Monedas de 1: ' + MonedasDe1.ToString);
-    memo1.Lines.Add('Monedas de 2: ' + MonedasDe2.ToString);
-    memo1.Lines.Add('Monedas de 5: ' + MonedasDe5.ToString);
-    memo1.Lines.Add('Monedas de 10: ' + MonedasDe10.ToString);
-    memo1.Lines.Add('Billetes de 10: ' + BilletesDe10.ToString);
-    memo1.Lines.Add('Billetes de 20: ' + BilletesDe20.ToString);
-    memo1.Lines.Add('Billetes de 50: ' + BilletesDe50.ToString);
-    memo1.Lines.Add('Billetes de 100: ' + BilletesDe100.ToString);
-    memo1.Lines.Add('Billetes de 200: ' + BilletesDe200.ToString);
-    memo1.Lines.Add('Billetes de 500: ' + BilletesDe500.ToString);
-    memo1.Lines.Add('Billetes de 1000: ' + BilletesDe1000.ToString);
-    memo1.Lines.Add('-----------------------------------------------------------------');
-    memo1.Lines.Add('TOTAL ACUMULADO: $' + saldofinal.ToString);
-  end;
+  memo1.Clear;
+  memo1.Lines.Add('Cerrando el turno...');
+  for i := 1 to CR.getLongitud do
+    memo1.Lines.Add('Monedas de ' + Valores[i].ToString + ': ' + ContRestantes[i].Cantidad.ToString);
+  memo1.Lines.Add('-----------------------------------------------------------------');
+  memo1.Lines.Add('TOTAL ACUMULADO: $' + saldofinal.ToString);
   eCantidadACobrar.Clear;
   CR.InicializarContenedores;
   CR.InicializarVuelto;
   MostrarCaja();
   MostrarVuelto();
   btCobrar.Enabled := False;
-  eCantidadACobrar.Enabled := False
+  eCantidadACobrar.Enabled := False;
 end;
 
 procedure TForm1.eCantidadACobrarChange(Sender: TObject);

@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Caja Registradora'
-  ClientHeight = 586
+  ClientHeight = 652
   ClientWidth = 1110
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -69,15 +69,15 @@ object Form1: TForm1
     Caption = '3'#186' Ingresar el monto a cobrar'
   end
   object GroupBox1: TGroupBox
-    Left = 16
+    Left = 8
     Top = 8
     Width = 201
-    Height = 204
+    Height = 281
     Caption = 'Monedas'
     TabOrder = 0
     object Label1: TLabel
       Left = 16
-      Top = 35
+      Top = 107
       Width = 85
       Height = 13
       Caption = 'Monedas de $1'
@@ -90,7 +90,7 @@ object Form1: TForm1
     end
     object Label2: TLabel
       Left = 16
-      Top = 83
+      Top = 155
       Width = 85
       Height = 13
       Caption = 'Monedas de $2'
@@ -103,7 +103,7 @@ object Form1: TForm1
     end
     object Label3: TLabel
       Left = 16
-      Top = 131
+      Top = 203
       Width = 85
       Height = 13
       Caption = 'Monedas de $5'
@@ -116,7 +116,7 @@ object Form1: TForm1
     end
     object Label4: TLabel
       Left = 16
-      Top = 176
+      Top = 248
       Width = 92
       Height = 13
       Caption = 'Monedas de $10'
@@ -127,70 +127,56 @@ object Form1: TForm1
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label19: TLabel
+      Left = 16
+      Top = 65
+      Width = 102
+      Height = 13
+      Caption = 'Monedas de $0.50'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label20: TLabel
+      Left = 16
+      Top = 27
+      Width = 102
+      Height = 13
+      Caption = 'Monedas de $0.25'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object eMonedasDe1: TEdit
       Left = 123
-      Top = 32
+      Top = 104
       Width = 33
       Height = 21
       Alignment = taCenter
       AutoSelect = False
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 3
       Text = '0'
     end
     object UpDown1: TUpDown
       Left = 156
-      Top = 32
+      Top = 104
       Width = 16
       Height = 21
       Associate = eMonedasDe1
       Max = 10000
-      TabOrder = 1
+      TabOrder = 0
     end
     object eMonedasDe2: TEdit
       Left = 123
-      Top = 80
-      Width = 33
-      Height = 21
-      Alignment = taCenter
-      NumbersOnly = True
-      ReadOnly = True
-      TabOrder = 2
-      Text = '0'
-    end
-    object UpDown2: TUpDown
-      Left = 156
-      Top = 80
-      Width = 16
-      Height = 21
-      Associate = eMonedasDe2
-      Max = 10000
-      TabOrder = 5
-    end
-    object eMonedasDe5: TEdit
-      Left = 123
-      Top = 128
-      Width = 33
-      Height = 21
-      Alignment = taCenter
-      NumbersOnly = True
-      ReadOnly = True
-      TabOrder = 3
-      Text = '0'
-    end
-    object UpDown3: TUpDown
-      Left = 156
-      Top = 128
-      Width = 16
-      Height = 21
-      Associate = eMonedasDe5
-      Max = 10000
-      TabOrder = 6
-    end
-    object eMonedasDe10: TEdit
-      Left = 123
-      Top = 173
+      Top = 152
       Width = 33
       Height = 21
       Alignment = taCenter
@@ -199,9 +185,49 @@ object Form1: TForm1
       TabOrder = 4
       Text = '0'
     end
+    object UpDown2: TUpDown
+      Left = 156
+      Top = 152
+      Width = 16
+      Height = 21
+      Associate = eMonedasDe2
+      Max = 10000
+      TabOrder = 1
+    end
+    object eMonedasDe5: TEdit
+      Left = 123
+      Top = 200
+      Width = 33
+      Height = 21
+      Alignment = taCenter
+      NumbersOnly = True
+      ReadOnly = True
+      TabOrder = 5
+      Text = '0'
+    end
+    object UpDown3: TUpDown
+      Left = 156
+      Top = 200
+      Width = 16
+      Height = 21
+      Associate = eMonedasDe5
+      Max = 10000
+      TabOrder = 2
+    end
+    object eMonedasDe10: TEdit
+      Left = 123
+      Top = 245
+      Width = 33
+      Height = 21
+      Alignment = taCenter
+      NumbersOnly = True
+      ReadOnly = True
+      TabOrder = 6
+      Text = '0'
+    end
     object UpDown4: TUpDown
       Left = 156
-      Top = 173
+      Top = 245
       Width = 16
       Height = 21
       Associate = eMonedasDe10
@@ -210,12 +236,12 @@ object Form1: TForm1
     end
   end
   object GroupBox2: TGroupBox
-    Left = 16
-    Top = 218
+    Left = 8
+    Top = 295
     Width = 201
     Height = 322
     Caption = 'Billetes'
-    TabOrder = 1
+    TabOrder = 3
     object Label5: TLabel
       Left = 12
       Top = 31
@@ -315,7 +341,7 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 1
       Text = '0'
     end
     object eBilletesDe100: TEdit
@@ -326,18 +352,18 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 6
+      TabOrder = 7
       Text = '0'
     end
     object eBilletesDe1000: TEdit
-      Left = 123
-      Top = 271
+      Left = 124
+      Top = 270
       Width = 33
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 11
+      TabOrder = 0
       Text = '0'
     end
     object eBilletesde20: TEdit
@@ -348,7 +374,7 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 3
       Text = '0'
     end
     object eBilletesDe200: TEdit
@@ -359,7 +385,7 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 8
+      TabOrder = 9
       Text = '0'
     end
     object eBilletesDe50: TEdit
@@ -370,7 +396,7 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 5
       Text = '0'
     end
     object eBilletesDe500: TEdit
@@ -381,7 +407,7 @@ object Form1: TForm1
       Alignment = taCenter
       NumbersOnly = True
       ReadOnly = True
-      TabOrder = 10
+      TabOrder = 12
       Text = '0'
     end
     object UpDown5: TUpDown
@@ -391,7 +417,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe10
       Max = 10000
-      TabOrder = 1
+      TabOrder = 2
     end
     object UpDown6: TUpDown
       Left = 156
@@ -400,7 +426,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesde20
       Max = 10000
-      TabOrder = 3
+      TabOrder = 4
     end
     object UpDown7: TUpDown
       Left = 156
@@ -409,7 +435,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe200
       Max = 10000
-      TabOrder = 5
+      TabOrder = 6
     end
     object UpDown8: TUpDown
       Left = 156
@@ -418,7 +444,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe1000
       Max = 10000
-      TabOrder = 7
+      TabOrder = 8
     end
     object UpDown9: TUpDown
       Left = 156
@@ -427,7 +453,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe500
       Max = 10000
-      TabOrder = 9
+      TabOrder = 10
     end
     object UpDown10: TUpDown
       Left = 156
@@ -436,7 +462,7 @@ object Form1: TForm1
       Height = 21
       Associate = eBilletesDe50
       Max = 10000
-      TabOrder = 12
+      TabOrder = 11
     end
     object UpDown11: TUpDown
       Left = 156
@@ -450,14 +476,14 @@ object Form1: TForm1
   end
   object sgCaja: TStringGrid
     Left = 420
-    Top = 58
+    Top = 47
     Width = 305
-    Height = 325
+    Height = 380
     ColCount = 2
     DefaultColWidth = 150
     DefaultColAlignment = taCenter
     FixedColor = clMedGray
-    RowCount = 12
+    RowCount = 14
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -465,8 +491,10 @@ object Form1: TForm1
     Font.Style = []
     GridLineWidth = 3
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 4
     RowHeights = (
+      24
+      24
       24
       24
       24
@@ -492,19 +520,19 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 5
     OnClick = btCargarClick
   end
   object sgVuelto: TStringGrid
-    Left = 772
-    Top = 58
+    Left = 771
+    Top = 47
     Width = 305
-    Height = 325
+    Height = 380
     ColCount = 2
     DefaultColWidth = 150
     DefaultColAlignment = taCenter
     FixedColor = clMedGray
-    RowCount = 12
+    RowCount = 14
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -512,27 +540,14 @@ object Form1: TForm1
     Font.Style = []
     GridLineWidth = 3
     ParentFont = False
-    TabOrder = 4
-    RowHeights = (
-      24
-      24
-      24
-      24
-      24
-      24
-      24
-      24
-      24
-      24
-      24
-      24)
+    TabOrder = 6
   end
   object GroupBox3: TGroupBox
     Left = 248
     Top = 246
     Width = 141
     Height = 88
-    TabOrder = 5
+    TabOrder = 7
     object Label14: TLabel
       Left = 24
       Top = 3
@@ -561,10 +576,10 @@ object Form1: TForm1
     end
   end
   object Memo1: TMemo
-    Left = 240
-    Top = 429
+    Left = 230
+    Top = 479
     Width = 853
-    Height = 111
+    Height = 113
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -574,24 +589,66 @@ object Form1: TForm1
       'Memo1')
     ParentFont = False
     ScrollBars = ssVertical
-    TabOrder = 6
+    TabOrder = 8
   end
   object btSaldo: TButton
     Left = 420
-    Top = 389
+    Top = 433
     Width = 305
     Height = 25
     Caption = 'MostrarSaldo'
-    TabOrder = 7
+    TabOrder = 9
     OnClick = btSaldoClick
   end
   object btCerrarCaja: TButton
-    Left = 164
-    Top = 553
-    Width = 793
+    Left = 285
+    Top = 611
+    Width = 738
     Height = 25
     Caption = 'Cerrar Caja'
-    TabOrder = 8
+    TabOrder = 10
     OnClick = btCerrarCajaClick
+  end
+  object eMonedasDe050: TEdit
+    Left = 132
+    Top = 70
+    Width = 33
+    Height = 21
+    Alignment = taCenter
+    AutoSelect = False
+    NumbersOnly = True
+    ReadOnly = True
+    TabOrder = 2
+    Text = '0'
+  end
+  object UpDown12: TUpDown
+    Left = 165
+    Top = 70
+    Width = 16
+    Height = 21
+    Associate = eMonedasDe050
+    Max = 10000
+    TabOrder = 11
+  end
+  object eMonedasDe025: TEdit
+    Left = 132
+    Top = 32
+    Width = 33
+    Height = 21
+    Alignment = taCenter
+    AutoSelect = False
+    NumbersOnly = True
+    ReadOnly = True
+    TabOrder = 1
+    Text = '0'
+  end
+  object UpDown13: TUpDown
+    Left = 165
+    Top = 32
+    Width = 16
+    Height = 21
+    Associate = eMonedasDe025
+    Max = 10000
+    TabOrder = 12
   end
 end
