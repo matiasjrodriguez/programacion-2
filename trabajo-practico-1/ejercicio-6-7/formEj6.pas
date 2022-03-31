@@ -42,9 +42,20 @@ type
     editDiaSalida: TEdit;
     editMesSalida: TEdit;
     editAñoSalida: TEdit;
-    Button1: TButton;
+    btnEscribirArchivo: TButton;
+    btnLeerArchivo: TButton;
+    editDiaBuscar: TEdit;
+    Label10: TLabel;
+    editMesBuscar: TEdit;
+    Label11: TLabel;
+    editAñoBuscar: TEdit;
+    btnBuscarEnArchivo: TButton;
+    GroupBox1: TGroupBox;
     procedure btnIngresarClick(Sender: TObject);
     procedure btnAplicarClick(Sender: TObject);
+    procedure btnEscribirArchivoClick(Sender: TObject);
+    procedure btnLeerArchivoClick(Sender: TObject);
+    procedure btnBuscarEnArchivoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,6 +76,12 @@ var
 begin
   tarifa := strtoint(editTarifaHora.text);
   esta.setTarifaHora(tarifa);
+
+  tarifa := strtoint(editMediaEstadia.text);
+  esta.setMediaEstadia(tarifa);
+
+  tarifa := strtoint(editEstadiaCompleta.text);
+  esta.setEstadiaCompleta(tarifa)
 end;
 
 procedure TForm1.btnIngresarClick(Sender: TObject);
@@ -105,6 +122,103 @@ begin
     porHora: Memo1.Lines.Add('El tipo de tarifa a pagar es por hora');
     porMediaEstadia: Memo1.Lines.Add('El tipo de tarifa a pagar por media estadía');
     porEstadiaCompleta: Memo1.Lines.Add('El tipo de tarifa a pagar es por estadía completa');
+  end;
+
+end;
+
+procedure TForm1.btnBuscarEnArchivoClick(Sender: TObject);
+var
+  añoUsuario, mesUsuario, diaUsuario, añoArchivo, mesArchivo, diaArchivo:word;
+  archivo: File of regAutos;
+  rAutos: regAutos;
+  coincidencias: boolean;
+  percibidoHora, percibidoMedia, percibidoCompleta: double;
+begin
+  Memo1.Clear;
+  añoUsuario := strtoint(editAñoBuscar.text);
+  mesUsuario := strtoint(editMesBuscar.text);
+  diaUsuario := strtoint(editDiaBuscar.text);
+  coincidencias := false;
+  percibidoHora := 0;
+  percibidoMedia := 0;
+  percibidoCompleta := 0;
+
+  AssignFile(archivo, 'registro.dat');
+  reset(archivo);
+
+  while not EOF(archivo) do begin
+    read(archivo, rAutos);
+    DecodeDate(rAutos.salida, añoArchivo, mesArchivo, diaArchivo);
+
+    if (añoArchivo = añoUsuario) and (mesArchivo = mesUsuario) and (diaArchivo = diaUsuario) then begin
+      case rAutos.tipotarifa of
+        porHora: percibidoHora := percibidoHora + rAutos.abona;
+        porMediaEstadia: percibidoMedia := percibidoMedia + rAutos.abona;
+        porEstadiaCompleta: percibidoCompleta := percibidoCompleta + rAutos.abona;
+      end;
+
+      coincidencias := true;
+    end
+  end;
+
+  if not(coincidencias) then
+    Memo1.Lines.Add('No se encuentra la fecha en el archivo.')
+  else begin
+    Memo1.Lines.Add('Cantidad percibida:');
+    Memo1.Lines.Add('Por hora: $' + percibidoHora.ToString);
+    Memo1.Lines.Add('Por media estadía: $' + percibidoMedia.ToString);
+    Memo1.Lines.Add('Por estadía completa: $' + percibidoCompleta.ToString);
+  end;
+
+
+  CloseFile(archivo);
+end;
+
+procedure TForm1.btnEscribirArchivoClick(Sender: TObject);
+var
+  archivo: File of regAutos;
+  autos: vecAutos;
+  rAutos: regAutos;
+  I:integer;
+begin
+
+  AssignFile(archivo, 'registro.dat');
+  ReWrite(archivo);
+  autos := esta.getAutos();
+
+  for I := 0 to high(autos) do begin
+    rAutos := autos[I];
+    write(archivo, rAutos);
+  end;
+
+  CloseFile(archivo);
+
+end;
+
+procedure TForm1.btnLeerArchivoClick(Sender: TObject);
+var
+  archivo: File of regAutos;
+  rAutos: regAutos;
+
+begin
+  Memo1.Clear;
+  AssignFile(archivo, 'registro.dat');
+  reset(archivo);
+
+  while not EOF(archivo) do begin
+    read(archivo, rAutos);
+    Memo1.Lines.Add('Entrada: ' + DateTimeToStr(rAutos.entrada));
+    Memo1.Lines.Add('Salida: ' + DateTimeToStr(rAutos.salida));
+    Memo1.Lines.Add('Abona: $' + floattostr(rAutos.abona));
+
+    case rAutos.tipotarifa of
+      porHora: Memo1.Lines.Add('Tipo tarifa: por hora');
+      porMediaEstadia: Memo1.Lines.Add('Tipo tarifa: por media estadía');
+      porEstadiaCompleta: Memo1.Lines.Add('Tipo tarifa: por estadía completa');
+    end;
+
+    Memo1.Lines.Add('');
+
   end;
 
 end;

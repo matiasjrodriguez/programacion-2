@@ -3,7 +3,7 @@
   Top = 0
   Caption = 'Form1'
   ClientHeight = 511
-  ClientWidth = 748
+  ClientWidth = 890
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -221,8 +221,8 @@
     end
   end
   object Ajustes: TGroupBox
-    Left = 69
-    Top = 230
+    Left = 8
+    Top = 229
     Width = 246
     Height = 274
     Caption = 'Ajustes'
@@ -322,20 +322,98 @@
     end
   end
   object Memo1: TMemo
-    Left = 391
-    Top = 15
+    Left = 529
+    Top = 8
     Width = 353
     Height = 489
     Lines.Strings = (
       'Autos cargados: 0')
+    ScrollBars = ssVertical
     TabOrder = 2
   end
-  object Button1: TButton
-    Left = 334
-    Top = 254
-    Width = 37
+  object btnEscribirArchivo: TButton
+    Left = 391
+    Top = 24
+    Width = 131
     Height = 25
-    Caption = 'Button1'
+    Caption = 'btnEscribirArchivo'
     TabOrder = 3
+    OnClick = btnEscribirArchivoClick
+  end
+  object btnLeerArchivo: TButton
+    Left = 391
+    Top = 55
+    Width = 131
+    Height = 25
+    Caption = 'btnLeerArchivo'
+    TabOrder = 4
+    OnClick = btnLeerArchivoClick
+  end
+  object GroupBox1: TGroupBox
+    Left = 260
+    Top = 229
+    Width = 181
+    Height = 108
+    Caption = 'FechaDeterminada'
+    TabOrder = 5
+    object Label10: TLabel
+      Left = 43
+      Top = 21
+      Width = 11
+      Height = 23
+      Caption = '/'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label11: TLabel
+      Left = 91
+      Top = 21
+      Width = 11
+      Height = 23
+      Caption = '/'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object editAñoBuscar: TEdit
+      Left = 109
+      Top = 23
+      Width = 50
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 0
+    end
+    object editDiaBuscar: TEdit
+      Left = 13
+      Top = 23
+      Width = 25
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 1
+    end
+    object editMesBuscar: TEdit
+      Left = 61
+      Top = 23
+      Width = 25
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 2
+    end
+    object btnBuscarEnArchivo: TButton
+      Left = 29
+      Top = 58
+      Width = 116
+      Height = 25
+      Caption = 'Buscar en archivo'
+      TabOrder = 3
+      OnClick = btnBuscarEnArchivoClick
+    end
   end
 end
