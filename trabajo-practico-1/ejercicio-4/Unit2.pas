@@ -18,6 +18,9 @@ type
     BitBtn5: TBitBtn;
     Edit2: TEdit;
     Edit3: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     procedure Edit1Change(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -159,5 +162,6 @@ begin
    modoBinario:=true;
    edit3.Enabled:=false;
 end;
+
 
 end.
