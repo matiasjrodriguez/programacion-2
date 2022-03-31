@@ -14,7 +14,14 @@ type
     tipotarifa: TARIFA;
   end;
 
+  regRecaudacion = record
+    fecha: TDateTime;
+    monto: double;
+  end;
+
   vecAutos = array of regAutos;
+
+  vecRecaudacion = array of regRecaudacion;
 
   Estacionamiento = object
   private
@@ -23,7 +30,11 @@ type
     mediaEstadia: integer;
     estadiaCompleta: integer;
     tarifaHora: integer;
+    recaudacion: vecRecaudacion;
   public
+    function getRecaudacion():vecRecaudacion;
+    procedure setRecaudacion(recauda:vecRecaudacion);
+    procedure agregarRecaudacion(recauda:regRecaudacion);
     function getCantidadAutos():integer;
     procedure setCantidadAutos(n: integer);
     function getAutos():vecAutos;
@@ -40,6 +51,26 @@ type
 
 implementation
 
+function Estacionamiento.getRecaudacion: vecRecaudacion;
+begin
+  result := copy(recaudacion);
+end;
+
+procedure Estacionamiento.setRecaudacion(recauda:vecRecaudacion);
+begin
+  recaudacion := copy(recauda);
+end;
+
+procedure Estacionamiento.agregarRecaudacion(recauda: regRecaudacion);
+var
+  vectorRecaudacion: vecRecaudacion;
+begin
+  vectorRecaudacion := copy(getRecaudacion());
+  setLength(vectorRecaudacion, length(vectorRecaudacion)+1);
+  vectorRecaudacion[high(vectorRecaudacion)] := recauda;
+  recaudacion := copy(vectorRecaudacion);
+end;
+
 function Estacionamiento.getCantidadAutos():integer;
 begin
   result := cantidadAutos;
@@ -52,7 +83,7 @@ end;
 
 function Estacionamiento.getAutos():vecAutos;
 begin
-  result := autos;
+  result := copy(autos);
 end;
 
 procedure Estacionamiento.setAutos(auto: regAutos);

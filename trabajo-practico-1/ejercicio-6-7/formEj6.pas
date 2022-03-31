@@ -50,12 +50,27 @@ type
     Label11: TLabel;
     editAñoBuscar: TEdit;
     btnBuscarEnArchivo: TButton;
-    GroupBox1: TGroupBox;
+    FechaDeterminada: TGroupBox;
+    GroupBox2: TGroupBox;
+    editDesdeDia: TEdit;
+    Label12: TLabel;
+    editDesdeMes: TEdit;
+    editDesdeAño: TEdit;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    editHastaDia: TEdit;
+    Label16: TLabel;
+    editHastaMes: TEdit;
+    Label17: TLabel;
+    editHastaAño: TEdit;
+    Button1: TButton;
     procedure btnIngresarClick(Sender: TObject);
     procedure btnAplicarClick(Sender: TObject);
     procedure btnEscribirArchivoClick(Sender: TObject);
     procedure btnLeerArchivoClick(Sender: TObject);
     procedure btnBuscarEnArchivoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -138,6 +153,7 @@ begin
   añoUsuario := strtoint(editAñoBuscar.text);
   mesUsuario := strtoint(editMesBuscar.text);
   diaUsuario := strtoint(editDiaBuscar.text);
+
   coincidencias := false;
   percibidoHora := 0;
   percibidoMedia := 0;
@@ -221,6 +237,68 @@ begin
 
   end;
 
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  dia, mes, año, I:integer;
+  fechaDesde, fechaHasta, fecha: TDateTime;
+  archivo: File of regAutos;
+  rAutos: regAutos;
+  rRecaudacion, rAux: regRecaudacion;
+  vRecaudacion: vecRecaudacion;
+  existe: boolean;
+begin
+
+
+
+  dia := strtoint(editDesdeDia.Text);
+  mes := strtoint(editDesdeMes.Text);
+  año := strtoint(editDesdeAño.Text);
+
+  fechaDesde := EncodeDate(año, mes, dia);
+
+  dia := strtoint(editHastaDia.Text);
+  mes := strtoint(editHastaMes.Text);
+  año := strtoint(editHastaAño.Text);
+
+  fechaHasta := EncodeDate(año, mes, dia);
+
+  AssignFile(archivo, 'registro.dat');
+  reset(archivo);
+
+  while not EOF(archivo) do begin
+    read(archivo, rAutos);
+
+    if (CompareDate(rAutos.salida, fechaDesde) in [0, 1]) and (CompareDate(rAutos.salida, fechaHasta) <> 1) then begin
+      vRecaudacion := esta.getRecaudacion();
+      if high(vRecaudacion) = -1 then begin
+        rRecaudacion.fecha := rAutos.salida;
+        rRecaudacion.monto := rAutos.abona;
+        esta.agregarRecaudacion(rRecaudacion);
+      end else begin
+        I := 0;
+        existe := false;
+        while (I <= high(vRecaudacion)) and not existe do begin
+          rAux := vRecaudacion[I];
+          if IsSameDay(rAux.fecha, rAutos.salida) then begin
+            vRecaudacion[I].monto := vRecaudacion[I].monto + rAutos.abona;
+            esta.setRecaudacion(vRecaudacion);
+            existe := true;
+          end;
+          Inc(I);
+        end;
+        if not existe then begin
+          rRecaudacion.fecha := rAutos.salida;
+          rRecaudacion.monto := rAutos.abona;
+          esta.agregarRecaudacion(rRecaudacion);
+        end;
+      end;
+    end;
+
+  end;
+
+  CloseFile(archivo)
 end;
 
 end.

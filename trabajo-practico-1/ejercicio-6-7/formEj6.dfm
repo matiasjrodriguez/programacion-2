@@ -15,7 +15,7 @@
   TextHeight = 13
   object IngresoAuto: TGroupBox
     Left = 8
-    Top = 8
+    Top = 14
     Width = 377
     Height = 209
     Caption = 'Ingreso de auto'
@@ -349,12 +349,12 @@
     TabOrder = 4
     OnClick = btnLeerArchivoClick
   end
-  object GroupBox1: TGroupBox
+  object FechaDeterminada: TGroupBox
     Left = 260
     Top = 229
-    Width = 181
+    Width = 245
     Height = 108
-    Caption = 'FechaDeterminada'
+    Caption = 'Buscar fecha determinada'
     TabOrder = 5
     object Label10: TLabel
       Left = 43
@@ -414,6 +414,137 @@
       Caption = 'Buscar en archivo'
       TabOrder = 3
       OnClick = btnBuscarEnArchivoClick
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 260
+    Top = 343
+    Width = 245
+    Height = 160
+    Caption = 'GroupBox2'
+    TabOrder = 6
+    object Label12: TLabel
+      Left = 99
+      Top = 29
+      Width = 11
+      Height = 23
+      Caption = '/'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label13: TLabel
+      Left = 147
+      Top = 29
+      Width = 11
+      Height = 23
+      Caption = '/'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label14: TLabel
+      Left = 16
+      Top = 32
+      Width = 30
+      Height = 13
+      Caption = 'Desde'
+    end
+    object Label15: TLabel
+      Left = 16
+      Top = 88
+      Width = 28
+      Height = 13
+      Caption = 'Hasta'
+    end
+    object Label16: TLabel
+      Left = 99
+      Top = 85
+      Width = 11
+      Height = 23
+      Caption = '/'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label17: TLabel
+      Left = 147
+      Top = 85
+      Width = 11
+      Height = 23
+      Caption = '/'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object editDesdeDia: TEdit
+      Left = 69
+      Top = 31
+      Width = 25
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 0
+    end
+    object editDesdeMes: TEdit
+      Left = 117
+      Top = 31
+      Width = 25
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 1
+    end
+    object editDesdeAño: TEdit
+      Left = 165
+      Top = 31
+      Width = 50
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 2
+    end
+    object editHastaDia: TEdit
+      Left = 69
+      Top = 87
+      Width = 25
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 3
+    end
+    object editHastaMes: TEdit
+      Left = 117
+      Top = 87
+      Width = 25
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 4
+    end
+    object editHastaAño: TEdit
+      Left = 165
+      Top = 87
+      Width = 50
+      Height = 21
+      NumbersOnly = True
+      TabOrder = 5
+    end
+    object Button1: TButton
+      Left = 80
+      Top = 114
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 6
+      OnClick = Button1Click
     end
   end
 end
