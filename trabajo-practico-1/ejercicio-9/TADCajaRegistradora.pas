@@ -93,24 +93,40 @@ var
   suma: double;
 begin
   suma := Saldo(Billetes);
-  if suma >= cobro then
-    result := True
-  else
-    result := False;
+  result := suma >= cobro;
 end;
 
 function CajaRegistradora.GenerarVuelto(CCliente: ArrayContenedores; cobro:Double; var aDevolver:Double):boolean;
 var
-  i: integer; V:Double;
+  i,j: integer; V:Double;
+  contenedoresAux: ArrayContenedores;
+  k: Integer;
 begin
   V := Saldo(CCliente) - cobro;
   aDevolver := V;
-  for i := GetLongitud() downto 1 do begin
-    while (Contenedores[i].Cantidad > 0) and (V >= Contenedores[i].Valor) do begin
-      V := V - Contenedores[i].Valor;
-      inc(Vuelto[i].Cantidad);
-      dec(Contenedores[i].Cantidad);
+  i := GetLongitud();
+  j := GetLongitud();
+  for k := 1 to getLongitud do
+    contenedoresAux[k].Cantidad := Contenedores[k].Cantidad;
+
+  while j > 0 do begin
+    while i > 0 do begin
+      while (Contenedores[i].Cantidad > 0) and (V >= Contenedores[i].Valor) do begin
+        V := V - Contenedores[i].Valor;
+        inc(Vuelto[i].Cantidad);
+        dec(Contenedores[i].Cantidad);
+      end;
+      dec(i);
     end;
+    if v > 0 then begin
+      dec(j);
+      i := j;
+      v := aDevolver;
+      InicializarVuelto();
+      for k := 1 to getLongitud do
+        Contenedores[k].Cantidad := contenedoresAux[k].Cantidad;
+    end else
+      j := 0;
   end;
   result := (v = 0);
 end;
