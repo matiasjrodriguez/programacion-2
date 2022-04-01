@@ -57,15 +57,22 @@
   object lFecha: TLabel
     Left = 760
     Top = 20
-    Width = 63
+    Width = 47
     Height = 19
-    Caption = 'Caption'
+    Caption = 'Fecha'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+  end
+  object Label12: TLabel
+    Left = 157
+    Top = 98
+    Width = 91
+    Height = 13
+    Caption = 'Por ejemplo: 03/24'
   end
   object Memo1: TMemo
     Left = 440

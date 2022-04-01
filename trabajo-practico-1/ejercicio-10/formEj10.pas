@@ -35,6 +35,7 @@ type
     UpDown1: TUpDown;
     Label11: TLabel;
     lFecha: TLabel;
+    Label12: TLabel;
     procedure btPagarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btValidarClick(Sender: TObject);
@@ -43,6 +44,7 @@ type
     procedure eUnaCuotaChange(Sender: TObject);
   private
     { Private declarations }
+    flag: boolean;
   public
     { Public declarations }
   end;
@@ -126,6 +128,7 @@ begin
         btLimites.Enabled := False;
         eUnaCuota.Enabled := True;
         eVariasCuotas.Enabled := True;
+        flag := true;
 
       end else begin
         memo1.Clear;
@@ -157,7 +160,7 @@ end;
 procedure TForm1.eUnaCuotaChange(Sender: TObject);
 begin
   if (eUnaCuota.Text <> '') and (eVariasCuotas.Text <> '') and (eMonto.Text <> '') and
-  ((strtoint(eCuotas.Text) > 0)) and (eAño.Text <> '') and (eMes.Text <> '') and (eNumero.Text <> '') then
+  ((strtoint(eCuotas.Text) > 0)) and (eAño.Text <> '') and (eMes.Text <> '') and (eNumero.Text <> '') and flag then
     btPagar.Enabled := true
   else
     btPagar.Enabled := false;
@@ -171,6 +174,7 @@ begin
   btValidar.Enabled := False;
   btPagar.Enabled := False;
   btLimites.Enabled := False;
+  flag := false;
 end;
 
 end.

@@ -113,7 +113,7 @@ end;
 
 function TarjetaDeCredito.mostrarLimites: string;
 begin
-  result := ('-Limite actual en una cuota: ' + limite.unaCuota.ToString + #13#10 + '-Limite actual en varias cuotas: ' + limite.variasCuotas.ToString);
+  result := ('-Limite actual en una cuota: $' + limite.unaCuota.ToString + #13#10 + '-Limite actual en varias cuotas: $' + limite.variasCuotas.ToString);
 end;
 
 procedure TarjetaDeCredito.setFecha(fecha: TDateTime);
