@@ -35,6 +35,7 @@ type
     function getRecaudacion():vecRecaudacion;
     procedure setRecaudacion(recauda:vecRecaudacion);
     procedure agregarRecaudacion(recauda:regRecaudacion);
+    procedure vaciarRecaudacion();
     function getCantidadAutos():integer;
     procedure setCantidadAutos(n: integer);
     function getAutos():vecAutos;
@@ -68,6 +69,15 @@ begin
   vectorRecaudacion := copy(getRecaudacion());
   setLength(vectorRecaudacion, length(vectorRecaudacion)+1);
   vectorRecaudacion[high(vectorRecaudacion)] := recauda;
+  recaudacion := copy(vectorRecaudacion);
+end;
+
+procedure Estacionamiento.vaciarRecaudacion;
+var
+  vectorRecaudacion: vecRecaudacion;
+begin
+  vectorRecaudacion := copy(getRecaudacion());
+  setLength(vectorRecaudacion, 0);
   recaudacion := copy(vectorRecaudacion);
 end;
 

@@ -250,8 +250,6 @@ var
   existe: boolean;
 begin
 
-
-
   dia := strtoint(editDesdeDia.Text);
   mes := strtoint(editDesdeMes.Text);
   año := strtoint(editDesdeAño.Text);
@@ -298,7 +296,18 @@ begin
 
   end;
 
-  CloseFile(archivo)
+  CloseFile(archivo);
+
+  vRecaudacion := esta.getRecaudacion();
+  Memo1.Clear;
+
+  for I := 0 to High(vRecaudacion) do begin
+    Memo1.Lines.Add('Fecha: ' + datetostr(vRecaudacion[I].fecha));
+    Memo1.Lines.Add('Recaudación ' + vRecaudacion[I].monto.ToString);
+    Memo1.Lines.Add('');
+  end;
+
+  esta.vaciarRecaudacion;
 end;
 
 end.
