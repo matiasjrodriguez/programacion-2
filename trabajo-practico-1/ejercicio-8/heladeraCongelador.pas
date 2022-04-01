@@ -4,6 +4,8 @@ interface
 
   uses
     sysutils;
+    const
+     kilos = 25;
   type
     congelador  = object
       private
@@ -16,6 +18,7 @@ interface
         procedure cargarKilaje_cremaAmericana(kilos:single);
         procedure cargarKilaje_frutilla(kilos:single);
         procedure cargarKilaje_limon(kilos:single);
+
         function  obtenerKilaje_chocolate():single;
         function  obtenerKilaje_cremaAmericana():single;
         function  obtenerKilaje_frutilla():single;
@@ -54,7 +57,9 @@ implementation
 
 //3 SABORES
 //------------------------------------------------------------------------
-                                    //pasa por parametro los kilajes que obtuviste con el getValue de abajo (sabor 1 y sabor 2 respectivamente de la combinacion que hayas hecho en la interfaz, bien pueden ser combinaciones de 2 sabores iguales o 2 diferentes)
+    //pasa por parametro los kilajes que obtuviste con el getValue de abajo
+// (sabor 1 y sabor 2 respectivamente de la combinacion que hayas hecho en la interfaz, bien pueden
+//  ser combinaciones de 2 sabores iguales o 2 diferentes)
 function congelador.consultar3sabores(sabor1: Single; sabor2: Single; sabor3: Single): Boolean;
 var cantTacho1,cantTacho2,cantTacho3:single;
                   retorno:boolean;
@@ -71,14 +76,18 @@ begin
    else
     begin
       retorno:=false;
-    end;             //si es true restale 0.25 a los gustos y carga el resultado con cargarKilaje (si es false no se puede servir esa combinacion de gusto)
+    end;             //si es true restale 0.25 a los gustos y carga el resultado con cargarKilaje (
+            //si es false no se puede servir esa combinacion de gusto)
    consultar3sabores:=retorno;
 end;
 
 
 //2 SABORES
 //------------------------------------------------------------------------
-                                    //pasa por parametro los kilajes que obtuviste con el getValue de abajo (sabor 1 y sabor 2 respectivamente de la combinacion que hayas hecho en la interfaz, bien pueden ser combinaciones de 2 sabores iguales o 2 diferentes)
+                                    //pasa por parametro los kilajes que obtuviste con el getValue de abajo
+                                    // (sabor 1 y sabor 2 respectivamente de la combinacion que hayas hecho en
+                                    //la interfaz, bien pueden ser combinaciones de 2 sabores iguales o 2
+                                    //diferentes)
 function congelador.consultar2sabores(sabor1: Single; sabor2: Single): Boolean;
 var cantTacho1,cantTacho2:single;
                   retorno:boolean;
@@ -95,7 +104,8 @@ begin
    else
     begin
       retorno:=false;
-    end;             //si es true restale 0.25 a los gustos y carga el resultado con cargarKilaje (si es false no se puede servir esa combinacion de gusto)
+    end;             //si es true restale 0.25 a los gustos y carga el resultado con cargarKilaje
+            //(si es false no se puede servir esa combinacion de gusto)
    consultar2sabores:=retorno;
 end;
 

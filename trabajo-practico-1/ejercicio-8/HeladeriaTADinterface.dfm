@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 614
-  ClientWidth = 597
+  ClientHeight = 716
+  ClientWidth = 598
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -156,6 +156,7 @@ object Form1: TForm1
         Height = 41
         Caption = 'Aumentar cantidad de helado seleccionado'
         TabOrder = 0
+        OnClick = Button1Click
       end
       object Button3: TButton
         Left = 14
@@ -164,6 +165,7 @@ object Form1: TForm1
         Height = 41
         Caption = 'Consultar disponibilidad de sabores de helado deseados'
         TabOrder = 1
+        OnClick = Button3Click
       end
     end
     object Button2: TButton
@@ -173,6 +175,7 @@ object Form1: TForm1
       Height = 41
       Caption = 'Consultar si alcanza para 2 o 3 sabores disponibles'
       TabOrder = 6
+      OnClick = Button2Click
     end
     object Button4: TButton
       Left = 313
@@ -181,6 +184,7 @@ object Form1: TForm1
       Height = 41
       Caption = 'Consultar combinaciones disponibles'
       TabOrder = 7
+      OnClick = Button4Click
     end
   end
   object GroupBox3: TGroupBox
@@ -192,7 +196,7 @@ object Form1: TForm1
     object Label7: TLabel
       Left = 3
       Top = 35
-      Width = 205
+      Width = 201
       Height = 13
       Caption = 'Ingrese cuantas bochas de helado desea:'
     end
@@ -210,5 +214,14 @@ object Form1: TForm1
       Height = 21
       TabOrder = 0
     end
+  end
+  object Memo5: TMemo
+    Left = 2
+    Top = 607
+    Width = 588
+    Height = 74
+    Lines.Strings = (
+      'Memo5')
+    TabOrder = 2
   end
 end
