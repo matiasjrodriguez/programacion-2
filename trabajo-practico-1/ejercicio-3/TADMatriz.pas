@@ -6,10 +6,11 @@ uses sysutils, System.Math, VectorTADelements;
 
 const
   MAX = 10;
+  MIN = 1
 
 type
-  tipoVector = array[1..MAX] of integer;
-  tipoMatriz = array[1..MAX,1..MAX] of integer;
+  tipoVector = array[MIN..MAX] of integer;
+  tipoMatriz = array[MIN..MAX,MIN..MAX] of integer;
 
   Matriz = Object
     private
@@ -65,8 +66,8 @@ procedure Matriz.InicializarMatriz();
 var
   i: Integer;j: Integer;
 begin
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do begin
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do begin
       Items[i,j] := 0;
     end;
 end;
@@ -76,8 +77,8 @@ var
   i: Integer;
   j: Integer;
 begin
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do
       Items[i,j] := m[i,j];
 end;
 
@@ -87,8 +88,8 @@ var
 begin
   mRes.setDimension(nDimension);
   mRes.InicializarMatriz();
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do begin
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do begin
       suma := Items[i,j] + otraMatriz.getItem(i,j);
       mRes.setItem(i,j,suma);
     end;
@@ -102,10 +103,10 @@ var
 begin
   mRes.setDimension(nDimension);
   mRes.InicializarMatriz();
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do begin
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do begin
       suma := 0;
-      for k := 1 to nDimension do
+      for k := MIN to nDimension do
         suma := suma + Items[i,k] * otraMatriz.getItem(k,j);
       mRes.setItem(i,j,suma);
     end;
@@ -116,9 +117,9 @@ function Matriz.MaximaFila(var suma:integer): integer;
 var
   i,j,mayor,iMayor: Integer; vs:tipoVector;
 begin
-  for i := 1 to nDimension do begin
+  for i := MIN to nDimension do begin
     suma := 0;
-    for j := 1 to nDimension do begin
+    for j := MIN to nDimension do begin
       suma := suma + Items[i,j];
     end;
     vs[i] := suma;
@@ -126,7 +127,7 @@ begin
 
   mayor := -1;
   iMayor := 0;
-  for I := 1 to nDimension do begin
+  for I := MIN to nDimension do begin
     if vs[i] > mayor then begin
       mayor := vs[i];
       iMayor := i;
@@ -141,9 +142,9 @@ function Matriz.MaximaColumna(var suma:integer): integer;
 var
   i,j,mayor,iMayor: Integer; vs:tipoVector;
 begin
-  for j := 1 to nDimension do begin
+  for j := MIN to nDimension do begin
     suma := 0;
-    for i := 1 to nDimension do begin
+    for i := MIN to nDimension do begin
       suma := suma + Items[i,j];
     end;
     vs[j] := suma;
@@ -151,7 +152,7 @@ begin
 
   iMayor := 0;
   mayor := -1;
-  for I := 1 to nDimension do begin
+  for I := MIN to nDimension do begin
     if vs[i] > mayor then begin
       mayor := vs[i];
       iMayor := i;
@@ -168,8 +169,8 @@ var
   VR: Vector;
 begin
   k := 1;
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do
       if i = j then begin
         n := Items[i,j];
         VR.SetPosicionElegida(k,n);
@@ -184,8 +185,8 @@ var
   VR: Vector;
 begin
   k := 1;
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do
       if (i + j = nDimension + 1) then begin
         n := Items[i,j];
         VR.SetPosicionElegida(k,n);
@@ -200,8 +201,8 @@ var
 begin
   mRes.setDimension(nDimension);
   mRes.InicializarMatriz();
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do begin
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do begin
       res := Items[i,j] * n;
       mRes.setItem(i,j,res);
     end;
@@ -212,8 +213,8 @@ function Matriz.Buscar(item:integer; var nFila,nColumna:integer):boolean;
 var
   i,j:integer;
 begin
-  for i := 1 to nDimension do
-    for j := 1 to nDimension do
+  for i := MIN to nDimension do
+    for j := MIN to nDimension do
       if item = Items[i,j] then begin
         nFila := i;
         nColumna := j;
