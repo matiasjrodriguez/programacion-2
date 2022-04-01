@@ -6,7 +6,7 @@ uses sysutils, System.Math, VectorTADelements;
 
 const
   MAX = 10;
-  MIN = 1
+  MIN = 1;
 
 type
   tipoVector = array[MIN..MAX] of integer;

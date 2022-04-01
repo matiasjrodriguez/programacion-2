@@ -262,6 +262,7 @@
     Width = 57
     Height = 21
     Alignment = taCenter
+    NumbersOnly = True
     TabOrder = 14
   end
   object btDiagonales: TButton
