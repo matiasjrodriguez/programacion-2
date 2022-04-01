@@ -36,6 +36,7 @@ type
     procedure setRecaudacion(recauda:vecRecaudacion);
     procedure agregarRecaudacion(recauda:regRecaudacion);
     procedure vaciarRecaudacion();
+    procedure ordenarRecaudacion();
     function getCantidadAutos():integer;
     procedure setCantidadAutos(n: integer);
     function getAutos():vecAutos;
@@ -79,6 +80,26 @@ begin
   vectorRecaudacion := copy(getRecaudacion());
   setLength(vectorRecaudacion, 0);
   recaudacion := copy(vectorRecaudacion);
+end;
+
+procedure Estacionamiento.ordenarRecaudacion;
+var
+  I, J: Integer;
+  aux: TDateTime;
+  vectorRecaudacion: vecRecaudacion;
+
+begin
+  vectorRecaudacion := getRecaudacion();
+  For I := 1 to high(vectorRecaudacion) do begin
+    aux := vectorRecaudacion[I].fecha;
+    J := I;
+    While ((J > 0) AND (CompareDate(vectorRecaudacion[J-1].fecha, aux) = 1)) do begin
+      vectorRecaudacion[J].fecha := vectorRecaudacion[J-1].fecha;
+      J := J - 1;
+    End;
+    vectorRecaudacion[J].fecha := aux;
+  End;
+  setRecaudacion(vectorRecaudacion);
 end;
 
 function Estacionamiento.getCantidadAutos():integer;

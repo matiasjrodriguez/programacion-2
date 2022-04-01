@@ -298,12 +298,13 @@ begin
 
   CloseFile(archivo);
 
+  esta.ordenarRecaudacion;
   vRecaudacion := esta.getRecaudacion();
   Memo1.Clear;
 
   for I := 0 to High(vRecaudacion) do begin
     Memo1.Lines.Add('Fecha: ' + datetostr(vRecaudacion[I].fecha));
-    Memo1.Lines.Add('Recaudación ' + vRecaudacion[I].monto.ToString);
+    Memo1.Lines.Add('Recaudación $' + vRecaudacion[I].monto.ToString);
     Memo1.Lines.Add('');
   end;
 
