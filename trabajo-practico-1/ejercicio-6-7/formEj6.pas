@@ -66,6 +66,7 @@ type
     Label17: TLabel;
     editHastaAño: TEdit;
     btnBuscarRango: TButton;
+    Memo2: TMemo;
     procedure btnIngresarClick(Sender: TObject);
     procedure btnAplicarClick(Sender: TObject);
     procedure btnEscribirArchivoClick(Sender: TObject);
@@ -122,6 +123,7 @@ var
   tipo : TARIFA;
   f: TDateTime;
 begin
+  //validación
   if (TryStrToDate(fechaAString(editAñoIngreso.Text,editMesIngreso.Text,EditdiaIngreso.Text),f)) and
     (TryStrToDate(fechaAString(editAñoSalida.Text,editMesSalida.Text,EditdiaSalida.Text),f)) and
     (strtoint(editHoraIngreso.Text) < 24) and (strtoint(editMinutoIngreso.Text) < 60) and
@@ -156,11 +158,13 @@ begin
       Memo1.Lines.Add('Autos cargados: ' + esta.getCantidadAutos().ToString);
       Memo1.Lines.Add('Al momento de su retiro debe abonar $' + format('%.2f', [rAutos.abona]));
       tipo := rAutos.tipotarifa;
+
       case tipo of
         porHora: Memo1.Lines.Add('El tipo de tarifa a pagar es por hora');
         porMediaEstadia: Memo1.Lines.Add('El tipo de tarifa a pagar por media estadía');
         porEstadiaCompleta: Memo1.Lines.Add('El tipo de tarifa a pagar es por estadía completa');
       end;
+
       btnEscribirArchivo.Enabled := True;
     end else
       memo1.Lines.Add('ERROR EN INGRESO DE AUTO: Los datos de ingreso son iguales o mayores a los de salida');
@@ -239,10 +243,18 @@ begin
   btnLeerArchivo.Enabled := True;
 end;
 
+function agregarTiempo(texto:string):string;
+begin
+  if length(texto) = 10 then
+    texto := texto + ' 00:00:00';
+  result := texto;
+end;
+
 procedure TForm1.btnLeerArchivoClick(Sender: TObject);
 var
   archivo: File of regAutos;
   rAutos: regAutos;
+  entrada, salida:string;
 
 begin
   Memo1.Clear;
@@ -251,8 +263,12 @@ begin
 
   while not EOF(archivo) do begin
     read(archivo, rAutos);
-    Memo1.Lines.Add('Entrada: ' + DateTimeToStr(rAutos.entrada));
-    Memo1.Lines.Add('Salida: ' + DateTimeToStr(rAutos.salida));
+
+    entrada := agregarTiempo(DateTimeToStr(rAutos.entrada));
+    salida := agregarTiempo(DateTimeToStr(rAutos.salida));
+
+    Memo1.Lines.Add('Entrada: ' + entrada);
+    Memo1.Lines.Add('Salida: ' + salida);
     Memo1.Lines.Add('Abona: $' + format('%.2f',[rAutos.abona]));
 
     case rAutos.tipotarifa of

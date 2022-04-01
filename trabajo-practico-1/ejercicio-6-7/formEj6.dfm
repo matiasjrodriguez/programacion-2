@@ -2,7 +2,7 @@
   Left = 0
   Top = 0
   Caption = 'Estacionamiento'
-  ClientHeight = 511
+  ClientHeight = 508
   ClientWidth = 890
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -620,5 +620,26 @@
       TabOrder = 6
       OnClick = btnBuscarRangoClick
     end
+  end
+  object Memo2: TMemo
+    Left = 391
+    Top = 86
+    Width = 131
+    Height = 137
+    BorderStyle = bsNone
+    Color = clBtnFace
+    Lines.Strings = (
+      '1. Cargar ajustes'
+      '2. Ingresar fecha y '
+      'horario'
+      '3. Listo para usar'
+      ''
+      '(En caso de que un auto '
+      'permanezca mas de un '
+      'd'#237'a, a las 00hs se cobrar'#225' '
+      'automaticamente una '
+      'hora)')
+    ReadOnly = True
+    TabOrder = 7
   end
 end

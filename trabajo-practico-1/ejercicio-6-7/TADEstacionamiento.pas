@@ -164,7 +164,9 @@ var
   añoEntrada, añoSalida, mesEntrada, mesSalida, diaEntrada, diaSalida,
   horaEntrada, horaSalida, minEntrada, minSalida, segEntrada, segSalida,
   milEntrada, milSalida, añoDif, mesDif, diaDif, horaDif, minDif, segDif,
-  milDif, totalMinutos: word;
+  milDif, totalMinutosPrimer, totalMinutosUltimo: word;
+  primerDia, ultimoDia:TARIFA;
+  primerDiaAbono, ultimoDiaAbono: extended;
 begin
 
   DecodeDateTime(tiempoEntrada, añoEntrada, mesEntrada, diaEntrada, horaEntrada,
@@ -184,24 +186,63 @@ begin
   end else
     minDif := minSalida - minEntrada;
 
-  if horaDif < 3 then begin
-    totalMinutos := minDif + (horaDif * 60);
-    if totalMinutos mod 10 <> 0 then
-      totalMinutos := totalMinutos - (totalMinutos mod 10) + 10;
-    auto.abona := (totalMinutos * getTarifaHora()) / 60;
+   if horaEntrada < 18 then
+    primerDia := porEstadiaCompleta
+  else if horaEntrada < 21 then
+    primerDia := porMediaEstadia
+  else
+    primerDia := porHora;
+
+  if horaSalida >= 6 then
+    ultimoDia := porEstadiaCompleta
+  else if horaSalida >= 3 then
+    ultimoDia := porMediaEstadia
+  else
+    ultimoDia := porHora;
+
+
+  if primerDia = porHora then begin
+    totalMinutosPrimer := minDif + ((24-horaEntrada)*60);
+    if minDif <> 0 then
+      dec(totalMinutosPrimer, 60);
+    if totalMinutosPrimer mod 10 <> 0 then
+      totalMinutosPrimer := totalMinutosPrimer - (totalMinutosPrimer mod 10);
+    if totalMinutosPrimer < 60 then
+      totalMinutosPrimer := 60;
+    primerDiaAbono := (totalMinutosPrimer * getTarifaHora()) / 60;
+  end else if primerDia = porMediaEstadia then
+    primerDiaAbono := getMediaEstadia()
+  else
+    primerDiaAbono := getEstadiaCompleta();
+
+  if ultimoDia = porHora then begin
+    totalMinutosUltimo := 0;
+    totalMinutosUltimo := minDif + (horaSalida * 60);
+    if totalMinutosUltimo mod 10 <> 0 then
+      totalMinutosUltimo := totalMinutosUltimo - (totalMinutosUltimo mod 10) + 10;
+    if totalMinutosUltimo < 60 then
+      totalMinutosUltimo := 60;
+    ultimoDiaAbono := (totalMinutosUltimo * getTarifaHora()) / 60;
+  end else if ultimoDia = porMediaEstadia then
+    ultimoDiaAbono := getMediaEstadia()
+  else
+    ultimoDiaAbono := getEstadiaCompleta();
+
+
+   if (CompareDate(tiempoEntrada, tiempoSalida) = -1) or
+    ((CompareDate(tiempoEntrada, tiempoSalida) = 0) and (horaDif >= 6)) then
+    auto.tipotarifa := porEstadiaCompleta
+  else if horaDif >= 3 then
+    auto.tipotarifa := porMediaEstadia
+  else
     auto.tipotarifa := porHora;
-  end else if horaDif < 6 then begin
-    auto.abona := getMediaEstadia();
-    auto.tipotarifa := porMediaEstadia;
-  end else begin
-    auto.abona := getEstadiaCompleta();
-    auto.tipotarifa := porEstadiaCompleta;
-  end;
+
+
 
   auto.entrada := tiempoEntrada;
   auto.salida := tiempoSalida;
+  auto.abona := ((daysbetween(DateOf(tiempoSalida), DateOf(tiempoEntrada))-1) * getEstadiaCompleta()) + primerDiaAbono + ultimoDiaAbono;
 
   setAutos(auto);
 end;
-
 end.
