@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, TADEstacionamiento, DateUtils;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, TADEstacionamiento, DateUtils,
+  Vcl.ComCtrls;
 
 type
   TForm1 = class(TForm)
@@ -64,15 +65,21 @@ type
     editHastaMes: TEdit;
     Label17: TLabel;
     editHastaAño: TEdit;
-    Button1: TButton;
+    btnBuscarRango: TButton;
     procedure btnIngresarClick(Sender: TObject);
     procedure btnAplicarClick(Sender: TObject);
     procedure btnEscribirArchivoClick(Sender: TObject);
     procedure btnLeerArchivoClick(Sender: TObject);
     procedure btnBuscarEnArchivoClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnBuscarRangoClick(Sender: TObject);
+    procedure editPrecioOnChange(Sender: TObject);
+    procedure editCargaOnChange(Sender:TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure editDiaBuscarChange(Sender: TObject);
+    procedure editDesdeDiaChange(Sender: TObject);
   private
     { Private declarations }
+    flag: boolean;
   public
     { Public declarations }
   end;
@@ -85,6 +92,11 @@ implementation
 
 {$R *.dfm}
 
+function FechaAString(dia,mes,año:string): string;
+begin
+  result := año + '/' + mes + '/' + dia;
+end;
+
 procedure TForm1.btnAplicarClick(Sender: TObject);
 var
   tarifa: integer;
@@ -96,7 +108,10 @@ begin
   esta.setMediaEstadia(tarifa);
 
   tarifa := strtoint(editEstadiaCompleta.text);
-  esta.setEstadiaCompleta(tarifa)
+  esta.setEstadiaCompleta(tarifa);
+
+  IngresoAuto.Enabled := True;
+  flag := True;
 end;
 
 procedure TForm1.btnIngresarClick(Sender: TObject);
@@ -105,40 +120,52 @@ var
   vAutos : vecAutos;
   rAutos : regAutos;
   tipo : TARIFA;
+  f: TDateTime;
 begin
-  entrada := EncodeDateTime(
-    strtoint(editAñoIngreso.text),
-    strtoint(editMesIngreso.text),
-    strtoint(editDiaIngreso.text),
-    strtoint(editHoraIngreso.text),
-    strtoint(editMinutoIngreso.text),
-    0,
-    0
-  );
+  if (TryStrToDate(fechaAString(editAñoIngreso.Text,editMesIngreso.Text,EditdiaIngreso.Text),f)) and
+    (TryStrToDate(fechaAString(editAñoSalida.Text,editMesSalida.Text,EditdiaSalida.Text),f)) and
+    (strtoint(editHoraIngreso.Text) < 24) and (strtoint(editMinutoIngreso.Text) < 60) and
+    ((strtoint(editHoraSalida.Text) < 24) and (strtoint(editMinutoSalida.Text) < 60)) and
+    ((strtoint(editAñoIngreso.text) >= 1900)) and ((strtoint(editAñosalida.text) >= 1900)) then begin
 
-  salida := EncodeDateTime(
-    strtoint(editAñoSalida.text),
-    strtoint(editMesSalida.text),
-    strtoint(editDiaSalida.text),
-    strtoint(editHoraSalida.text),
-    strtoint(editMinutoSalida.text),
-    0,
-    0
-  );
+    entrada := EncodeDateTime(
+      strtoint(editAñoIngreso.text),
+      strtoint(editMesIngreso.text),
+      strtoint(editDiaIngreso.text),
+      strtoint(editHoraIngreso.text),
+      strtoint(editMinutoIngreso.text),
+      0,
+      0
+    );
 
-  esta.ingresarAuto(entrada, salida);
-  vAutos := copy(esta.getAutos());
-  rAutos := vAutos[high(vAutos)];
-  Memo1.Clear;
-  Memo1.Lines.Add('Autos cargados: ' + esta.getCantidadAutos().ToString);
-  Memo1.Lines.Add('Al momento de su retiro debe abonar $' + format('%.2f', [rAutos.abona]));
-  tipo := rAutos.tipotarifa;
-  case tipo of
-    porHora: Memo1.Lines.Add('El tipo de tarifa a pagar es por hora');
-    porMediaEstadia: Memo1.Lines.Add('El tipo de tarifa a pagar por media estadía');
-    porEstadiaCompleta: Memo1.Lines.Add('El tipo de tarifa a pagar es por estadía completa');
-  end;
+    salida := EncodeDateTime(
+      strtoint(editAñoSalida.text),
+      strtoint(editMesSalida.text),
+      strtoint(editDiaSalida.text),
+      strtoint(editHoraSalida.text),
+      strtoint(editMinutoSalida.text),
+      0,
+      0
+    );
 
+    if CompareDateTime(entrada,salida) = -1 then begin
+      esta.ingresarAuto(entrada, salida);
+      vAutos := copy(esta.getAutos());
+      rAutos := vAutos[high(vAutos)];
+      Memo1.Clear;
+      Memo1.Lines.Add('Autos cargados: ' + esta.getCantidadAutos().ToString);
+      Memo1.Lines.Add('Al momento de su retiro debe abonar $' + format('%.2f', [rAutos.abona]));
+      tipo := rAutos.tipotarifa;
+      case tipo of
+        porHora: Memo1.Lines.Add('El tipo de tarifa a pagar es por hora');
+        porMediaEstadia: Memo1.Lines.Add('El tipo de tarifa a pagar por media estadía');
+        porEstadiaCompleta: Memo1.Lines.Add('El tipo de tarifa a pagar es por estadía completa');
+      end;
+      btnEscribirArchivo.Enabled := True;
+    end else
+      memo1.Lines.Add('ERROR EN INGRESO DE AUTO: Los datos de ingreso son iguales o mayores a los de salida');
+  end else
+    memo1.lines.Add('ERROR EN INGRESO DE AUTO: Verifique que las fechas y los horarios sean correctos e intente de nuevo.');
 end;
 
 procedure TForm1.btnBuscarEnArchivoClick(Sender: TObject);
@@ -178,7 +205,7 @@ begin
   end;
 
   if not(coincidencias) then
-    Memo1.Lines.Add('No se encuentra la fecha en el archivo.')
+    Memo1.Lines.Add('No se encuentra la fecha en el archivo. Intente buscar la fecha de salida.')
   else begin
     Memo1.Lines.Add('Cantidad percibida:');
     Memo1.Lines.Add('Por hora: $' + percibidoHora.ToString);
@@ -207,8 +234,9 @@ begin
     write(archivo, rAutos);
   end;
 
+  memo1.Lines.Add('Archivo generado');
   CloseFile(archivo);
-
+  btnLeerArchivo.Enabled := True;
 end;
 
 procedure TForm1.btnLeerArchivoClick(Sender: TObject);
@@ -225,7 +253,7 @@ begin
     read(archivo, rAutos);
     Memo1.Lines.Add('Entrada: ' + DateTimeToStr(rAutos.entrada));
     Memo1.Lines.Add('Salida: ' + DateTimeToStr(rAutos.salida));
-    Memo1.Lines.Add('Abona: $' + floattostr(rAutos.abona));
+    Memo1.Lines.Add('Abona: $' + format('%.2f',[rAutos.abona]));
 
     case rAutos.tipotarifa of
       porHora: Memo1.Lines.Add('Tipo tarifa: por hora');
@@ -239,7 +267,7 @@ begin
 
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.btnBuscarRangoClick(Sender: TObject);
 var
   dia, mes, año, I:integer;
   fechaDesde, fechaHasta, fecha: TDateTime;
@@ -309,6 +337,39 @@ begin
   end;
 
   esta.vaciarRecaudacion;
+end;
+
+procedure TForm1.editPrecioOnChange(Sender: TObject);
+begin
+  btnAplicar.Enabled := (editTarifaHora.Text <> '') and (editMediaEstadia.Text <> '') and (editEstadiaCompleta.Text <> '');
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  btnLeerArchivo.Enabled := FileExists('registro.dat');
+end;
+
+procedure Tform1.editCargaOnChange(Sender: TObject);
+begin
+  btnIngresar.Enabled := (editHoraIngreso.text <> '') and
+    (editMinutoIngreso.text <> '') and (editHoraSalida.text <> '') and
+    (editMinutoSalida.text <> '') and (editAñoIngreso.text <> '') and
+    (editMesIngreso.text <> '') and (editDiaIngreso.text <> '') and
+    (editAñoSalida.text <> '') and (editMesSalida.text <> '') and
+    (editDiaSalida.text <> '') and flag;
+end;
+
+procedure TForm1.editDesdeDiaChange(Sender: TObject);
+begin
+  btnBuscarRango.Enabled := (editDesdeDia.text <> '') and
+    (editDesdeMes.text <> '') and (editDesdeAño.text <> '') and
+    (editHastadia.text <> '') and (editHastaMes.text <> '') and
+    (editHastaAño.text <> '') and FileExists('registro.dat');
+end;
+
+procedure TForm1.editDiaBuscarChange(Sender: TObject);
+begin
+  btnBuscarEnArchivo.Enabled := (editDiaBuscar.Text <> '') and (editMesBuscar.Text <> '') and (editAñoBuscar.Text <> '') and FileExists('registro.dat');
 end;
 
 end.

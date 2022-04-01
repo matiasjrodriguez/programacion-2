@@ -1,7 +1,7 @@
 ﻿object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Estacionamiento'
   ClientHeight = 511
   ClientWidth = 890
   Color = clBtnFace
@@ -11,6 +11,7 @@
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object IngresoAuto: TGroupBox
@@ -19,6 +20,7 @@
     Width = 377
     Height = 209
     Caption = 'Ingreso de auto'
+    Enabled = False
     TabOrder = 0
     object HorarioIngreso: TGroupBox
       Left = 11
@@ -45,16 +47,22 @@
         Top = 24
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 0
+        OnChange = editCargaOnChange
       end
       object editMinutoIngreso: TEdit
         Left = 93
         Top = 24
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 1
+        OnChange = editCargaOnChange
       end
     end
     object HorarioSalida: TGroupBox
@@ -82,16 +90,22 @@
         Top = 24
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 0
+        OnChange = editCargaOnChange
       end
       object editMinutoSalida: TEdit
         Left = 92
         Top = 24
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 1
+        OnChange = editCargaOnChange
       end
     end
     object btnIngresar: TButton
@@ -100,6 +114,7 @@
       Width = 358
       Height = 25
       Caption = 'Ingresar auto'
+      Enabled = False
       TabOrder = 2
       OnClick = btnIngresarClick
     end
@@ -141,24 +156,33 @@
         Top = 32
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 0
+        OnChange = editCargaOnChange
       end
       object editMesIngreso: TEdit
         Left = 62
         Top = 32
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 1
+        OnChange = editCargaOnChange
       end
       object editAñoIngreso: TEdit
         Left = 110
         Top = 32
         Width = 50
         Height = 21
+        Alignment = taCenter
+        MaxLength = 4
         NumbersOnly = True
         TabOrder = 2
+        OnChange = editCargaOnChange
       end
     end
     object FechaSalida: TGroupBox
@@ -199,24 +223,33 @@
         Top = 32
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 0
+        OnChange = editCargaOnChange
       end
       object editMesSalida: TEdit
         Left = 62
         Top = 32
         Width = 25
         Height = 21
+        Alignment = taCenter
+        MaxLength = 2
         NumbersOnly = True
         TabOrder = 1
+        OnChange = editCargaOnChange
       end
       object editAñoSalida: TEdit
         Left = 110
         Top = 32
         Width = 50
         Height = 21
+        Alignment = taCenter
+        MaxLength = 4
         NumbersOnly = True
         TabOrder = 2
+        OnChange = editCargaOnChange
       end
     end
   end
@@ -252,7 +285,10 @@
         Top = 24
         Width = 71
         Height = 21
+        Alignment = taCenter
+        NumbersOnly = True
         TabOrder = 0
+        OnChange = editPrecioOnChange
       end
     end
     object MediaEstadia: TGroupBox
@@ -280,7 +316,10 @@
         Top = 24
         Width = 71
         Height = 21
+        Alignment = taCenter
+        NumbersOnly = True
         TabOrder = 0
+        OnChange = editPrecioOnChange
       end
     end
     object EstadiaCompleta: TGroupBox
@@ -308,15 +347,19 @@
         Top = 24
         Width = 71
         Height = 21
+        Alignment = taCenter
+        NumbersOnly = True
         TabOrder = 0
+        OnChange = editPrecioOnChange
       end
     end
     object btnAplicar: TButton
       Left = 27
-      Top = 231
+      Top = 237
       Width = 188
       Height = 25
       Caption = 'Aplicar'
+      Enabled = False
       TabOrder = 3
       OnClick = btnAplicarClick
     end
@@ -328,6 +371,7 @@
     Height = 489
     Lines.Strings = (
       'Autos cargados: 0')
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 2
   end
@@ -336,7 +380,8 @@
     Top = 24
     Width = 131
     Height = 25
-    Caption = 'btnEscribirArchivo'
+    Caption = 'Generar archivo'
+    Enabled = False
     TabOrder = 3
     OnClick = btnEscribirArchivoClick
   end
@@ -345,7 +390,7 @@
     Top = 55
     Width = 131
     Height = 25
-    Caption = 'btnLeerArchivo'
+    Caption = 'Leer archivo'
     TabOrder = 4
     OnClick = btnLeerArchivoClick
   end
@@ -387,24 +432,33 @@
       Top = 23
       Width = 50
       Height = 21
+      Alignment = taCenter
+      MaxLength = 4
       NumbersOnly = True
       TabOrder = 0
+      OnChange = editDiaBuscarChange
     end
     object editDiaBuscar: TEdit
       Left = 13
       Top = 23
       Width = 25
       Height = 21
+      Alignment = taCenter
+      MaxLength = 2
       NumbersOnly = True
       TabOrder = 1
+      OnChange = editDiaBuscarChange
     end
     object editMesBuscar: TEdit
-      Left = 61
+      Left = 60
       Top = 23
       Width = 25
       Height = 21
+      Alignment = taCenter
+      MaxLength = 2
       NumbersOnly = True
       TabOrder = 2
+      OnChange = editDiaBuscarChange
     end
     object btnBuscarEnArchivo: TButton
       Left = 29
@@ -412,6 +466,7 @@
       Width = 116
       Height = 25
       Caption = 'Buscar en archivo'
+      Enabled = False
       TabOrder = 3
       OnClick = btnBuscarEnArchivoClick
     end
@@ -421,7 +476,7 @@
     Top = 343
     Width = 245
     Height = 160
-    Caption = 'GroupBox2'
+    Caption = 'Buscar rango de fechas'
     TabOrder = 6
     object Label12: TLabel
       Left = 99
@@ -494,57 +549,76 @@
       Top = 31
       Width = 25
       Height = 21
+      Alignment = taCenter
+      MaxLength = 2
       NumbersOnly = True
       TabOrder = 0
+      OnChange = editDesdeDiaChange
     end
     object editDesdeMes: TEdit
       Left = 117
       Top = 31
       Width = 25
       Height = 21
+      Alignment = taCenter
+      MaxLength = 2
       NumbersOnly = True
       TabOrder = 1
+      OnChange = editDesdeDiaChange
     end
     object editDesdeAño: TEdit
       Left = 165
       Top = 31
       Width = 50
       Height = 21
+      Alignment = taCenter
+      MaxLength = 4
       NumbersOnly = True
       TabOrder = 2
+      OnChange = editDesdeDiaChange
     end
     object editHastaDia: TEdit
       Left = 69
       Top = 87
       Width = 25
       Height = 21
+      Alignment = taCenter
+      MaxLength = 2
       NumbersOnly = True
       TabOrder = 3
+      OnChange = editDesdeDiaChange
     end
     object editHastaMes: TEdit
       Left = 117
       Top = 87
       Width = 25
       Height = 21
+      Alignment = taCenter
+      MaxLength = 2
       NumbersOnly = True
       TabOrder = 4
+      OnChange = editDesdeDiaChange
     end
     object editHastaAño: TEdit
       Left = 165
       Top = 87
       Width = 50
       Height = 21
+      Alignment = taCenter
+      MaxLength = 4
       NumbersOnly = True
       TabOrder = 5
+      OnChange = editDesdeDiaChange
     end
-    object Button1: TButton
-      Left = 80
-      Top = 114
-      Width = 75
+    object btnBuscarRango: TButton
+      Left = 53
+      Top = 123
+      Width = 137
       Height = 25
-      Caption = 'Button1'
+      Caption = 'Buscar rango de fechas'
+      Enabled = False
       TabOrder = 6
-      OnClick = Button1Click
+      OnClick = btnBuscarRangoClick
     end
   end
 end
