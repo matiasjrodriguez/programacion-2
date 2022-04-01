@@ -132,7 +132,7 @@ object Form1: TForm1
       Top = 65
       Width = 102
       Height = 13
-      Caption = 'Monedas de $0.50'
+      Caption = 'Monedas de $0,50'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -145,7 +145,7 @@ object Form1: TForm1
       Top = 27
       Width = 102
       Height = 13
-      Caption = 'Monedas de $0.25'
+      Caption = 'Monedas de $0,25'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -438,8 +438,8 @@ object Form1: TForm1
       TabOrder = 6
     end
     object UpDown8: TUpDown
-      Left = 156
-      Top = 271
+      Left = 157
+      Top = 270
       Width = 16
       Height = 21
       Associate = eBilletesDe1000
@@ -587,6 +587,7 @@ object Form1: TForm1
     Lines.Strings = (
       'Memo1')
     ParentFont = False
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 8
   end
