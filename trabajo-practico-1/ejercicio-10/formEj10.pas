@@ -123,6 +123,9 @@ begin
         end;
         eUnaCuota.Clear;
         eVariasCuotas.Clear;
+        btLimites.Enabled := False;
+        eUnaCuota.Enabled := True;
+        eVariasCuotas.Enabled := True;
 
       end else begin
         memo1.Clear;
@@ -134,11 +137,6 @@ begin
         if fecha > fechaVencimiento then
           memo1.Lines.Add('La tarjeta se encuentra vencida.');
         btPagar.Enabled := False;
-        eUnaCuota.Clear;
-        eVariasCuotas.Clear;
-        eUnaCuota.Enabled := True;
-        eVariasCuotas.Enabled := True;
-        btLimites.Enabled := False;
       end;
 
     end else

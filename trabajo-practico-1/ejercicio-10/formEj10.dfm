@@ -231,6 +231,7 @@
       Height = 21
       Alignment = taCenter
       NumbersOnly = True
+      ReadOnly = True
       TabOrder = 1
       Text = '0'
       OnChange = eUnaCuotaChange
