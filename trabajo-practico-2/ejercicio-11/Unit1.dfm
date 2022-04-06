@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -44,6 +45,7 @@ object Form1: TForm1
     Alignment = taCenter
     NumbersOnly = True
     TabOrder = 1
+    OnChange = Edit1Change
   end
   object Edit2: TEdit
     Left = 168
@@ -53,6 +55,7 @@ object Form1: TForm1
     Alignment = taCenter
     NumbersOnly = True
     TabOrder = 2
+    OnChange = Edit1Change
   end
   object Memo1: TMemo
     Left = 29

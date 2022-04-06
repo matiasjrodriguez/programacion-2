@@ -15,6 +15,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     procedure Button1Click(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,6 +47,19 @@ begin
       s := s + V[i].ToString + ', ';
   s := '[' + s + ']';
   memo1.Lines.Add(s);
+end;
+
+procedure TForm1.Edit1Change(Sender: TObject);
+begin
+  if (edit1.Text <> '') and (edit2.Text <> '') then
+    button1.Enabled := True
+  else
+    button1.Enabled := False;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  button1.Enabled := False;
 end;
 
 end.
