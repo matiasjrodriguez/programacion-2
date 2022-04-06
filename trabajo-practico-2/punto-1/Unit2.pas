@@ -10,7 +10,8 @@ type
   TForm2 = class(TForm)
     Edit1: TEdit;
     BitBtn1: TBitBtn;
-    Edit2: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
@@ -30,11 +31,11 @@ procedure TForm2.BitBtn1Click(Sender: TObject);
 begin
     if entrada.verificarPalindromo(edit1.Text) then
      begin
-         edit2.Text:='ES PALINDROMO';
+         label2.Caption:='ES PALINDROMO';
      end
     else
      begin
-         edit2.Text:='NO ES PALINDROMO';
+         label2.Caption:='NO ES PALINDROMO';
      end;
 end;
 

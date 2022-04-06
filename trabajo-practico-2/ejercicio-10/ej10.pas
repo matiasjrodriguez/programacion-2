@@ -83,9 +83,9 @@ begin
   result := copy(cadenas);
 end;
 
-function sumatoria(numero, acumulador, I, J, auxJ:integer; conjunto:vector; suma:string; cadenas:sVector):sVector;
+function sumatoria(numero, acumulador, I, J, auxJ:integer; conjunto:vector; suma:string; var cadenas:sVector):sVector;
 
-  procedure acumular(indice:integer; conjunto:vector; var acumulador:integer; suma:string);
+  procedure acumular(indice:integer; conjunto:vector; var acumulador:integer; var suma:string);
   begin
     acumulador := acumulador+conjunto[indice];
     suma := suma + conjunto[indice].ToString + ' - ';
@@ -108,9 +108,9 @@ begin
   end;
   if j = auxJ then
     if auxJ = length(conjunto)+1 then
-      sumatoria := sumatoria(numero, acumulador, I+1, I+1, I+2, conjunto, '', cadenas)
+      sumatoria := sumatoria(numero, 0, I+1, I+1, I+2, conjunto, '', cadenas)
     else
-      sumatoria := sumatoria(numero, conjunto[I], I, auxJ, auxJ+1, conjunto, '', cadenas);
+      sumatoria := sumatoria(numero, 0, I, auxJ, auxJ+1, conjunto, '', cadenas);
 end;
 
 

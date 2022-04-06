@@ -13,27 +13,33 @@ object Form2: TForm2
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 144
+    Top = 104
+    Width = 100
+    Height = 13
+    Caption = 'ENTRADA DE DATOS'
+  end
+  object Label2: TLabel
+    Left = 144
+    Top = 149
+    Width = 3
+    Height = 13
+  end
   object Edit1: TEdit
-    Left = 80
-    Top = 24
+    Left = 144
+    Top = 120
     Width = 121
     Height = 21
     TabOrder = 0
   end
   object BitBtn1: TBitBtn
-    Left = 232
-    Top = 22
+    Left = 296
+    Top = 118
     Width = 129
     Height = 25
     Caption = 'VERIFICAR PALINDROMO'
     TabOrder = 1
     OnClick = BitBtn1Click
-  end
-  object Edit2: TEdit
-    Left = 120
-    Top = 72
-    Width = 209
-    Height = 21
-    TabOrder = 2
   end
 end
