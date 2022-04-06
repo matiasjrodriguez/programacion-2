@@ -85,7 +85,7 @@ end;
 
 function sumatoria(numero, acumulador, I, J, auxJ:integer; conjunto:vector; suma:string; cadenas:sVector):sVector;
 
-  procedure acumular(numero, indice:integer; conjunto:vector; var acumulador:integer; suma:string);
+  procedure acumular(indice:integer; conjunto:vector; var acumulador:integer; suma:string);
   begin
     acumulador := acumulador+conjunto[indice];
     suma := suma + conjunto[indice].ToString + ' - ';
@@ -100,13 +100,13 @@ begin
     sumatoria := cadenas;
   end else begin
     if (I = J) and (numero >= conjunto[I]) and (numero >= acumulador+conjunto[I]) then
-      acumular(numero, I, conjunto, acumulador, suma)
+      acumular(I, conjunto, acumulador, suma)
     else if (numero >= conjunto[J]) and (numero >= acumulador+conjunto[J]) then
-      acumular(numero, J, conjunto, acumulador, suma);
+      acumular(J, conjunto, acumulador, suma);
 
     sumatoria := sumatoria(numero, acumulador, I, J+1, auxJ, conjunto, suma, cadenas);
   end;
-  if not(I = length(conjunto)+1) then
+  if j = auxJ then
     if auxJ = length(conjunto)+1 then
       sumatoria := sumatoria(numero, acumulador, I+1, I+1, I+2, conjunto, '', cadenas)
     else
