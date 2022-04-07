@@ -16,10 +16,10 @@ implementation
 
   function Tnumeros.Producto(n1: integer ;n2:integer):integer;
   begin
-    if (n2 = 1) then
-      producto := n1
+    if (n2 = 1) or (n2=0) then
+      producto := n1 * n2
     else if (n2 >1) then
-      producto := n1 + Tnumeros.Producto(n1,n2-1 );
+      producto := n1 + Producto(n1,n2-1 );
   end;
 end.
 

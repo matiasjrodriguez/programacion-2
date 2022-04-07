@@ -32,14 +32,15 @@ implementation
 
 
 procedure TForm2.Button1Click(Sender: TObject);
-var Entran1,Entran2 : integer;
+var Entran1,Entran2,n : integer;
  n1 : Tnumeros;
  caracter : string;
 begin
-   //memo1.Clear;
+   memo1.Clear;
    TryStrToInt(edit1.Text, Entran1);
    TryStrToInt(edit2.text, Entran2);
-   memo1.Lines.Add(n1.Producto(Entran1,Entran2).ToString);
+   n :=  n1.Producto(Entran1,Entran2);
+   memo1.Lines.Add(trim(n.ToString));
 end;
 
 end.

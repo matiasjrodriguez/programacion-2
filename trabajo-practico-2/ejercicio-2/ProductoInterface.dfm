@@ -44,7 +44,7 @@ object Form2: TForm2
   object Edit2: TEdit
     Left = 223
     Top = 40
-    Width = 114
+    Width = 106
     Height = 21
     TabOrder = 1
   end
@@ -58,12 +58,11 @@ object Form2: TForm2
     OnClick = Button1Click
   end
   object Memo1: TMemo
-    Left = 360
-    Top = 40
-    Width = 105
-    Height = 21
-    Lines.Strings = (
-      '')
+    Left = 361
+    Top = 32
+    Width = 88
+    Height = 41
+    ReadOnly = True
     TabOrder = 3
   end
 end
