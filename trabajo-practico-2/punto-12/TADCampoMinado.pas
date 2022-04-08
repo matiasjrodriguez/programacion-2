@@ -69,8 +69,7 @@ end;
 
 procedure CampoMinado.InicializarMB();
 var
-  i: Integer;
-  j: Integer;
+  i,j: Integer;
 begin
   for i := 1 to FILAS do
     for j := 1 to COLUMNAS do
@@ -129,32 +128,31 @@ begin
   end;
 end;
 
-procedure CampoMinado.BuscarCaminoSeguro(i,j: integer;CaminoAux:VCamino;MinasAux:VMinas);   // i = filas; j = columnas
+procedure CampoMinado.BuscarCaminoSeguro(i,j: integer;CaminoAux:VCamino;MinasAux:VMinas);// i = filas; j = columnas
 var
   k:integer;
 begin
-  if MC[i,j] = 'D' then begin       //caso base
+  if MC[i,j] = 'D' then begin  //caso base
 
-    if (length(MinasAux) < length(VM)) or (length(VM) = 0) then begin
+    if (length(VC) = 0) or (length(MinasAux) < length(VM)) then begin
       VM := MinasAux;
+      VC := CaminoAux;
     end;
-
-    VC := CaminoAux;
 
   end
   else if (i > FILAS) or (j > COLUMNAS) or (i <= 0) or (j <= 0) then
-    //pass
+    // pass
   else begin
 
     for k := 1 to length(nDireccion) do begin
       MB[i,j] := True;
 
-      if MC[i+nDireccion[k][1],j+nDireccion[k][2]] <> 'P' then begin
+      if (MC[i+nDireccion[k][1],j+nDireccion[k][2]] <> 'P') then begin
         setlength(CaminoAux,length(CaminoAux)+1);
         CaminoAux[high(CaminoAux)].Direccion := CharDireccion[k];
         CaminoAux[high(CaminoAux)].Situacion := MC[i+nDireccion[k][1],j+nDireccion[k][2]];
 
-        if MC[i+nDireccion[k][1],j+nDireccion[k][2]] = 'M' then begin
+        if (MC[i+nDireccion[k][1],j+nDireccion[k][2]] = 'M') then begin
           setlength(MinasAux,length(MinasAux)+1);
           MinasAux[high(MinasAux)].F := i + nDireccion[k][1];
           MinasAux[high(MinasAux)].C := j + nDireccion[k][2];
@@ -164,10 +162,10 @@ begin
           BuscarCaminoSeguro(i+nDireccion[k][1],j+nDireccion[k][2],CaminoAux,MinasAux);
         end;
 
-        MB[i,j] := False;        //comienza el Backtracking volviendo todo para atras
+        MB[i,j] := False;        //comienza el Backtracking volviendo todo como estaba antes
         setlength(CaminoAux,length(CaminoAux)-1);
 
-        if MC[i+nDireccion[k][1],j+nDireccion[k][2]] = 'M' then begin
+        if (MC[i+nDireccion[k][1],j+nDireccion[k][2]] = 'M') then begin
           setlength(MinasAux,length(MinasAux)-1);
         end;
 
