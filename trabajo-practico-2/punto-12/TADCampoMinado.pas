@@ -20,7 +20,7 @@ type
     Situacion: char;
   End;
 
-  VCamino =  array[1..50] of Celda;
+  VCamino =  array of Celda;
 
   CampoMinado = Object
     private
@@ -117,6 +117,8 @@ begin
 end;
 
 function CampoMinado.BuscarCaminoSeguro(i,j,k: integer): VCamino;
+var
+  derecha, izquierda, arriba, abajo: boolean;
 begin
 
   if MC[i-1,j] = 'D' then begin  //casos base
@@ -141,31 +143,45 @@ begin
   end
   else begin  //casos recursivos
 
-    if (MC[i-1,j] = 'S') and (MB[i-1,j]) then begin  //Up
+    if (MC[i-1,j] = 'S') and (MB[i-1,j]) and then begin  //Up
       VC[k].Direccion := 'U';
       VC[k].Situacion := 'S';
       MB[i-1,j] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i-1,j,k+1);
-    end else
+    end;
     if (MC[i,j+1] = 'S') and (MB[i,j+1]) then begin  //Right
       VC[k].Direccion := 'R';
       VC[k].Situacion := 'S';
       MB[i,j+1] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i,j+1,k+1);
-    end else
+    end;
     if (MC[i+1,j] = 'S') and (MB[i+1,j]) then begin  //Down
       VC[k].Direccion := 'D';
       VC[k].Situacion := 'S';
       MB[i+1,j] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i+1,j,k+1);
-    end else
+    end;
     if (MC[i,j-1] = 'S') and (MB[i,j-1]) then begin  //Left
       VC[k].Direccion := 'L';
       VC[k].Situacion := 'S';
       MB[i,j-1] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i,j-1,k+1);
-    end
+    end;
+
+
+   { if arriba then
+      BuscarCaminoSeguro := BuscarCaminoSeguro(i-1,j,k+1);
+
+    if derecha then
+      BuscarCaminoSeguro := BuscarCaminoSeguro(i,j+1,k+1);
+
+    if abajo then
+      BuscarCaminoSeguro := BuscarCaminoSeguro(i+1,j,k+1);
+
+    if izquierda then
+      BuscarCaminoSeguro := BuscarCaminoSeguro(i,j-1,k+1);  }
   end;
+
 end;
 
 end.
