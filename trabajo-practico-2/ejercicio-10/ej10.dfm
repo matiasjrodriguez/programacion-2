@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 299
-  ClientWidth = 635
+  ClientHeight = 216
+  ClientWidth = 522
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,29 +14,35 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 352
-    Top = 176
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
+    Left = 112
+    Top = 126
+    Width = 105
+    Height = 43
+    Caption = 'Calcular conjuntos'
     TabOrder = 0
     OnClick = Button1Click
   end
   object Memo1: TMemo
-    Left = 130
-    Top = 104
-    Width = 185
-    Height = 89
+    Left = 314
+    Top = 44
+    Width = 79
+    Height = 157
     Lines.Strings = (
       'Memo1')
     TabOrder = 1
   end
-  object Edit1: TEdit
-    Left = 480
-    Top = 72
+  object eVector: TEdit
+    Left = 42
+    Top = 44
     Width = 121
     Height = 21
     TabOrder = 2
-    Text = 'Edit1'
+  end
+  object eNumero: TEdit
+    Left = 42
+    Top = 80
+    Width = 47
+    Height = 21
+    TabOrder = 3
   end
 end

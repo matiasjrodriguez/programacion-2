@@ -9,7 +9,8 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Memo1: TMemo;
-    Edit1: TEdit;
+    eVector: TEdit;
+    eNumero: TEdit;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
@@ -18,31 +19,44 @@ type
   end;
 var
   Form1: TForm1;
-  conjunto: OConjunto;
+  Conjunto: OConjunto;
 
 implementation
 
 {$R *.dfm}
 
-
+function Split(cadena: string):iVector;
+var
+  i,p: integer;
+  V:iVector;
+begin
+  i := 1;
+  cadena := cadena + ' ';
+  p := pos(' ', cadena);
+  while P > 0 do begin
+    Inc(i);
+    setlength(V,length(V)+1);
+    V[high(V)] := strtoint(Copy(cadena, 1, p - 1));
+    cadena := copy(cadena, P + 1, length(cadena));
+    p := pos(' ', cadena);
+  end;
+  result := V;
+end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
   m: sVector;
-  v: vector;
-  cadena: sVector;
+  v: ivector;
+  n: integer;
+  i: Integer;
 begin
-  Randomize;
-  v[1] := 1;
-  v[2] := 2;
-  v[3] := 3;
-  v[4] := 4;
-  v[5] := 5;
-  v[6] := 6;
-
-
-  m := OConjunto.iniciar
-  memo1.Lines.add('');
+  memo1.Clear;
+  n := strtoint(eNumero.Text);
+  v := split(trim(eVector.Text));
+  Conjunto.setConjunto(V);
+  m := Conjunto.iniciarSumatoria(n,v);
+  for i := low(m) to high(m) do
+    memo1.Lines.Add(m[i]);
 end;
 
 end.
