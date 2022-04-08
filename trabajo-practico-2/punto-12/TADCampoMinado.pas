@@ -116,52 +116,60 @@ begin
   end;
 end;
 
-function CampoMinado.BuscarCaminoSeguro(i,j,k: integer): VCamino;
+function CampoMinado.BuscarCaminoSeguro(i,j: integer): VCamino;
 var
   derecha, izquierda, arriba, abajo: boolean;
 begin
 
   if MC[i-1,j] = 'D' then begin  //casos base
+    setLength(VC, length(VC)+1);
     VC[k].Situacion := 'D';
     VC[k].Direccion := 'U';
     BuscarCaminoSeguro := VC;
   end else
   if MC[i,j+1] = 'D' then begin
+    setLength(VC, length(VC)+1);
     VC[k].Situacion := 'D';
     VC[k].Direccion := 'R';
     BuscarCaminoSeguro := VC;
   end else
   if MC[i+1,j] = 'D' then begin
+    setLength(VC, length(VC)+1);
     VC[k].Situacion := 'D';
     VC[k].Direccion := 'D';
     BuscarCaminoSeguro := VC;
   end else
   if MC[i,j-1] = 'D' then begin
+    setLength(VC, length(VC)+1);
     VC[k].Situacion := 'D';
     VC[k].Direccion := 'L';
     BuscarCaminoSeguro := VC
   end
   else begin  //casos recursivos
 
-    if (MC[i-1,j] = 'S') and (MB[i-1,j]) and then begin  //Up
+    if (MC[i-1,j] = 'S') and (MB[i-1,j]) then begin //Up
+      setLength(VC, length(VC)+1);
       VC[k].Direccion := 'U';
       VC[k].Situacion := 'S';
       MB[i-1,j] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i-1,j,k+1);
     end;
     if (MC[i,j+1] = 'S') and (MB[i,j+1]) then begin  //Right
+      setLength(VC, length(VC)+1);
       VC[k].Direccion := 'R';
       VC[k].Situacion := 'S';
       MB[i,j+1] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i,j+1,k+1);
     end;
     if (MC[i+1,j] = 'S') and (MB[i+1,j]) then begin  //Down
+      setLength(VC, length(VC)+1);
       VC[k].Direccion := 'D';
       VC[k].Situacion := 'S';
       MB[i+1,j] := False;
       BuscarCaminoSeguro := BuscarCaminoSeguro(i+1,j,k+1);
     end;
     if (MC[i,j-1] = 'S') and (MB[i,j-1]) then begin  //Left
+      setLength(VC, length(VC)+1);
       VC[k].Direccion := 'L';
       VC[k].Situacion := 'S';
       MB[i,j-1] := False;

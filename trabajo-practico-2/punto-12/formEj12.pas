@@ -65,7 +65,7 @@ begin
     memo1.Lines.Add('Entrada: [' + PosEntrada.F.ToString + ';' + PosEntrada.C.ToString + ']');
     memo1.Lines.Add('Salida: [' + PosSalida.F.ToString + ';' + PosSalida.C.ToString + ']');
 
-    VC := MC.BuscarCaminoSeguro(PosEntrada.F,PosEntrada.C,1);
+    VC := MC.BuscarCaminoSeguro(PosEntrada.F,PosEntrada.C);
 
     for i := 1 to length(VC) do
       if VC[i].Direccion <> ' ' then
