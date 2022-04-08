@@ -2,7 +2,8 @@ program Project1;
 
 uses
   Vcl.Forms,
-  ej10 in 'ej10.pas' {Form1};
+  ej10 in 'ej10.pas' {Form1},
+  TADConjunto in 'TADConjunto.pas';
 
 {$R *.res}
 
