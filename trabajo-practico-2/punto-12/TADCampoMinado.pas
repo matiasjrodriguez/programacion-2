@@ -5,10 +5,13 @@ interface
 const
   FILAS = 7;
   COLUMNAS = 10;
+  nDireccion: Array [1..4,1..2] of integer = ((-1, 0), (0, 1),(1, 0), (0, -1));  //Up,Right,Down,Left
+  CharDireccion: Array [1 .. 4] of Char = ('U', 'R', 'D', 'L');
 
 type
   MChars = array[1..FILAS,1..COLUMNAS] of char;
   Mbool = array[1..FILAS,1..COLUMNAS] of boolean;
+
 
   Coordenadas = Record
     F:integer;
@@ -21,28 +24,42 @@ type
   End;
 
   VCamino =  array of Celda;
+  VMinas = array of Coordenadas;
 
   CampoMinado = Object
     private
       MC: MChars;
       MB: Mbool;
       VC: VCamino;
+      VM: VMinas;
     public
       function GetMatrizC: MChars;
       procedure SetMatrizC(M:MChars);
       function UbicarEntrada(i,j:integer):Coordenadas;
       function UbicarSalida(i,j:integer):Coordenadas;
-      function BuscarCaminoSeguro(i,j,k:integer):VCamino;
+      procedure BuscarCaminoSeguro(i,j:integer;CaminoAux:VCamino;MinasAux:VMinas);
       procedure InicializarMB();
-      procedure InicializarVC();
+      function getCamino:VCamino;
+      function getMinas:VMinas;
+      procedure resetVectores();
   End;
 
 implementation
 
 
+function CampoMinado.getCamino: VCamino;
+begin
+  result := VC;
+end;
+
 function CampoMinado.GetMatrizC: MChars;
 begin
   result := MC;
+end;
+
+function CampoMinado.getMinas: VMinas;
+begin
+  result := VM;
 end;
 
 procedure CampoMinado.SetMatrizC(M: MChars);
@@ -57,17 +74,13 @@ var
 begin
   for i := 1 to FILAS do
     for j := 1 to COLUMNAS do
-      MB[i,j] := True;
+      MB[i,j] := False;
 end;
 
-procedure CampoMinado.InicializarVC;
-var
-  I: Integer;
+procedure CampoMinado.resetVectores;
 begin
-  for I := 1 to length(VC) do begin
-    VC[i].Direccion := ' ';
-    Vc[i].Situacion := ' ';
-  end;
+  setlength(VC,0);
+  setlength(VM,0);
 end;
 
 function CampoMinado.UbicarEntrada(i,j:integer):Coordenadas;
@@ -116,80 +129,53 @@ begin
   end;
 end;
 
-function CampoMinado.BuscarCaminoSeguro(i,j: integer): VCamino;
+procedure CampoMinado.BuscarCaminoSeguro(i,j: integer;CaminoAux:VCamino;MinasAux:VMinas);   // i = filas; j = columnas
 var
-  derecha, izquierda, arriba, abajo: boolean;
+  k:integer;
 begin
+  if MC[i,j] = 'D' then begin       //caso base
 
-  if MC[i-1,j] = 'D' then begin  //casos base
-    setLength(VC, length(VC)+1);
-    VC[k].Situacion := 'D';
-    VC[k].Direccion := 'U';
-    BuscarCaminoSeguro := VC;
-  end else
-  if MC[i,j+1] = 'D' then begin
-    setLength(VC, length(VC)+1);
-    VC[k].Situacion := 'D';
-    VC[k].Direccion := 'R';
-    BuscarCaminoSeguro := VC;
-  end else
-  if MC[i+1,j] = 'D' then begin
-    setLength(VC, length(VC)+1);
-    VC[k].Situacion := 'D';
-    VC[k].Direccion := 'D';
-    BuscarCaminoSeguro := VC;
-  end else
-  if MC[i,j-1] = 'D' then begin
-    setLength(VC, length(VC)+1);
-    VC[k].Situacion := 'D';
-    VC[k].Direccion := 'L';
-    BuscarCaminoSeguro := VC
+    if (length(MinasAux) < length(VM)) or (length(VM) = 0) then begin
+      VM := MinasAux;
+    end;
+
+    VC := CaminoAux;
+
   end
-  else begin  //casos recursivos
+  else if (i > FILAS) or (j > COLUMNAS) or (i <= 0) or (j <= 0) then
+    //pass
+  else begin
 
-    if (MC[i-1,j] = 'S') and (MB[i-1,j]) then begin //Up
-      setLength(VC, length(VC)+1);
-      VC[k].Direccion := 'U';
-      VC[k].Situacion := 'S';
-      MB[i-1,j] := False;
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i-1,j,k+1);
+    for k := 1 to length(nDireccion) do begin
+      MB[i,j] := True;
+
+      if MC[i+nDireccion[k][1],j+nDireccion[k][2]] <> 'P' then begin
+        setlength(CaminoAux,length(CaminoAux)+1);
+        CaminoAux[high(CaminoAux)].Direccion := CharDireccion[k];
+        CaminoAux[high(CaminoAux)].Situacion := MC[i+nDireccion[k][1],j+nDireccion[k][2]];
+
+        if MC[i+nDireccion[k][1],j+nDireccion[k][2]] = 'M' then begin
+          setlength(MinasAux,length(MinasAux)+1);
+          MinasAux[high(MinasAux)].F := i + nDireccion[k][1];
+          MinasAux[high(MinasAux)].C := j + nDireccion[k][2];
+        end;
+
+        if (MB[i+nDireccion[k][1],j+nDireccion[k][2]] = False) then begin
+          BuscarCaminoSeguro(i+nDireccion[k][1],j+nDireccion[k][2],CaminoAux,MinasAux);
+        end;
+
+        MB[i,j] := False;        //comienza el Backtracking volviendo todo para atras
+        setlength(CaminoAux,length(CaminoAux)-1);
+
+        if MC[i+nDireccion[k][1],j+nDireccion[k][2]] = 'M' then begin
+          setlength(MinasAux,length(MinasAux)-1);
+        end;
+
+      end;
+
     end;
-    if (MC[i,j+1] = 'S') and (MB[i,j+1]) then begin  //Right
-      setLength(VC, length(VC)+1);
-      VC[k].Direccion := 'R';
-      VC[k].Situacion := 'S';
-      MB[i,j+1] := False;
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i,j+1,k+1);
-    end;
-    if (MC[i+1,j] = 'S') and (MB[i+1,j]) then begin  //Down
-      setLength(VC, length(VC)+1);
-      VC[k].Direccion := 'D';
-      VC[k].Situacion := 'S';
-      MB[i+1,j] := False;
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i+1,j,k+1);
-    end;
-    if (MC[i,j-1] = 'S') and (MB[i,j-1]) then begin  //Left
-      setLength(VC, length(VC)+1);
-      VC[k].Direccion := 'L';
-      VC[k].Situacion := 'S';
-      MB[i,j-1] := False;
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i,j-1,k+1);
-    end;
 
-
-   { if arriba then
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i-1,j,k+1);
-
-    if derecha then
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i,j+1,k+1);
-
-    if abajo then
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i+1,j,k+1);
-
-    if izquierda then
-      BuscarCaminoSeguro := BuscarCaminoSeguro(i,j-1,k+1);  }
   end;
-
 end;
 
 end.

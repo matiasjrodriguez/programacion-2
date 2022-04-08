@@ -11,6 +11,9 @@ type
     sg: TStringGrid;
     Button1: TButton;
     memo1: TMemo;
+    Memo2: TMemo;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -50,34 +53,47 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   PosEntrada,PosSalida:Coordenadas;
   MAux : MChars;
-  VC: VCamino;
-  i: Integer;
+  VC,VCRes: VCamino;
+  VM,VMRes: VMinas;
+  i:integer;
 begin
   memo1.Clear;
+  memo2.Clear;
+  MC.ResetVectores;
   cargarMatriz(MAux);
   MC.SetMatrizC(MAux);
   MC.InicializarMB;
-  MC.InicializarVC;
   PosEntrada := MC.UbicarEntrada(FILAS,COLUMNAS);
   PosSalida := MC.UbicarSalida(FILAS,COLUMNAS);
 
   if (PosEntrada.F <> -1) or (PosSalida.F <> -1) then begin
-    memo1.Lines.Add('Entrada: [' + PosEntrada.F.ToString + ';' + PosEntrada.C.ToString + ']');
-    memo1.Lines.Add('Salida: [' + PosSalida.F.ToString + ';' + PosSalida.C.ToString + ']');
 
-    VC := MC.BuscarCaminoSeguro(PosEntrada.F,PosEntrada.C);
+    MC.BuscarCaminoSeguro(PosEntrada.F,PosEntrada.C,VC,VM);
+    VCRes := MC.getCamino;
+    VMres := MC.getMinas;
 
-    for i := 1 to length(VC) do
-      if VC[i].Direccion <> ' ' then
-        memo1.Lines.Add('(' + VC[i].Direccion + ',' + VC[i].Situacion + ')');
+    if length(VCRes) = 0 then
+      memo1.Lines.Add('ERROR: No se ha encontrado una conexion entre la entrada (E) y la salida (D)')
+    else begin
+      for i := low(VCRes) to high(VCRes) do
+        memo1.Lines.Add('(' + VCRes[i].Direccion + ',' + VCRes[i].Situacion + ')');
+
+      if length(VMRes) = 0 then
+        memo2.Lines.Add('No hay minas')
+      else
+        for i := low(VMRes) to high(VMRes) do
+          memo2.Lines.Add('(' + VMRes[i].F.ToString + ',' + VMRes[i].C.ToString + ')');
+    end;
   end
   else
     memo1.Lines.Add('ERROR: No se encontro el punto de Entrada o de Salida');
+
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   memo1.Clear;
+  memo2.Clear;
   InicializarSG();
 end;
 

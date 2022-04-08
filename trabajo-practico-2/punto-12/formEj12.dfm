@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 385
-  ClientWidth = 734
+  ClientWidth = 748
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,9 +14,35 @@ object Form1: TForm1
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 484
+    Top = 26
+    Width = 46
+    Height = 16
+    Caption = 'Camino'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 596
+    Top = 26
+    Width = 135
+    Height = 16
+    Caption = 'Posicion de las Minas'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object sg: TStringGrid
-    Left = 96
-    Top = 72
+    Left = 40
+    Top = 57
     Width = 353
     Height = 193
     Color = clMenu
@@ -33,22 +59,22 @@ object Form1: TForm1
     TabOrder = 0
   end
   object Button1: TButton
-    Left = 208
-    Top = 296
-    Width = 129
-    Height = 25
-    Caption = 'Button1'
+    Left = 144
+    Top = 272
+    Width = 153
+    Height = 57
+    Caption = 'Buscar camino mas seguro'
     TabOrder = 1
     OnClick = Button1Click
   end
   object memo1: TMemo
-    Left = 528
-    Top = 32
-    Width = 169
-    Height = 321
+    Left = 448
+    Top = 48
+    Width = 113
+    Height = 305
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Tahoma'
     Font.Style = []
     Lines.Strings = (
@@ -56,5 +82,21 @@ object Form1: TForm1
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 2
+  end
+  object Memo2: TMemo
+    Left = 616
+    Top = 48
+    Width = 99
+    Height = 305
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'memo1')
+    ParentFont = False
+    ScrollBars = ssVertical
+    TabOrder = 3
   end
 end
