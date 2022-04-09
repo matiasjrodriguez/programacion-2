@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 159
-  ClientWidth = 418
+  ClientHeight = 518
+  ClientWidth = 697
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,21 +27,12 @@ object Form2: TForm2
     Height = 13
     Caption = 'Resultado'
   end
-  object Memo1: TMemo
-    Left = 56
-    Top = 96
-    Width = 274
-    Height = 57
-    Lines.Strings = (
-      '')
-    TabOrder = 0
-  end
   object Edit1: TEdit
     Left = 56
     Top = 43
     Width = 274
     Height = 21
-    TabOrder = 1
+    TabOrder = 0
   end
   object Button1: TButton
     Left = 336
@@ -49,7 +40,16 @@ object Form2: TForm2
     Width = 75
     Height = 25
     Caption = 'Onda digital'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = Button1Click
+  end
+  object Memo1: TMemo
+    Left = 80
+    Top = 136
+    Width = 553
+    Height = 321
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 2
   end
 end

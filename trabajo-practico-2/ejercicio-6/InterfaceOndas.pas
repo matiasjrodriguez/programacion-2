@@ -8,11 +8,11 @@ uses
 
 type
   TForm2 = class(TForm)
-    Memo1: TMemo;
     Edit1: TEdit;
     Label1: TLabel;
     Button1: TButton;
     Label2: TLabel;
+    Memo1: TMemo;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
@@ -22,17 +22,20 @@ type
 
 var
   Form2: TForm2;
-
 implementation
 
 {$R *.dfm}
 
 procedure TForm2.Button1Click(Sender: TObject);
-var variable:string;
-  posicionaAux : integer;
+var variable, variable2 :string;
+VectorOndas : onda;
+    i : integer;
 begin
+  i := 1;
  variable := edit1.Text;
- memo1.Lines.Add();
-end;
+ variable := variable.ToUpper;
+ variable2 := VectorOndas.ondadigital(variable,i);
+ memo1.Lines.Add(VectorOndas.corrigeonda(variable2,i));
+ end;
 
 end.

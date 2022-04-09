@@ -3,53 +3,41 @@ unit OndasTAD;
 interface
 uses
   System.SysUtils;
-const
-  min = 1;
-  max = 100;
 type
-  Tonda = array [min..max] of string;
-  Palabra = object
+  onda = object
 private
-  Unidad : Tonda;
-  Lacadena : string;
+  Unidad : string;
 public
-  function ConvierteOndas(cadena : string;ContI, ContF, posiciona : integer ):Tonda;
-  procedure AsignaOnda(cadena :string; var posicionaAux : integer; asignadorAux : integer);
+  function ondadigital(lista: string; i: Integer): string;
+  function corrigeonda(listaFaseii : string; i : integer):string;
   end;
 
 implementation
-  function Palabra.ConvierteOndas(cadena : string; ContI, ContF, posiciona : integer ):Tonda;
-
-  procedure Palabra.AsignaOnda(cadena :string; var posicionaAux : integer; asignadorAux : integer);
-  var VectorOndas, VondaRTA, Vtraducido :Tonda;
+  function onda.ondadigital(lista: string;  i: Integer ): string;
+  var caracter, nuevaLista : string;
   begin
-    Vtraducido[1] := 'L';
-    Vtraducido[1] := 'H';
-    VondaRTA[1] := '_';
-    VondaRTA[2] := '-';
-    VondaRTA[3] := '|';
-
-         if (cadena[ContI] = Vtraducido[asignadorAux]) then begin
-          if (VectorOndas[posicionaAux-1] <> VondaRTA[asignadorAux]) then
-              VectorOndas[posicionaAux]:=  VondaRTA[3];
-              posicionaAux := posicionaAux+1;
-          VectorOndas[posicionaAux] := VondaRTA[asignadorAux];
-         end else begin
-          AsignaOnda(cadena,posicionaAux,asignadorAux+1);
-         end;
+     if (i <= length(lista)) then begin
+        caracter := lista[i];
+        if (caracter = 'L') then begin
+          ondadigital := '_'+ondadigital(lista,i+1);
+        end else if (caracter = 'H') then begin
+          ondadigital := '¯'+ondadigital(lista,i+1);
+        end;
+     end;
   end;
-  var asignador, posicionaAux : integer;
-  VectorOndas : Tonda;
+
+  function onda.corrigeonda(listaFaseii : string; i : integer):string;
   begin
-    asignador := 1;
-    if (ContI < ContF) then begin
-      AsignaOnda(cadena,posicionaAux,asignador);
-      ConvierteOndas(cadena,ContI+1,ContF,posicionaAux+1);
-    end else begin
-      result := VectorOndas;
+    if i <= length(listaFaseii) then begin
+      if ((listaFaseii[i]) <> (listaFaseii[i+1])) and ((i+1) <= (length(listaFaseii))) then begin
+        corrigeonda := listaFaseii[i]+'|'+corrigeonda(listaFaseii, i+1);
+      end else begin
+        corrigeonda := listaFaseii[i]+corrigeonda(listaFaseii, i+1);
+      end;
     end;
   end;
 end.
+
 {Ejercicio 6
 
 Se tiene una cadena que representa una onda digital de señales L (Low) y H (High).
