@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 216
+  ClientHeight = 214
   ClientWidth = 522
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,8 +13,22 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 42
+    Top = 25
+    Width = 204
+    Height = 13
+    Caption = 'Ingrese el conjunto separado por espacios'
+  end
+  object Label2: TLabel
+    Left = 42
+    Top = 71
+    Width = 87
+    Height = 13
+    Caption = 'Ingrese el n'#250'mero'
+  end
   object Button1: TButton
-    Left = 112
+    Left = 42
     Top = 126
     Width = 105
     Height = 43
@@ -23,12 +37,11 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object Memo1: TMemo
-    Left = 314
-    Top = 44
-    Width = 79
+    Left = 252
+    Top = 25
+    Width = 109
     Height = 157
-    Lines.Strings = (
-      'Memo1')
+    ScrollBars = ssVertical
     TabOrder = 1
   end
   object eVector: TEdit
@@ -36,13 +49,15 @@ object Form1: TForm1
     Top = 44
     Width = 121
     Height = 21
+    NumbersOnly = True
     TabOrder = 2
   end
   object eNumero: TEdit
     Left = 42
-    Top = 80
+    Top = 88
     Width = 47
     Height = 21
+    NumbersOnly = True
     TabOrder = 3
   end
 end

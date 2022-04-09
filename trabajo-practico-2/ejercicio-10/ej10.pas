@@ -11,6 +11,8 @@ type
     Memo1: TMemo;
     eVector: TEdit;
     eNumero: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }

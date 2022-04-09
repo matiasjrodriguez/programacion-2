@@ -38,11 +38,11 @@ end;
 function OConjunto.sumatoria(numero, acumulador, I, J, auxJ:integer; conjunto:iVector; suma:string; var cadenas:sVector):sVector;
 
 begin
-  if (acumulador = numero) and not(numero = conjunto[I]) then begin
+  if (acumulador = numero) {and not(numero = conjunto[I])} then begin
     setLength(cadenas, length(cadenas)+1);
     cadenas[high(cadenas)] := trim(suma);
     sumatoria := cadenas;
-  end else if J = length(conjunto)+1 then begin
+  end else if J = length(conjunto) then begin
     sumatoria := cadenas;
   end else begin
     if (j = auxJ-1) and (numero >= conjunto[I]) and (numero >= acumulador+conjunto[I]) then
@@ -52,8 +52,8 @@ begin
 
     sumatoria := sumatoria(numero, acumulador, I, J+1, auxJ, conjunto, suma, cadenas);
   end;
-  if j = auxJ then
-    if auxJ = length(conjunto)+1 then
+  if (j = auxJ) or (conjunto[i] = numero) then
+    if auxJ = length(conjunto) then
       sumatoria := sumatoria(numero, 0, I+1, I+1, I+2, conjunto, '', cadenas)
     else
       sumatoria := sumatoria(numero, 0, I, auxJ, auxJ+1, conjunto, '', cadenas);
