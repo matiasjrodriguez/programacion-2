@@ -54,6 +54,7 @@ begin
   n := strtoint(eNumero.Text);
   v := split(trim(eVector.Text));
   Conjunto.setConjunto(V);
+  Conjunto.setConjunto(Conjunto.insertionsort(Conjunto.getConjunto));
   m := Conjunto.iniciarSumatoria(n,v);
   for i := low(m) to high(m) do
     memo1.Lines.Add(m[i]);

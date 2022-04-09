@@ -16,6 +16,7 @@ type
     function sumatoria(numero, acumulador, I, J, auxJ:integer; conjunto:iVector; suma:string; var cadenas:sVector):sVector;
   public
     function iniciarSumatoria(numero:integer; v:iVector):sVector;
+    function insertionsort(conjunto: iVector):iVector;
     procedure setConjunto(V:iVector);
     function getConjunto():iVector;
   end;
@@ -69,6 +70,24 @@ function OConjunto.iniciarSumatoria(numero:integer; v:iVector):sVector;
   var cadena:sVector;
 begin
   result := sumatoria(numero, 0, 0, 0, 1, getConjunto(), '', cadena);
+end;
+
+function OConjunto.insertionsort(conjunto: iVector):iVector;
+var
+  i, j, aux: integer;
+
+begin
+  for i := 1 to high(conjunto) do begin
+    aux := conjunto[i];
+    j := i;
+    while ((j > 0) and (conjunto[j-1] > aux)) do begin
+      conjunto[j] := conjunto[j-1];
+      j := j - 1;
+    end;
+   conjunto[j] := aux;
+  end;
+
+  result := conjunto;
 end;
 
 end.
