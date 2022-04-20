@@ -27,21 +27,21 @@ Type
             Procedure Intercambio (P,Q: PosicionLista);
         Public
             // Comportamiento del objeto (Operaciones del TAO)
-            Function Crear(avTipoClave: TipoDatosClave; alSize: LongInt): Errores;
+            Function Crear(avTipoClave: TipoDatosClave; alSize: LongInt): Resultado;
             Function EsVacia(): Boolean;
             Function EsLLena(): Boolean;
-            Function Agregar(X:TipoElemento): Errores;
-            Function Insertar(X:TipoElemento; P:PosicionLista): Errores;
-            Function Eliminar(P:PosicionLista): Errores;
+            Function Agregar(X:TipoElemento): Resultado;
+            Function Insertar(X:TipoElemento; P:PosicionLista): Resultado;
+            Function Eliminar(P:PosicionLista): Resultado;
             Function Buscar(X:TipoElemento):PosicionLista;
             Function Siguiente(P:PosicionLista): PosicionLista;
             Function Anterior(P:PosicionLista): PosicionLista;
             Function Ordinal(PLogica: Integer): PosicionLista;
             Function Recuperar(P:PosicionLista): TipoElemento;
-            Function Actualizar(X:TipoElemento; P:PosicionLista): Errores;
+            Function Actualizar(X:TipoElemento; P:PosicionLista): Resultado;
             Function ValidarPosicion(P:PosicionLista): Boolean;
             Function RetornarClaves(): String;
-            Function LlenarClavesRandom(alSize: LongInt; RangoDesde, RangoHasta: LongInt): Errores;
+            Function LlenarClavesRandom(alSize: LongInt; RangoDesde, RangoHasta: LongInt): Resultado;
             Function Comienzo: PosicionLista;
             Function Fin: PosicionLista;
             Function CantidadElementos: LongInt;
@@ -54,7 +54,7 @@ Type
 Implementation
 
 // Crea la lista vacia
-Function Lista.Crear(avTipoClave: TipoDatosClave; alSize: LongInt): Errores;
+Function Lista.Crear(avTipoClave: TipoDatosClave; alSize: LongInt): Resultado;
     Var Q: PosicionLista;
     Begin
         if alSize < Min then Crear:= CError;
@@ -105,7 +105,7 @@ Function Lista.Anterior (P:PosicionLista): PosicionLista;
     End;
 
 // Agrega elementos al final de la lista. Despues del ultimo.
-Function Lista.Agregar(X:TipoElemento): Errores;
+Function Lista.Agregar(X:TipoElemento): Resultado;
     Var Q: PosicionLista;
     Begin
         Agregar := CError;
@@ -131,7 +131,7 @@ Function Lista.Agregar(X:TipoElemento): Errores;
     End;
 
 // Inserta un elemento en cualquier lugar de la lista.
-Function Lista.Insertar(X:TipoElemento; P:PosicionLista): Errores;
+Function Lista.Insertar(X:TipoElemento; P:PosicionLista): Resultado;
     Var Q: PosicionLista;
     Begin
         Insertar := CError;
@@ -160,7 +160,7 @@ Function Lista.Insertar(X:TipoElemento; P:PosicionLista): Errores;
     End;
 
 // Elimina un elemento de cualquier posicion de la lista.
-Function Lista.Eliminar (P:PosicionLista): Errores;
+Function Lista.Eliminar (P:PosicionLista): Resultado;
     Var Q: PosicionLista;
     Begin
         Eliminar := CError;
@@ -228,7 +228,7 @@ Function Lista.Recuperar(P:PosicionLista): TipoElemento;
     End;
 
 // Actualiza La posicion P. Sobreescribe todo el elemento sin importar su contenido
-Function Lista.Actualizar (X:TipoElemento; P:PosicionLista): Errores;
+Function Lista.Actualizar (X:TipoElemento; P:PosicionLista): Resultado;
     Begin
         Actualizar := CError;
         // Controla que el Tipo de Dato de la Clave sea Homogeneo a la Lista
@@ -339,7 +339,7 @@ Function Lista.RetornarClaves(): String;
     End;
 
 // Llena la lista de 0 a <RangoHasta> el atributo DI de la lista
-Function Lista.LlenarClavesRandom(alSize: LongInt; RangoDesde, RangoHasta: LongInt): Errores;
+Function Lista.LlenarClavesRandom(alSize: LongInt; RangoDesde, RangoHasta: LongInt): Resultado;
     Var X: TipoElemento;
     Begin
         TDatoDeLaClave := Numero;

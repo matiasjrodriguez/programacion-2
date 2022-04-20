@@ -103,9 +103,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="DisplayTAD.pas"/>
-        <DCCReference Include="..\Listas\ListArray.pas"/>
-        <DCCReference Include="..\Listas\ListPointer.pas"/>
-        <DCCReference Include="..\Listas\Tipos.pas"/>
+        <DCCReference Include="ListArray.pas"/>
+        <DCCReference Include="ListCursor.pas"/>
+        <DCCReference Include="ListPointer.pas"/>
+        <DCCReference Include="Tipos.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
