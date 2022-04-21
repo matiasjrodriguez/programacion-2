@@ -22,8 +22,6 @@ Type
       Q_Items: Integer;           // cantidad de elementos de la lista
       TDatoDeLaClave: TipoDatosClave;  // Tipo de dato de la clave
       Size: LongInt;              // Tamaña de la Lista
-      // Comportamiento privado
-      Procedure Intercambio (P,Q: PosicionLista);
     Public
       // Comportamiento del objeto (Operaciones del TAO)
       Function Crear(avTipoClave: TipoDatosClave; alSize: LongInt): Resultado;
@@ -48,6 +46,7 @@ Type
       Function SizeList(): LongInt;
       Function MaxSizeList(): LongInt;
       Procedure Sort(Ascendente: Boolean);
+      Procedure Intercambio (P,Q: PosicionLista);
   End;
 
 

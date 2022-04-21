@@ -6,7 +6,8 @@ uses
   miListArray in 'miListArray.pas',
   Tipos in 'Tipos.pas',
   AgendaTAD in 'AgendaTAD.pas',
-  ListPointer in 'ListPointer.pas';
+  ListPointer in 'ListPointer.pas',
+  ListCursor in 'ListCursor.pas';
 
 {$R *.res}
 
