@@ -61,6 +61,11 @@ type
     procedure btMostrarAgendaClick(Sender: TObject);
     procedure btConsultarClick(Sender: TObject);
     procedure btPorcentajeClick(Sender: TObject);
+    procedure eActividadChange(Sender: TObject);
+    procedure eDiaChange(Sender: TObject);
+    procedure eDia2Change(Sender: TObject);
+    procedure eDia3Change(Sender: TObject);
+    procedure cbActividadesChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -96,7 +101,11 @@ begin
 
   inc(indice);
   btCargarTiempos.Caption := 'Cargar ' + indice.ToString + 'º';
-end;
+  btMostrarTiempos.Enabled := True;
+  groupbox2.Enabled := True;
+  groupbox3.Enabled := True;
+  groupbox4.Enabled := True;
+  end;
 
 procedure TForm1.btCargarActividadClick(Sender: TObject); //carga las actividades de un dia
 var
@@ -111,6 +120,7 @@ begin
     memo1.Lines.Add('Actividad agregada en la agenda:');
     memo1.Lines.Add('Dia ' + dia.ToString + ': ' + Act + '; ' + 'Horario: ' + Ag.FormatearHorario(Horario));
     memo1.Lines.Add('');
+    btTerminar.Enabled := True;
   end;
 end;
 
@@ -123,7 +133,10 @@ begin
   inc(dia);
   cbActividades.Text := '...';
   btTerminar.Caption := 'Terminar Dia ' + dia.ToString;
+  btMostrarAgenda.Enabled := True;
+  btTerminar.Enabled := False;
 end;
+
 
 procedure TForm1.btAgregarClick(Sender: TObject);
 var
@@ -162,6 +175,7 @@ end;
 procedure TForm1.btMostrarTiemposClick(Sender: TObject);
 begin
   memo1.Clear;
+  memo1.Lines.Add('Listado de Tiempos:');
   memo1.Lines.Add(Ag.getListadoTiempo.RetornarClaves);
 end;
 
@@ -170,7 +184,34 @@ var
   d: integer;
 begin
   d := strtoint(eDia3.Text);
+  memo1.Lines.Add('');
   memo1.Lines.Add('Ocupacion del dia ' + d.ToString + ': ' + formatfloat('0.00',Ag.PorcentajeOcupacion(d)) + '%');
+end;
+
+/////INTERFAZ/////
+
+procedure TForm1.eActividadChange(Sender: TObject);
+begin
+  btCargarTiempos.Enabled := (eActividad.Text <> '');
+end;
+
+procedure TForm1.cbActividadesChange(Sender: TObject);
+begin
+  btCargarActividad.Enabled := (cbActividades.Text <> '...');
+end;
+procedure TForm1.eDia2Change(Sender: TObject);
+begin
+  btConsultar.Enabled := (eDia2.Text <> '0');
+end;
+
+procedure TForm1.eDia3Change(Sender: TObject);
+begin
+  btPorcentaje.Enabled := (eDia3.Text <> '0');
+end;
+
+procedure TForm1.eDiaChange(Sender: TObject);
+begin
+  btAgregar.Enabled := ((eDia.Text <> '0') and (cbActividades2.Text <> '..'));
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
