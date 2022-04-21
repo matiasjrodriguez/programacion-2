@@ -5,8 +5,8 @@ interface
 uses
   Tipos, SysUtils, Variants,
   //miListArray;
-  ListPointer;
-  //ListCursor;
+  //ListPointer;
+  ListCursor;
 
 const
   LIMITE = 10;
@@ -19,23 +19,25 @@ type
       Agenda: Lista; //Atributo donde se guarda la agenda del dia actual que se agrega a la lista de Agendas; (Clave: Actividad; Valor1: Horario de comienzo)
       ListadoTiempo: Lista; //Clave: Actividad; Valor1: Tiempo de actividad en minutos
       Agendas: Lista; // Lista de Agenda
+      function copiarAgenda(A:Lista):Lista;
+      procedure ActualizarAgenda(dia:integer;A:Lista);
+      function ValidarAgenda(A:Lista):boolean;
+      function HoraADouble(T: string): double;
     public
-     procedure setListadoTiempo(LT:Lista);
-     function getListadoTiempo():Lista;
-     function getAgendas():Lista;
-     function AgregarActividadAAgenda(Actividad,Horario:string):boolean;
-     procedure AgregarAgenda(dia:integer);
-     function RecuperarAgenda(dia:integer):Lista;
-     function insertarActividadAgenda(X:TipoElemento;dia:integer):boolean;
-     function HoraADouble(T: string): double;
-     function FormatearHorario(H:string): string;
-     function OrdenarAgenda(A:Lista):Lista;
-     function ValidarAgenda(A:Lista):boolean;
-     function ValidarHorario(H:string):boolean;
-     function retornarAgendas():string;
-     function ConsultarActividad(dia:integer;Hora:string):string;
-     procedure ActualizarAgenda(dia:integer;A:Lista);
-     function copiarAgenda(A:Lista):Lista;
+      procedure setListadoTiempo(LT:Lista);
+      function getListadoTiempo():Lista;
+      function getAgendas():Lista;
+      function AgregarActividadAAgenda(Actividad,Horario:string):boolean;
+      procedure AgregarAListadoTiempos(X:TipoElemento);
+      procedure AgregarAgenda(dia:integer);
+      function RecuperarAgenda(dia:integer):Lista;
+      function insertarActividadAgenda(X:TipoElemento;dia:integer):boolean;
+      function FormatearHorario(H:string): string;
+      function OrdenarAgenda(A:Lista):Lista;
+      function ValidarHorario(H:string):boolean;
+      function retornarAgendas():string;
+      function ConsultarActividad(dia:integer;Hora:string):string;
+      function PorcentajeOcupacion(dia:integer):Double;
   end;
 
 implementation
@@ -53,12 +55,7 @@ begin
 end;
 
 procedure TADAgenda.setListadoTiempo(LT:Lista);
-var
-  X:TipoElemento;
 begin
-  X.Clave := 'Consulta'; //agrego un tipoElemento de bandera para el consultarActividad()
-  X.Valor1 := 0;
-  LT.Agregar(X);
   ListadoTiempo := LT;
 end;
 
@@ -141,6 +138,13 @@ begin
   Agenda.Crear(Cadena,LIMITE);
 end;
 
+procedure TADAgenda.AgregarAListadoTiempos(X: TipoElemento);
+begin
+  if ListadoTiempo.EsVacia then
+    ListadoTiempo.Crear(Cadena,LIMITE);
+  ListadoTiempo.Agregar(X);
+end;
+
 function TADAgenda.ConsultarActividad(dia: integer; Hora: string): string;
 var
   Bandera:TipoElemento;
@@ -154,7 +158,7 @@ begin
   Bandera.Valor1 := FormatearHorario(Hora);
   Aux.Agregar(Bandera);
   Aux := OrdenarAgenda(Aux);
-  if not ValidarAgenda(Aux) then begin // si se supoperpone retorna la actividad de la posicion anterior
+  if not ValidarAgenda(Aux) then begin // si se superpone retorna la actividad de la posicion anterior
     Q := Aux.Buscar(Bandera);
     Q := Aux.Anterior(Q);
     ActActual := Aux.Recuperar(Q).Clave;
@@ -207,7 +211,6 @@ begin
   P := A.Comienzo;
   while (P <> NULO) Do begin
     Q := A.Comienzo;
-
     while (Q <> NULO) Do begin
       X1 := A.Recuperar(Q);
 
@@ -219,22 +222,42 @@ begin
 
       Q := A.Siguiente(Q);
     end;
-
     P := A.Siguiente(P);
   end;
   result := A;
 end;
 
+function TADAgenda.PorcentajeOcupacion(dia: integer): Double;
+var
+  L:Lista;
+  X:TipoElemento;
+  Q: PosicionLista;
+  MinutosTrabajados: integer;
+begin
+  MinutosTrabajados := 0;
+  L := RecuperarAgenda(dia);
+  Q := L.Comienzo;
+  while Q <> NULO do begin
+    X := L.Recuperar(Q);
+    MinutosTrabajados := MinutosTrabajados + ListadoTiempo.Recuperar(ListadoTiempo.Buscar(X)).Valor1;
+    Q := L.Siguiente(Q);
+  end;
+  result := (MinutosTrabajados / (24 * 60)) * 100;
+end;
+
 function TADAgenda.ValidarAgenda(A:Lista):boolean; //Valida que no tenga actividades superpuestas con el listado de tiempos
 var
-  X,X1:TipoElemento;
+  X,X1,XB:TipoElemento;
   Q:PosicionLista;
   TiempoActActual: Double;
   Valido: Boolean;
 begin
+  XB.Clave := 'Consulta'; //setea una bandera para Consultas
+  XB.Valor1 := 0;
+  ListadoTiempo.Agregar(XB);
+
   Valido := True;
   Q := A.Comienzo;
-
   while (Q <> NULO) and (A.Siguiente(Q) <> NULO) and Valido do begin
     X := A.Recuperar(Q);
     X1 := A.Recuperar(A.Siguiente(Q));
@@ -245,7 +268,7 @@ begin
       Valido := False;
     Q := A.Siguiente(Q);
   end;
-
+  ListadoTiempo.Eliminar(ListadoTiempo.Fin);//elimina la bandera
   result := Valido;
 end;
 
@@ -276,6 +299,5 @@ begin
 
   result := Valida;
 end;
-
 
 end.

@@ -7,8 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, AgendaTAD, Tipos, Vcl.WinXPickers,
   system.Character,
   //miListArray;
-  ListPointer;
-  //ListCursor;
+  //ListPointer;
+  ListCursor;
 
 
 type
@@ -49,7 +49,7 @@ type
     btConsultar: TButton;
     GroupBox6: TGroupBox;
     Label10: TLabel;
-    Edit1: TEdit;
+    eDia3: TEdit;
     UpDown4: TUpDown;
     btPorcentaje: TButton;
     procedure btCargarTiemposClick(Sender: TObject);
@@ -60,6 +60,7 @@ type
     procedure btAgregarClick(Sender: TObject);
     procedure btMostrarAgendaClick(Sender: TObject);
     procedure btConsultarClick(Sender: TObject);
+    procedure btPorcentajeClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -71,13 +72,12 @@ var
   Form1: TForm1;
   Ag: TADAgenda;
   indice,dia:integer;
-  Tiempos: Lista;  //lista de tiempo
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.btCargarTiemposClick(Sender: TObject); // carga el listado de tiempos
+procedure TForm1.btCargarTiemposClick(Sender: TObject);
 var
   Act,Tiempo:string;
   X: TipoElemento;
@@ -92,8 +92,7 @@ begin
   cbActividades2.Items.Add(Act);
   X.Clave := Act;
   X.Valor1 := strtoint(Tiempo);
-  Tiempos.Agregar(X);
-  Ag.setListadoTiempo(Tiempos);
+  Ag.AgregarAListadoTiempos(X);
 
   inc(indice);
   btCargarTiempos.Caption := 'Cargar ' + indice.ToString + 'º';
@@ -110,7 +109,7 @@ begin
     memo1.Lines.Add('El horario ingresado no esta disponible. Intente con otro horario')
   else begin
     memo1.Lines.Add('Actividad agregada en la agenda:');
-    memo1.Lines.Add('Dia ' + dia.ToString + ': ' + Act + '. ' + 'Horario: ' + Ag.FormatearHorario(Horario));
+    memo1.Lines.Add('Dia ' + dia.ToString + ': ' + Act + '; ' + 'Horario: ' + Ag.FormatearHorario(Horario));
     memo1.Lines.Add('');
   end;
 end;
@@ -135,10 +134,10 @@ begin
   X.Clave := cbActividades2.Text;
   X.Valor1 := timetostr(TimePicker2.Time);
   if not Ag.InsertarActividadAgenda(X,D) then
-    memo1.Lines.Add('El horario ingresado no esta disponible. Intente con otro horario')
+    memo1.Lines.Add('El horario ingresado no esta disponible. Intente con otro horario' + cCRLF)
   else begin
     memo1.Lines.Add('Actividad agregada en la agenda:');
-    memo1.Lines.Add('Dia ' + D.ToString + ': ' + X.Clave + '. ' + 'Horario: ' + Ag.FormatearHorario(X.Valor1));
+    memo1.Lines.Add('Dia ' + D.ToString + ': ' + X.Clave + '; ' + 'Horario: ' + Ag.FormatearHorario(X.Valor1));
     memo1.Lines.Add('');
     cbActividades.Text := '...';
   end;
@@ -166,12 +165,19 @@ begin
   memo1.Lines.Add(Ag.getListadoTiempo.RetornarClaves);
 end;
 
+procedure TForm1.btPorcentajeClick(Sender: TObject);
+var
+  d: integer;
+begin
+  d := strtoint(eDia3.Text);
+  memo1.Lines.Add('Ocupacion del dia ' + d.ToString + ': ' + formatfloat('0.00',Ag.PorcentajeOcupacion(d)) + '%');
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   memo1.Clear;
   indice:= 1;
   dia := 1;
-  Tiempos.Crear(Cadena,LIMITE);
 end;
 
 end.

@@ -157,6 +157,7 @@ object Form1: TForm1
     Lines.Strings = (
       'Memo1')
     ParentFont = False
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 2
   end
@@ -333,7 +334,7 @@ object Form1: TForm1
         Height = 13
         Caption = 'Dia'
       end
-      object Edit1: TEdit
+      object eDia3: TEdit
         Left = 13
         Top = 60
         Width = 28
@@ -347,7 +348,7 @@ object Form1: TForm1
         Top = 60
         Width = 16
         Height = 21
-        Associate = Edit1
+        Associate = eDia3
         Max = 0
         TabOrder = 1
       end
@@ -358,6 +359,7 @@ object Form1: TForm1
         Height = 36
         Caption = 'Consultar'
         TabOrder = 2
+        OnClick = btPorcentajeClick
       end
     end
   end
