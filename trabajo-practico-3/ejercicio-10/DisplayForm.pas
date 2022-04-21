@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls, Vcl.ExtCtrls, ListPointer;
 
 const
-  COLS0GRID : Array [0..5] of String = ('Operacion','Digito 5','Digito 4','Digito 3','Digito 2','Digito 1');
+  COLS0GRID : Array [0..MAXCIFRAS] of String = ('Operacion','Digito 6','Digito 5','Digito 4','Digito 3','Digito 2','Digito 1');
   ROWS0GRID : Array [1..7] of String = ('Numero 1','Numero 2' , 'Suma', 'Resta', 'Multiplicacion','Cociente Div', 'Resto Div');
 type
   TForm1 = class(TForm)

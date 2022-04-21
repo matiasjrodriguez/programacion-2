@@ -5,7 +5,7 @@ interface
 uses ListPointer, Tipos, System.SysUtils, System.Variants, System.Classes;
 
 const
-     MAXCIFRAS = 5;
+     MAXCIFRAS = 6;
      Cod7S : Array [0..9] of String = ('1111110','0110000','1101101','1111001','0110011','1011011','1011111','1110000','1111111','1111011');
 
 type
@@ -130,8 +130,12 @@ implementation
         resto := n1 mod n2;
         resultado.cociente := numToCod7s(cociente.ToString);
         resultado.resto    := numToCod7s(resto.ToString);
-        result := resultado;
+      end
+      else begin
+        resultado.cociente := numToCod7s('');
+        resultado.resto    := numToCod7s('');
       end;
+      result := resultado;
     end;
 
     function Digital.Code7SToNum(n : Lista) : String;

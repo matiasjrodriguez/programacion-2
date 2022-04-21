@@ -1,9 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  AutoSize = True
   Caption = 'Form1'
-  ClientHeight = 343
-  ClientWidth = 890
+  ClientHeight = 329
+  ClientWidth = 665
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +18,7 @@ object Form1: TForm1
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 890
+    Width = 665
     Height = 41
     Align = alTop
     Caption = 'Display Digital'
@@ -28,11 +29,12 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 890
   end
   object GroupBox1: TGroupBox
     Left = 8
     Top = 47
-    Width = 877
+    Width = 657
     Height = 282
     Caption = 'GroupBox1'
     Color = clSilver
@@ -42,14 +44,14 @@ object Form1: TForm1
     object Panel2: TPanel
       Left = 168
       Top = 19
-      Width = 697
+      Width = 481
       Height = 254
       Caption = 'Panel2'
       Color = clGray
       ParentBackground = False
       TabOrder = 0
       object Label3: TLabel
-        Left = 264
+        Left = 208
         Top = 11
         Width = 88
         Height = 20
@@ -64,9 +66,9 @@ object Form1: TForm1
       object GridCod7S: TStringGrid
         Left = 8
         Top = 39
-        Width = 681
+        Width = 465
         Height = 210
-        ColCount = 6
+        ColCount = 7
         RowCount = 8
         TabOrder = 0
       end
