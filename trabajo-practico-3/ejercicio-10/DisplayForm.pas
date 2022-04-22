@@ -76,7 +76,7 @@ procedure Tform1.actualizarFilaGrid(fila: Integer; Num : Lista);
   begin
      pos := Num.Fin;
      cantElem := Num.CantidadElementos;
-     while (pos <> NULO) and (cantElem > 0) do begin
+     while (pos <> nulo) and (cantElem > 0) do begin
         GridCod7s.Cells[cantElem + ((GridCod7s.ColCount- 1) - Num.CantidadElementos),fila] := Num.Recuperar(pos).Clave;
         pos := Num.Anterior(pos);
         dec(cantElem);

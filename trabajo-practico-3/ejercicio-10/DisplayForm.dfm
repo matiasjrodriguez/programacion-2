@@ -35,6 +35,7 @@ object Form1: TForm1
     Top = 47
     Width = 657
     Height = 282
+    Caption = 'GroupBox1'
     Color = clSilver
     ParentBackground = False
     ParentColor = False

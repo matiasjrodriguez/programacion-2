@@ -92,7 +92,7 @@ implementation
       n1 := StrToInt(Code7SToNum(self.numero1));
       n2 := StrToInt(Code7SToNum(self.numero2));
       suma := n1+n2;
-      if Length(suma.ToString)<=5 then
+      if Length(suma.ToString)<=MAXCIFRAS then
          result := numToCod7s(suma.ToString);
     end;
 
@@ -114,7 +114,7 @@ implementation
       n1 := StrToInt(Code7SToNum(self.numero1));
       n2 := StrToInt(Code7SToNum(self.numero2));
       multi := n1*n2;
-      if Length(multi.ToString)<=5 then
+      if Length(multi.ToString)<=MAXCIFRAS then
          result := numToCod7s(multi.ToString);
     end;
 
@@ -147,7 +147,7 @@ implementation
     begin
       numStr := '';
       p := n.Comienzo;
-        while p <> NULO do begin
+        while p <> Nulo do begin
             j := 0;
             while (n.Recuperar(p).Clave <> Cod7s[j]) and (j <= 9)do
               inc(j);
