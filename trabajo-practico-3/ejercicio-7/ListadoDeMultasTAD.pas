@@ -26,6 +26,12 @@ type
        function multar(patente, numActa : String; fecha : TDATE ; importe : Real ) : Resultado;
        function getListado() : Lista;
        function deudaTotal(patente : String) : Double;
+       function multaAntigua(patente:string):TipoElemento;
+       function multaReciente(patente:string):TipoElemento;
+       function mayorInfracciones():TipoElemento;
+       function mayorDeuda():TipoElemento;
+       function noDeuda():boolean;
+
     private
        function recuperarMultas(patente : String) : Lista;
        procedure actualizarMultas(patente : String; List : Lista);
@@ -63,6 +69,97 @@ implementation
   end;
 
 
+function ListadoVehiculos.mayorDeuda: TipoElemento;
+var
+  Q,Q1:PosicionLista;
+  L:Lista;
+  X,X1,XF: TipoElemento;
+  R: RecordMulta;
+  RP: ^RecordMulta;
+  importe,importeMayor : double;
+begin
+  importeMayor := 0;
+  XF.Inicializar(Cadena,'');
+  Q := listado.Comienzo;
+  while Q <> NULO do begin
+    importe := 0;
+    X := Listado.Recuperar(Q);
+    L := recuperarMultas(X.Clave);
+    Q1 := L.Comienzo;
+    while Q1 <> Nulo do begin
+      X1 := L.Recuperar(Q1);
+      RP := X1.Valor2;
+      R := RP^;
+      if R.Estado = Pendiente then
+        importe := importe + R.importe;
+    end;
+    if importe > importeMayor then begin
+      importeMayor := importe;
+      XF := X;
+    end;
+    Q := listado.Siguiente(Q);
+  end;
+  result := XF;
+end;
+function ListadoVehiculos.mayorInfracciones: TipoElemento;
+var
+  Q,Q1:PosicionLista;
+  L:Lista;
+  mayor,acum: double;
+  X,X1,XF: TipoElemento;
+  R: RecordMulta;
+  RP: ^RecordMulta;
+begin
+  mayor := 0;
+  XF.Inicializar(Cadena,'');
+  Q := listado.Comienzo;
+  while Q <> NULO do begin
+    acum := 0;
+    X := Listado.Recuperar(Q);
+    L := recuperarMultas(X.Clave);
+    Q1 := L.Comienzo;
+    while Q1 <> NULO do begin
+      X1 := L.Recuperar(Q);
+      RP := X1.Valor2;
+      R := RP^;
+      if R.Estado <> Anulada then begin
+        acum := acum + R.importe;
+      end;
+      Q1 := L.Siguiente(Q1);
+    end;
+    if mayor < acum then begin
+      mayor := acum;
+      XF := X;
+    end;
+    Q := listado.Siguiente(Q);
+  end;
+  result := XF;
+end;
+
+function ListadoVehiculos.multaAntigua(patente:string): TipoElemento;
+var
+  X,XF:TipoElemento;
+  fechaAntigua:TdateTime;
+  VMultas : Lista;
+  pos : PosicionLista;
+begin
+  VMultas := recuperarMultas(patente);
+  pos := VMultas.Comienzo;
+  X := VMultas.Recuperar(pos);
+  fechaAntigua := X.Valor1;
+  XF := X;
+  pos := VMultas.Siguiente(pos);
+  while pos <> NULO do begin
+    X := vMultas.Recuperar(pos);
+    if fechaAntigua > X.Valor1 then begin
+      fechaAntigua := X.Valor1;
+      XF := X;
+    end;
+    pos := VMultas.Siguiente(pos);
+  end;
+  result := XF;
+end;
+
 function ListadoVehiculos.multar(patente: string; numActa: string; fecha: TDate; importe: Real): Resultado;
   var
     multa , Vehiculo : TipoElemento;
@@ -82,7 +179,60 @@ function ListadoVehiculos.multar(patente: string; numActa: string; fecha: TDate;
     actualizarMultas(patente,LMultas);
   end;
 
-  procedure ListadoVehiculos.actualizarMultas(patente: string; List : Lista);
+function ListadoVehiculos.multaReciente(patente: string): TipoElemento;
+var
+  X,XF:TipoElemento;
+  fechaReciente:TdateTime;
+  VMultas : Lista;
+  pos : PosicionLista;
+begin
+  VMultas := recuperarMultas(patente);
+  pos := VMultas.Comienzo;
+  X := VMultas.Recuperar(pos);
+  fechaReciente := X.Valor1;
+  XF := X;
+  pos := VMultas.Siguiente(pos);
+  while pos <> NULO do begin
+    X := vMultas.Recuperar(pos);
+    if fechaReciente < X.Valor1 then begin
+      fechaReciente := X.Valor1;
+      XF := X;
+    end;
+    pos := VMultas.Siguiente(pos);
+  end;
+  result := XF;
+end;
+
+function ListadoVehiculos.noDeuda: boolean;
+var
+  Q,Q1:PosicionLista;
+  L:Lista;
+  X,X1,XF: TipoElemento;
+  R: RecordMulta;
+  RP: ^RecordMulta;
+  adeudando:boolean;
+begin
+  Adeudando := False;
+  XF.Inicializar(Cadena,'');
+  Q := listado.Comienzo;
+  while Q <> NULO do begin
+    X := Listado.Recuperar(Q);
+    L := recuperarMultas(X.Clave);
+    Q1 := L.Comienzo;
+    while Q1 <> NULO do begin
+      X1 := L.Recuperar(Q);
+      RP := X1.Valor2;
+      R := RP^;
+      if R.Estado = Pendiente then
+        adeudando := True;
+      Q1 := L.Siguiente(Q1);
+    end;
+    Q := listado.Siguiente(Q);
+  end;
+  result := not adeudando;
+end;
+
+procedure ListadoVehiculos.actualizarMultas(patente: string; List : Lista);
   var
        X : TipoElemento ; L : ^Lista;
   begin
