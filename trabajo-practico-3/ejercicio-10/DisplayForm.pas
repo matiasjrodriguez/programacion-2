@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Tipos, DisplayTAD, Vcl.Grids,
-  Vcl.StdCtrls, Vcl.ExtCtrls, ListPointer;
+  Vcl.StdCtrls, Vcl.ExtCtrls, ListCursor;
 
 const
   COLS0GRID : Array [0..MAXCIFRAS] of String = ('Operacion','Digito 6','Digito 5','Digito 4','Digito 3','Digito 2','Digito 1');
@@ -76,9 +76,9 @@ procedure Tform1.actualizarFilaGrid(fila: Integer; Num : Lista);
   begin
      pos := Num.Fin;
      cantElem := Num.CantidadElementos;
-     while (pos <> nil) and (cantElem > 0) do begin
+     while (pos <> NULO) and (cantElem > 0) do begin
         GridCod7s.Cells[cantElem + ((GridCod7s.ColCount- 1) - Num.CantidadElementos),fila] := Num.Recuperar(pos).Clave;
-        pos := pos.Ante;
+        pos := Num.Anterior(pos);
         dec(cantElem);
      end;
   end;

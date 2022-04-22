@@ -29,14 +29,12 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 890
   end
   object GroupBox1: TGroupBox
     Left = 8
     Top = 47
     Width = 657
     Height = 282
-    Caption = 'GroupBox1'
     Color = clSilver
     ParentBackground = False
     ParentColor = False

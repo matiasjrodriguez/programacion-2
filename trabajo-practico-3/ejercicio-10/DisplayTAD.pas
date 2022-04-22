@@ -2,7 +2,7 @@ unit DisplayTAD;
 
 interface
 
-uses ListPointer, Tipos, System.SysUtils, System.Variants, System.Classes;
+uses ListCursor, Tipos, System.SysUtils, System.Variants, System.Classes;
 
 const
      MAXCIFRAS = 6;
@@ -147,12 +147,12 @@ implementation
     begin
       numStr := '';
       p := n.Comienzo;
-        while p <> Nil do begin
+        while p <> NULO do begin
             j := 0;
             while (n.Recuperar(p).Clave <> Cod7s[j]) and (j <= 9)do
               inc(j);
             numStr := numStr+j.ToString;
-            p := p.Prox;
+            p := n.Siguiente(p);
         end;
       result := numStr;
     end;
