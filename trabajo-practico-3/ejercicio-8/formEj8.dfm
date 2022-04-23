@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Pacman'
-  ClientHeight = 280
+  ClientHeight = 285
   ClientWidth = 298
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,8 +18,7 @@ object Form1: TForm1
     Left = 146
     Top = 8
     Width = 143
-    Height = 214
-    Alignment = taCenter
+    Height = 180
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -85,12 +84,30 @@ object Form1: TForm1
     OnClick = btnBonusClick
   end
   object btnRecorrido: TButton
-    Left = 8
-    Top = 233
+    Left = 9
+    Top = 194
     Width = 281
     Height = 39
     Caption = 'Verificar recorrido'
     TabOrder = 7
     OnClick = btnRecorridoClick
+  end
+  object btnEliminar: TButton
+    Left = 152
+    Top = 239
+    Width = 138
+    Height = 39
+    Caption = 'Eliminar '#250'ltimo elemento'
+    TabOrder = 8
+    OnClick = btnEliminarClick
+  end
+  object btnVaciar: TButton
+    Left = 8
+    Top = 239
+    Width = 138
+    Height = 39
+    Caption = 'Vaciar lista'
+    TabOrder = 9
+    OnClick = btnVaciarClick
   end
 end

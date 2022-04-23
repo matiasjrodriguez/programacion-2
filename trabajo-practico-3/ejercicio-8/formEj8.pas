@@ -17,6 +17,8 @@ type
     btnFantasma: TButton;
     btnBonus: TButton;
     btnRecorrido: TButton;
+    btnEliminar: TButton;
+    btnVaciar: TButton;
     procedure btnPuntitoClick(Sender: TObject);
     procedure btnFrutillaClick(Sender: TObject);
     procedure btnBananaClick(Sender: TObject);
@@ -25,14 +27,16 @@ type
     procedure btnBonusClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnRecorridoClick(Sender: TObject);
+    procedure btnVaciarClick(Sender: TObject);
+    procedure btnEliminarClick(Sender: TObject);
   private
     { Private declarations }
-  public
+  public L: Lista;
   end;
 
 var
   Form1: TForm1;
-  L: Lista;
+
 
 
 implementation
@@ -61,6 +65,12 @@ begin
     Memo1.Lines.Add('Perdiste')
   else
     Memo1.Lines.Add(P.getPuntaje().ToString);
+end;
+
+procedure TForm1.btnVaciarClick(Sender: TObject);
+begin
+  Memo1.clear;
+  L.Crear(Cadena, 30);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -93,6 +103,18 @@ begin
   Memo1.Lines.Add('Cereza');
   X.Clave := 'Cereza';
   L.Agregar(X);
+end;
+
+procedure TForm1.btnEliminarClick(Sender: TObject);
+var
+  pos: PosicionLista;
+begin
+  Memo1.Lines.Delete(Memo1.Lines.Count-1);
+  pos := L.Fin;
+  if L.CantidadElementos() = 1 then
+    L.Crear(Cadena, 30)
+  else
+    L.Eliminar(pos);
 end;
 
 procedure TForm1.btnFantasmaClick(Sender: TObject);
