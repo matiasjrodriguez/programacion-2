@@ -2,9 +2,9 @@ object Form1: TForm1
   Left = 0
   Top = 0
   AutoSize = True
-  Caption = 'Form1'
+  Caption = 'Multas'
   ClientHeight = 433
-  ClientWidth = 484
+  ClientWidth = 480
   Color = clSilver
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -105,7 +105,7 @@ object Form1: TForm1
       Width = 272
       Height = 74
       Lines.Strings = (
-        'consulta')
+        '')
       TabOrder = 5
     end
   end
@@ -153,16 +153,13 @@ object Form1: TForm1
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 484
+    Width = 480
     Height = 41
     Align = alTop
     Caption = 'Ejercicio 7'
     Color = clGray
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 584
-    ExplicitTop = 392
-    ExplicitWidth = 185
   end
   object Panel3: TPanel
     Left = 327

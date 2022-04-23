@@ -94,9 +94,9 @@ var
   fecha : TDATE;
 begin
   fecha := now;
-  if inputQuery('Ingrese Numero de acta','Haciendo Multa',acta) then
+  if inputQuery('Haciendo Multa','Ingrese Numero de acta',acta) then
      if tryStrToInt(acta,a) then
-        if inputQuery('Ingrese Valor de multa','Haciendo Multa',valorMulta) then
+        if inputQuery('Haciendo Multa','Ingrese Valor de multa',valorMulta) then
            if tryStrToFloat(valorMulta,valorM) then begin
               listVehiculos.multar(UpperCase(editPatente.Text),acta,fecha,valorM);
               actualizarGrid();

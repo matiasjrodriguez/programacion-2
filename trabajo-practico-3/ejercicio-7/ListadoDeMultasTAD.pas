@@ -97,12 +97,13 @@ begin
     X := Listado.Recuperar(Q);
     L := recuperarMultas(X.Clave);
     Q1 := L.Comienzo;
-    while Q1 <> Nulo do begin
+    while (Q1 <> Nulo) and (not L.EsVacia) do begin
       X1 := L.Recuperar(Q1);
       RP := X1.Valor2;
       R := RP^;
       if R.Estado = Pendiente then
         importe := importe + R.importe;
+      Q1 := L.Siguiente(Q1);
     end;
     if importe > importeMayor then begin
       importeMayor := importe;
@@ -129,8 +130,8 @@ begin
     X := Listado.Recuperar(Q);
     L := recuperarMultas(X.Clave);
     Q1 := L.Comienzo;
-    while Q1 <> NULO do begin
-      X1 := L.Recuperar(Q);
+    while (Q1 <> Nulo) and (not L.EsVacia) do begin
+      X1 := L.Recuperar(Q1);
       RP := X1.Valor2;
       R := RP^;
       if R.Estado <> Anulada then begin
@@ -155,18 +156,22 @@ var
   pos : PosicionLista;
 begin
   VMultas := recuperarMultas(patente);
-  pos := VMultas.Comienzo;
-  X := VMultas.Recuperar(pos);
-  fechaAntigua := X.Valor1;
-  XF := X;
-  pos := VMultas.Siguiente(pos);
-  while pos <> NULO do begin
-    X := vMultas.Recuperar(pos);
-    if fechaAntigua > X.Valor1 then begin
-      fechaAntigua := X.Valor1;
-      XF := X;
-    end;
+  if VMultas.EsVacia then
+    XF.Clave := 'No hay multas'
+  else begin
+    pos := VMultas.Comienzo;
+    X := VMultas.Recuperar(pos);
+    fechaAntigua := X.Valor1;
+    XF := X;
     pos := VMultas.Siguiente(pos);
+    while pos <> NULO do begin
+      X := vMultas.Recuperar(pos);
+      if fechaAntigua > X.Valor1 then begin
+        fechaAntigua := X.Valor1;
+        XF := X;
+      end;
+      pos := VMultas.Siguiente(pos);
+    end;
   end;
   result := XF;
 end;
@@ -200,18 +205,22 @@ var
   pos : PosicionLista;
 begin
   VMultas := recuperarMultas(patente);
-  pos := VMultas.Comienzo;
-  X := VMultas.Recuperar(pos);
-  fechaReciente := X.Valor1;
-  XF := X;
-  pos := VMultas.Siguiente(pos);
-  while pos <> NULO do begin
-    X := vMultas.Recuperar(pos);
-    if fechaReciente < X.Valor1 then begin
-      fechaReciente := X.Valor1;
-      XF := X;
-    end;
+  if VMultas.EsVacia then
+    XF.Clave := 'No hay multas'
+  else begin
+    pos := VMultas.Comienzo;
+    X := VMultas.Recuperar(pos);
+    fechaReciente := X.Valor1;
+    XF := X;
     pos := VMultas.Siguiente(pos);
+    while pos <> NULO do begin
+      X := vMultas.Recuperar(pos);
+      if fechaReciente < X.Valor1 then begin
+        fechaReciente := X.Valor1;
+        XF := X;
+      end;
+      pos := VMultas.Siguiente(pos);
+    end;
   end;
   result := XF;
 end;
@@ -232,8 +241,8 @@ begin
     X := Listado.Recuperar(Q);
     L := recuperarMultas(X.Clave);
     Q1 := L.Comienzo;
-    while Q1 <> NULO do begin
-      X1 := L.Recuperar(Q);
+    while (Q1 <> NULO) and (not L.EsVacia) do begin
+      X1 := L.Recuperar(Q1);
       RP := X1.Valor2;
       R := RP^;
       if R.Estado = Pendiente then
