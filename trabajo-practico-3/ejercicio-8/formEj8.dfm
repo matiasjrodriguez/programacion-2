@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 229
-  ClientWidth = 353
+  Caption = 'Pacman'
+  ClientHeight = 280
+  ClientWidth = 298
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,16 @@ object Form1: TForm1
   object Memo1: TMemo
     Left = 146
     Top = 8
-    Width = 191
-    Height = 180
+    Width = 143
+    Height = 214
+    Alignment = taCenter
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 0
   end
@@ -78,9 +86,9 @@ object Form1: TForm1
   end
   object btnRecorrido: TButton
     Left = 8
-    Top = 196
-    Width = 329
-    Height = 25
+    Top = 233
+    Width = 281
+    Height = 39
     Caption = 'Verificar recorrido'
     TabOrder = 7
     OnClick = btnRecorridoClick
