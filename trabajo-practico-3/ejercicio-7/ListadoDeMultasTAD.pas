@@ -25,16 +25,17 @@ type
        function agregarVehiculo(patente : String) : Resultado;
        function multar(patente, numActa : String; fecha : TDATE ; importe : Real ) : Resultado;
        function getListado() : Lista;
-       function deudaTotal(patente : String) : Double;
-       function multaAntigua(patente:string):TipoElemento;
-       function multaReciente(patente:string):TipoElemento;
+       function deudaTotal(patente : String) : Double;   //
+       function multaAntigua(patente:string):TipoElemento;    //
+       function multaReciente(patente:string):TipoElemento;   //
        function mayorInfracciones():TipoElemento;
        function mayorDeuda():TipoElemento;
        function noDeuda():boolean;
-
+       function VehiculoEsta(patente : String) : Boolean;
     private
        function recuperarMultas(patente : String) : Lista;
        procedure actualizarMultas(patente : String; List : Lista);
+
   End;
 
 implementation
@@ -68,6 +69,16 @@ implementation
     result := listado.Agregar(vehiculo);
   end;
 
+
+function ListadoVehiculos.VehiculoEsta(patente: String): Boolean;
+var
+ pos : PosicionLista;
+begin
+  pos := self.listado.Comienzo;
+  while (pos <> Nulo) and (patente <> self.listado.Recuperar(pos).Clave) do
+     pos := self.listado.Siguiente(pos);
+  result :=  patente = self.listado.Recuperar(pos).Clave
+end;
 
 function ListadoVehiculos.mayorDeuda: TipoElemento;
 var
@@ -166,6 +177,7 @@ function ListadoVehiculos.multar(patente: string; numActa: string; fecha: TDate;
     datosMulta : RecordMulta;
     LMultas   : Lista;
     PDatosMulta : ^RecordMulta;
+    retorno : Resultado;
   begin
     datosMulta.importe := importe;
     datosMulta.Estado := Pendiente;
@@ -175,8 +187,9 @@ function ListadoVehiculos.multar(patente: string; numActa: string; fecha: TDate;
     multa.Valor1 := fecha;
     PDatosMulta^ := datosMulta;
     multa.Valor2 := PDatosMulta;
-    LMultas.Agregar(multa);
+    retorno := LMultas.Agregar(multa);
     actualizarMultas(patente,LMultas);
+    result:= retorno;
   end;
 
 function ListadoVehiculos.multaReciente(patente: string): TipoElemento;
@@ -253,7 +266,8 @@ procedure ListadoVehiculos.actualizarMultas(patente: string; List : Lista);
     result := L^;
   end;
 
-  function ListadoVehiculos.deudaTotal(patente: String): Double;
+
+function ListadoVehiculos.deudaTotal(patente: String): Double;
   var
     deuda : Double;
     VMultas : Lista;
