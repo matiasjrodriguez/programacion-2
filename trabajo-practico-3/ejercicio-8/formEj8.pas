@@ -53,8 +53,14 @@ var
   P:Pacman;
 begin
   P.setPuntaje(0);
+  P.setPerdio(False);
+  P.setBonus(0);
   P.setRecorrido(L);
   P.calcularPuntaje;
+  if P.getPerdio() then
+    Memo1.Lines.Add('Perdiste')
+  else
+    Memo1.Lines.Add(P.getPuntaje().ToString);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

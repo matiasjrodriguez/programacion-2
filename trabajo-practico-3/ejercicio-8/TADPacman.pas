@@ -15,11 +15,14 @@ type
     recorrido: Lista;
     puntaje: integer;
     bonus: byte;
+    perdio: boolean;
   public
     procedure setRecorrido(L:Lista);
     function getPuntaje():integer;
     procedure setPuntaje(p:integer);
     function getBonus():byte;
+    procedure setPerdio(p:boolean);
+    function getPerdio():boolean;
     procedure setBonus(b:byte);
     procedure calcularPuntaje();
   end;
@@ -41,6 +44,28 @@ begin
   puntaje := p;
 end;
 
+function Pacman.getBonus: Byte;
+begin
+  result := bonus;
+end;
+
+procedure Pacman.setBonus(b: Byte);
+begin
+  bonus := b;
+  if getBonus() > 10 then
+    bonus := 0;
+end;
+
+function Pacman.getPerdio: Boolean;
+begin
+  result := perdio;
+end;
+
+procedure Pacman.setPerdio(p: Boolean);
+begin
+  perdio := p;
+end;
+
 procedure Pacman.calcularPuntaje;
 var
   I, J, cantidadElementos:longint;
@@ -55,11 +80,19 @@ begin
     posicion := recorrido.Siguiente(posicion);
 
     J := 1;
-    while J <= length(items) do begin
+    while (J <= length(items)) and not getPerdio() do begin
       if dato.Clave = items[J] then begin
-        setPuntaje(getPuntaje() + puntos[J]);
+        if getBonus() = 0 then begin
+          if dato.Clave = 'Fantasma' then
+            setPerdio(True)
+          else
+            setPuntaje(getPuntaje() + puntos[J]);
+        end else
+          setPuntaje(getPuntaje() + (puntos[J]*2));
         J := length(items);
-      end;
+        setBonus(getBonus()-1);
+      end else if dato.Clave = 'Bonus' then
+        setBonus(10);
       Inc(J)
     end;
 
