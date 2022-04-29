@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ManejoPilas,
-  StackArray;
+  //StackArray;
+  //StackCursor;
+  StackPointer;
 
 type
   TForm1 = class(TForm)
@@ -45,7 +47,7 @@ var
 begin
   memo1.Clear;
   n := strtoint(edit1.Text);
-  P.LlenarRandom(1,20);
+  P.LlenarRandom(1,10);
   memo1.Lines.Add(P.retornarString);
   memo1.Lines.Add('');
   if P.buscarClave(n) then
@@ -60,7 +62,7 @@ var
 begin
   memo1.Clear;
   n := strtoint(edit2.Text);
-  P.LlenarRandom(1,20);
+  P.LlenarRandom(1,10);
   memo1.Lines.Add(P.retornarString);
   memo1.Lines.Add('------------------------MODIFICADO--------------------------------');
   P.agregarElementoFondo(n);

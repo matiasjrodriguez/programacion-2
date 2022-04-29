@@ -4,10 +4,12 @@ interface
 
 Uses
   Tipos, stdctrls, SysUtils, Variants,
-  StackArray;
+  //StackArray;
+  //StackCursor;
+  StackPointer;
 
 const
-  LARGO = 10;
+  LARGO = 15;
 
 type TADManejoPilas = object
   private
