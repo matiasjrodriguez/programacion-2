@@ -49,6 +49,7 @@ var
 begin
   Memo1.Lines.Add('Puntito');
   X.Clave := 'Puntito';
+  X.Valor1 := 1;
   L.Agregar(X);
 end;
 
@@ -84,6 +85,7 @@ var
 begin
   Memo1.Lines.Add('Frutilla');
   X.Clave := 'Frutilla';
+  X.Valor1 := 10;
   L.Agregar(X);
 end;
 
@@ -93,6 +95,7 @@ var
 begin
   Memo1.Lines.Add('Banana');
   X.Clave := 'Banana';
+  X.Valor1 := 30;
   L.Agregar(X);
 end;
 
@@ -102,6 +105,7 @@ var
 begin
   Memo1.Lines.Add('Cereza');
   X.Clave := 'Cereza';
+  X.Valor1 := 50;
   L.Agregar(X);
 end;
 
@@ -123,6 +127,7 @@ var
 begin
   Memo1.Lines.Add('Fantasma');
   X.Clave := 'Fantasma';
+  X.Valor1 := 100;
   L.Agregar(X);
 end;
 

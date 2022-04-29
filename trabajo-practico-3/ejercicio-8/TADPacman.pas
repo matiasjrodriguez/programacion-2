@@ -3,10 +3,10 @@ unit TADPacman;
 interface
 uses
   Tipos, ListPointer;
-
+       {
 const
   items: array[1..5] of string = ('Puntito', 'Frutilla', 'Banana', 'Cereza', 'Fantasma');
-  puntos: array[1..5] of byte = (1, 10, 30, 50, 100);
+  puntos: array[1..5] of byte = (1, 10, 30, 50, 100);  }
 type
 
 
@@ -79,6 +79,25 @@ begin
     dato := recorrido.Recuperar(posicion);
     posicion := recorrido.Siguiente(posicion);
 
+    if dato.Clave = 'Bonus' then
+      setBonus(10)
+    else begin
+      if getBonus() = 0 then begin
+        if dato.Clave = 'Fantasma' then
+          setPerdio(True)
+        else
+          setPuntaje(getPuntaje() + dato.Valor1);
+      end else
+        setPuntaje(getPuntaje() + (dato.Valor1*2));
+      setBonus(getBonus()-1);
+    end;
+
+
+
+
+
+
+             {
     J := 1;
     while (J <= length(items)) and not getPerdio() do begin
       if dato.Clave = items[J] then begin
@@ -95,7 +114,7 @@ begin
         setBonus(10);
       Inc(J)
     end;
-
+                 }
   end;
 
 end;
