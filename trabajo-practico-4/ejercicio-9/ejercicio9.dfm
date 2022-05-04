@@ -29,8 +29,9 @@ object Form1: TForm1
     Height = 33
     Caption = 'Calcular'
     TabOrder = 1
+    OnClick = Button1Click
   end
-  object LabeledEdit1: TLabeledEdit
+  object baseEdit: TLabeledEdit
     Left = 184
     Top = 20
     Width = 57
@@ -41,7 +42,7 @@ object Form1: TForm1
     NumbersOnly = True
     TabOrder = 2
   end
-  object LabeledEdit2: TLabeledEdit
+  object numEdit: TLabeledEdit
     Left = 8
     Top = 20
     Width = 57
