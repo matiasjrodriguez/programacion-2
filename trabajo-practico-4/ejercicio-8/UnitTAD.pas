@@ -4,9 +4,9 @@ interface
 
 uses
   Variants, Tipos,
-  //StackArray;
+  StackArray;
   //StackCursor;
-  StackPointer;
+  //StackPointer;
 
 type
   PilaPalindromo = object
@@ -37,7 +37,7 @@ begin
   miPila.Crear(Cadena,tamaño);
 end;
 
-function PilaPalindromo.esPalindromo: boolean;
+function PilaPalindromo.esPalindromo: boolean;   //Tiene una complejidad de 59n + 83, O(n)
 var
   PAux,PAux2: Pila;
   X: TipoElemento;

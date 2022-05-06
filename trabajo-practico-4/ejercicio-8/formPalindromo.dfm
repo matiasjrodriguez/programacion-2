@@ -37,7 +37,7 @@ object Form1: TForm1
     Caption = 'Pila'
   end
   object Button1: TButton
-    Left = 126
+    Left = 118
     Top = 166
     Width = 110
     Height = 51
@@ -50,9 +50,9 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object StringGrid1: TStringGrid
-    Left = 63
+    Left = 49
     Top = 82
-    Width = 47
+    Width = 54
     Height = 279
     Margins.Left = 4
     Margins.Top = 4
@@ -69,7 +69,7 @@ object Form1: TForm1
     TabOrder = 1
   end
   object Edit1: TEdit
-    Left = 63
+    Left = 49
     Top = 50
     Width = 37
     Height = 24
@@ -83,7 +83,7 @@ object Form1: TForm1
     Text = '10'
   end
   object UpDown1: TUpDown
-    Left = 108
+    Left = 86
     Top = 50
     Width = 19
     Height = 24
@@ -98,9 +98,9 @@ object Form1: TForm1
     OnClick = UpDown1Click
   end
   object Memo1: TMemo
-    Left = 256
+    Left = 248
     Top = 20
-    Width = 228
+    Width = 236
     Height = 364
     Alignment = taCenter
     Font.Charset = DEFAULT_CHARSET
