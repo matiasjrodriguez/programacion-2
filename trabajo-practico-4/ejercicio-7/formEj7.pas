@@ -45,11 +45,14 @@ var
   expCadena:string;
 begin
   expCadena := sacarEspacios(trim(editExpresion.text));
-  exp.setExpPila(expCadena);
-  if exp.getValida then
-    Label1.Caption := 'La expresión es válida.'
-  else
-    Label1.Caption := 'La expresión no es válida.'
+  if length(expCadena) > 0 then begin
+    exp.setExpPila(expCadena);
+    if exp.getValida then
+      Label1.Caption := 'La expresión es válida.'
+    else
+      Label1.Caption := 'La expresión no es válida.'
+  end else
+    Label1.Caption := 'Ingrese una expresión';
 end;
 
 

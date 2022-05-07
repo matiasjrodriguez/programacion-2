@@ -29,7 +29,7 @@ object Form1: TForm1
     object Label1: TLabel
       Left = 53
       Top = 98
-      Width = 180
+      Width = 3
       Height = 13
       Alignment = taCenter
     end
