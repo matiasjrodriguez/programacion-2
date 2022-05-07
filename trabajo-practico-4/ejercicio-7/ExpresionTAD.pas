@@ -3,7 +3,10 @@ unit ExpresionTAD;
 interface
 
 uses
-  Tipos, StackPointer;
+  Tipos,
+  //StackArray;
+  //StackCursor;
+  StackPointer;
 
 const
   aParentesis = ['(', ')'];
@@ -20,7 +23,7 @@ type
     expPila: Pila;
     valida: boolean;
   public
-    procedure setExpPila(e: string);
+    procedure setExpPila(e: string); //Tiene un solo ciclo, complejidad O(n)
     function getValida():boolean;
   end;
 
