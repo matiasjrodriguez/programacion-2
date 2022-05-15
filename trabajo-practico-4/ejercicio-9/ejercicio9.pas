@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, tipos, stackArray, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Controls, tipos, stackpointer, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
 
 
 type
@@ -50,20 +50,22 @@ begin
     result := '0';
     exit;
   end;
-  if baseValida(b) then begin
-    strResultado := '';
-    pResult.Crear(cadena, max);
-    while n > 0 do begin
-      resultado := (n mod b);
-      if resultado >= 10 then
-        x.Clave := vEquivalencias[resultado]
+  if baseValida(b) then begin // 1
+    strResultado := ''; // 1
+    pResult.Crear(cadena, max); // const
+    while n > 0 do begin // log n
+      resultado := (n mod b);  // const
+      if resultado >= 10 then // const
+        x.Clave := vEquivalencias[resultado] // const
       else
-        x.Clave := resultado.ToString;
-      pResult.Apilar(x);
-      n := n div b;
-    end;
-    result := pResult.RetornarClaves;
-  end;
+        x.Clave := resultado.ToString; // const
+      pResult.Apilar(x);  // const
+      n := n div b;  // const
+    end; // complejidad algoritmica O(log n)
+    result := pResult.RetornarClaves; // const
+  end
+  else
+    result := 'La base ingresada no es válida';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
