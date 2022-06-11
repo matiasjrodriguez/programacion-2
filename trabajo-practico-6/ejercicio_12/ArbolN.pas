@@ -12,7 +12,6 @@ const
   MAX = 'Ñ';
 
 type
-
     PosicionArbol = ^NodoArbol;
 
     Hijos = Array [MIN..MAX] of PosicionArbol;
@@ -23,10 +22,6 @@ type
         H : Hijos;
         Ocurrencias : integer;
     End;
-
-
-
-
 
     ArbolNario = Object
        private

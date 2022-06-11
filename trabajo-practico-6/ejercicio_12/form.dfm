@@ -136,6 +136,25 @@ object Form1: TForm1
         TabOrder = 8
         OnClick = CargarDicClick
       end
+      object Button1: TButton
+        Left = 306
+        Top = 90
+        Width = 111
+        Height = 36
+        Caption = 'Mostar palabras mas usadas'
+        TabOrder = 9
+        WordWrap = True
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 352
+        Top = 144
+        Width = 75
+        Height = 25
+        Caption = 'Button2'
+        TabOrder = 10
+        OnClick = Button2Click
+      end
     end
     object MemoTexto: TMemo
       Left = 8

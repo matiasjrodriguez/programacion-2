@@ -27,6 +27,8 @@ type
     Label1: TLabel;
     Panel1: TPanel;
     Label2: TLabel;
+    Button1: TButton;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure EditEscribiendoChange(Sender: TObject);
     procedure BotonAddDicClick(Sender: TObject);
@@ -40,6 +42,8 @@ type
     procedure CargarArbol;
     procedure CargarDicClick(Sender: TObject);
     function SoloValidos(S : String) : Boolean;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -119,6 +123,28 @@ begin
       Arbol.IncrementarOcurrencia(BotonP5.Caption);
       ClearAll();
     end
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  p:posicionlista;
+  x:tipoElemento;
+  l:lista;
+begin
+  MemoTexto.clear;
+  l := dic.ListadoMU;
+  p := l.Comienzo;
+  while p <> nulo do begin
+    x := l.Recuperar(p);
+    memoTexto.Lines.Add(x.Clave + ' - Ocurrencias: ' + inttoStr(x.Valor1));
+    p := l.Siguiente(p);
+  end;
+
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+   MemoTexto.clear;
 end;
 
 procedure TForm1.EditEscribiendoChange(Sender: TObject);
