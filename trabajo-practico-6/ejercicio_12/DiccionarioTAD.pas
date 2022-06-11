@@ -175,7 +175,36 @@ implementation
        begin
          P := Arbol.Root;
          Recursion(P);
+
        end;
+
+      procedure ordenarlistaDesc(VAR l:lista);
+      var
+        x, mayor:tipoelemento;
+        p,q,k, pmayor:posicionlista;
+      begin
+        p := l.Comienzo;
+        k := l.Comienzo;
+        while p <> nulo do begin
+          pmayor := p;
+          mayor := l.Recuperar(p);
+          q := l.Siguiente(p);
+          while q <> nulo do begin
+            x := l.Recuperar(q);
+            if x.Valor1 > mayor.Valor1 then begin
+              mayor := x;
+              pmayor := q;
+            end;
+            q := l.Siguiente(q);
+          end;
+          x := l.Recuperar(k);
+          l.Actualizar(mayor, k);
+          l.Actualizar(x, pmayor);
+          k := l.Siguiente(k);
+          p := l.Siguiente(p);
+        end;
+
+      end;
 
       procedure Diccionario.CargarPalabrasMU(var L : Lista);
       Var P : PosicionArbol;
@@ -193,11 +222,11 @@ implementation
                   X.Clave := P.Datos.Valor1;
                   X.Valor1 := P.Ocurrencias;
                   ListaMasUsadas.agregar(x);
-//                end else if (ListaMasUsadas.Buscar(x) <> nulo) then begin
-//                  plista := ListaMasUsadas.Buscar(x);
-//                  x := ListaMasUsadas.Recuperar(plista);
-//                  inc(x.Valor1);
-//                  ListaMasUsadas.Actualizar(x, plista);
+                end else if (ListaMasUsadas.Buscar(x) <> nulo) then begin
+                  plista := ListaMasUsadas.Buscar(x);
+                  x := ListaMasUsadas.Recuperar(plista);
+                  inc(x.Valor1);
+                  ListaMasUsadas.Actualizar(x, plista);
                 end;
 
                 while (not ListaMasUsadas.EsLLena) and (index <= MAX) do begin
@@ -211,7 +240,9 @@ implementation
            P := Arbol.Root;
            ListaMasUsadas.Crear(cadena,MAXL);
            Recursion(P);
+           ordenarlistaDesc(ListaMasUsadas);
         end;
+
 
 
     Function Diccionario.Listado: Lista;
